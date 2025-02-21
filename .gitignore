@@ -1,0 +1,183 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+~$*
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln*
+*.ps1
+*.suo
+*.user
+*.vcxproj*
+*.csproj*
+*.cache
+*.pidb
+*.swp
+*.sublime-project
+*.sublime-workspace
+*.log
+*.bak
+*.tmp
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+.npm/
+.nvmrc
+
+# Java & Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+release.properties
+*.class
+*.war
+*.jar
+*.ear
+*.log
+.mvn/
+.settings/
+.classpath
+.project
+
+# Java Spring Boot
+bin/
+build/
+logs/
+!logs/.keep
+*.log.*
+
+# Gradle
+.gradle/
+build/
+out/
+gradle-app.setting
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# C, C++
+*.o
+*.out
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.dylib
+*.class
+
+# C#
+bin/
+obj/
+*.csproj.user
+*.vs/
+
+# Rust
+target/
+Cargo.lock
+
+# Go
+bin/
+pkg/
+*.exe
+
+# Ruby
+.bundle/
+vendor/bundle
+*.gem
+log/
+
+# PHP
+vendor/
+composer.lock
+
+# Swift & iOS
+*.xcworkspace/
+*.xcodeproj/
+Pods/
+DerivedData/
+*.ipa
+
+# Android
+.gradle/
+local.properties
+captures/
+.idea/
+*.iml
+*.hprof
+
+# Electron & Web
+out/
+dist/
+coverage/
+.cache/
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.mdb
+*.accdb
+
+# JetBrains Rider
+.idea/
+*.sln
+*.userprefs
+*.iml
+
+# JetBrains Rider-specific for C#/.NET
+*.DotSettings.user
+/ReSharperSettings/
+**/obj/
+**/bin/
+**/packages/
+**/project.lock.json
+**/project.fragment.lock.json
+
+# Unity
+Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
+MemoryCaptures/
+Assets/Plugins/
+*.csproj
+
+# Misc
+*.env
+.env.local
+.env.*.local
+!.env.example
+*.pem
+*.key
+*.crt
+*.pfx
+*.secret
+*.keystore

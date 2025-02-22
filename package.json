@@ -1,5 +1,5 @@
 {
-  "name": "aion",
+  "name": "aion-ics",
   "version": "1.0.0",
   "description": "Aion",
   "main": "index.ts",
@@ -16,7 +16,7 @@
     "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/aion.exe"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.13.4",
     "typescript": "^5.7.3"

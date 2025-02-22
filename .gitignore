@@ -181,3 +181,6 @@ Assets/Plugins/
 *.pfx
 *.secret
 *.keystore
+
+dist/
+

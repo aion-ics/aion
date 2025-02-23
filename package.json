@@ -8,16 +8,18 @@
   "bin": {
     "aion": "./dist/cli.js"
   },
-  
+ 
   "scripts": {
     "build": "tsup",
-        "start": "node dist/index.js",
+    "start": "node dist/index.js",
     "playground": "node src/playground.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pkg": "pkg .",
-    "check-exports": "attw --pack . ",
-    "cli": "node dist/cli.js",
-    "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/executables/aion.exe"
+    "check-exports": "attw --pack .",
+    "cli": "npm run build && node dist/cli.js",
+    "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/executables/aion.exe && timeout /t 5",
+    "set-metadata": "resedit --in dist/executables/aion.exe --out dist/executables/aion.exe --icon 1,docs/img/aionsmall.ico --original-filename aion.exe --file-description Aion",
+    "build-exe": "npm run make-exe && npm run set-metadata"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -31,9 +33,9 @@
     "scripts": "dist/**/*.js",
     "assets": "views/**/*",
     "targets": [
-      "node14-linux-x64",
-      "node14-macos-x64",
-      "node14-win-x64"
+      "node18-linux-x64",
+      "node18-macos-x64",
+      "node18-win-x64"
     ],
     "outputPath": "dist"
   },
@@ -42,6 +44,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
     "@types/node": "^22.13.4",
+    "resedit-cli": "^2.0.0",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3"
   },

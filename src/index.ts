@@ -1,11 +1,5 @@
-import * as fs from 'fs';
-const chalk = require('chalk'); // Use require() with chalk@4
+// the entry point for the library. here should be located all the components avaliable for export. Eg: import {add} from 'aion-ics' 
 
-fs.writeFileSync('example.txt', 'Hello from my language!');
+import { add, multiply } from './core/add'
 
-console.log(chalk.green('✅ Created example.txt successfully.'));
-console.error(chalk.red('❌ Created example.txt unsuccessfully!'));
-
-throw new Error(chalk.bgRed.white("Something went wrong!"));
-
-console.log(chalk.blue('hi'));
+export {add, multiply};

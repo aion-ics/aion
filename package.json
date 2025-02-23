@@ -2,22 +2,47 @@
   "name": "aion-ics",
   "version": "1.0.0",
   "description": "Aion",
-  "type": "module",
-  "main": "index.ts",
+  "types": "types.types.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "bin": {
-    "aion": "./dist/index.js"
+    "aion": "./dist/cli.js"
   },
+  
   "scripts": {
-    "build": "tsc",
-    "start": "node src/index.ts",
+    "build": "tsup",
+        "start": "node dist/index.js",
+    "playground": "node src/playground.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pkg": "pkg .",
-    "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/aion.exe"
+    "check-exports": "attw --pack . ",
+    "cli": "node dist/cli.js",
+    "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/executables/aion.exe"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "pkg": {
+    "scripts": "dist/**/*.js",
+    "assets": "views/**/*",
+    "targets": [
+      "node14-linux-x64",
+      "node14-macos-x64",
+      "node14-win-x64"
+    ],
+    "outputPath": "dist"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.17.4",
     "@types/node": "^22.13.4",
+    "tsup": "^8.3.6",
     "typescript": "^5.7.3"
   },
   "dependencies": {

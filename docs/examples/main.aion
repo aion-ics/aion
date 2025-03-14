@@ -1,0 +1,70 @@
+import "orar-231" as orar;
+import "personal.ics" as personal;
+import "work.ics" as work;
+
+// Constants
+today = date.now();
+
+// Tasks and events (automatically saved to "calendar.ics")
+new task "kiss my wife" daily at 23:00;
+new event "empty the dishwasher" at 18:30 for 10m;
+new event "Buy mum gif" on 8th March at 15:50 for 1h 
+
+// Pomodoro sessions (not automatically exported)
+pomodoro "LAB" at 14:30 repeat 4 times;
+pomodoro "LAB2" at 18:30 repeat 5 times every 30m with 10m pause;
+
+// Flexible event scheduling (manual export required)
+meeting = event "meeting" on Friday find between 10:00 and 15:00;
+event "Reading" daily at 21:00 for 2h 10m;
+
+// Define a structured event (not automatically exported)
+event find_gift {
+    name: "gift",
+    start: 10:30,
+    duration: 2h,
+    location: "Mall"
+}
+
+// Default behavior: All new tasks/events go into "calendar.ics"
+export default as "calendar.ics";
+
+// Start week calculation
+start_week_number = weeknumber(2025.02.03);
+
+// Different loop types
+iterate weeks from start_week_number to +26 {  
+    new event "Weekly Report" every Monday at 9:00 for 1h;  
+}
+
+iterate days from 2025.03.01 to 2025.03.10 step 2 {  
+    new event "Gym Session" at 07:00 for 1h;  
+}
+
+
+
+// Schedule "Date" on the correct Friday
+iterate months from today to today + 50 {
+    
+    c = count(Friday) in month;
+    
+    if (c == 4) {
+        new event "Date" on 2nd Friday at 19:00 for 3h;
+    } else if (c == 5) {
+        new event "Date" on 3rd Friday at 19:00 for 3h;
+    }
+}
+
+// Include an event in another calendar
+include find_gift in orar;
+
+// .ics file management
+merge orar, personal into merged_calendar;
+filter merged_calendar where category != "work" into personal_only;
+filter merged_calendar where category == "meeting" into meetings_only;
+
+// Export calendars
+export merged_calendar as "full_schedule.ics";
+export personal_only as "personal_filtered.ics";
+export meetings_only;
+export all;

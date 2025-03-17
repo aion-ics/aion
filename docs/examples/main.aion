@@ -3,7 +3,6 @@ import "personal.ics" as personal;
 import "work.ics" as work;
 
 // Constants
-today = date.now();
 
 // Tasks and events (automatically saved to "calendar.ics")
 new task "kiss my wife" daily at 23:00;

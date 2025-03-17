@@ -67,6 +67,38 @@ export class Grammar {
         return new FiniteAutomaton(q, sigma, delta, q0, qF);
     }
 
+    toBnfString(): string {
+        let bnfString = "";
+    
+        for (const [nonTerminal, productions] of this.P.entries()) {
+            // Start with the non-terminal in angle brackets
+            bnfString += `<${nonTerminal}> ::= `;
+    
+            // Map each production to BNF format
+            const formattedProductions = productions.map(prod => {
+                let result = "";
+    
+                for (let char of prod) {
+                    if (this.VN.has(char)) {
+                        result += `<${char}>`;
+                    } else if (this.VT.has(char)) {
+                        result += `'${char}'`;
+                    } else if (char === 'ε') { // Optional: Handle epsilon explicitly
+                        result += 'ε';
+                    }
+                }
+    
+                return result || 'ε'; // In case of empty string production
+            });
+    
+            // Join productions with ' | '
+            bnfString += formattedProductions.join(' | ') + '\n';
+        }
+    
+        return bnfString;
+    }
+    
+
     toString(): string {
         let output = `V_N = { ${Array.from(this.VN).join(", ")} }\n`;
         output += `V_T = { ${Array.from(this.VT).join(", ")} }\n`;

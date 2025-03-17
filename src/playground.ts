@@ -29,41 +29,4 @@ const grammar = new Grammar(vN, vT, p, s);
 console.log("Grammar:");
 console.log(grammar.toString());
 
-console.log("\n5 valid strings by grammar:");
-for (let i = 0; i < 5; i++) {
-    console.log(`\nString ${i + 1}:`);
-    const generatedString = grammar.createWord();
-    console.log("Final string:", generatedString);
-}
-
-const finiteAutomaton = grammar.toFiniteAutomaton();
-
-console.log("\nTesting random strings with the Finite Automaton:");
-for (let i = 0; i < 5; i++) {
-    const testString = generateRandomString(vT);
-    console.log(`\nTest string ${i + 1}: ${testString}`);
-    const belongs = finiteAutomaton.doesStringBelongToLanguage(testString);
-    console.log(`String belongs to language: ${belongs}`);
-}
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-console.log("\nEnter a string to check if it belongs to the language (type 'exit' to quit):");
-
-function promptInput() {
-    rl.question("> ", (inputString) => {
-        if (inputString.toLowerCase() === "exit") {
-            console.log("Exiting...");
-            rl.close();
-        } else {
-            const belongs = finiteAutomaton.doesStringBelongToLanguage(inputString);
-            console.log(`String belongs to language: ${belongs}`);
-            promptInput();
-        }
-    });
-}
-
-promptInput();
+console.log(grammar.toBnfString())

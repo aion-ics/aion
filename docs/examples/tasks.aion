@@ -1,0 +1,4 @@
+t = task named "kms" at 21:00 on each Monday with alarm;
+t1 = task named "respawn" at 21:15 on each Monday;
+t3 = task named "respawn" at 9:00PM on each Monday;
+t3 = task named "Get rid of trash" find between 21:00 and 21:30 using random; // earliest, latest

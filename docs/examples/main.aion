@@ -10,7 +10,7 @@ new event "empty the dishwasher" at 18:30 for 10m;
 new event "Buy mum gif" on 8th March at 15:50 for 1h 
 
 // Pomodoro sessions (not automatically exported)
-pomodoro "LAB" at 14:30 repeat 4 times;
+pmd = pomodoro "LAB" at 14:30 repeat 4 times;
 pomodoro "LAB2" at 18:30 repeat 5 times every 30m with 10m pause;
 
 // Flexible event scheduling (manual export required)

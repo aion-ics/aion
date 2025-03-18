@@ -1,0 +1,4 @@
+pmd = pomodoro "Drawing" at 14:30 repeat 4 times; // default - 5
+pmd2 = pomodoro "LAB" at 15:30 repeat 4 times with 5m break;
+
+

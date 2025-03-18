@@ -1,0 +1,11 @@
+default_day = event "Read" at 12:30 for 1h; // if now is later than 12:30, it will be next day
+default_month = event "Empty the dishwasher" on 12 March at 12:30; // if now it's before 12th march, it is this year; 
+
+default_find = event "Do the lab" beween 21:00 and 22:40 find; // buy default - find is using earliest
+
+default_repeat = event "Brush teetth" daily at 12:00 for 10m; // by default - for 180 days
+default_until = event "Brush teeth" daily at 14:30 for 10m repeat until 31.12.2028;
+default_count = event "Brush teeth" daily at 14:30 for 10m repeat 10 times;
+
+
+

@@ -4,7 +4,13 @@
 
 # The Aion language
 
+
+
 Aion is DSL language for managing .ics files.  
+
+
+> [!CAUTION]
+> The language is under development, and doesn't yet works.
 
 Version 1.0.0
 

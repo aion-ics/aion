@@ -18,7 +18,12 @@
     "cli": "npm run build && node dist/cli.js",
     "make-exe": "npm run build && pkg . --targets node18-win-x64 --output dist/executables/aion.exe && timeout /t 5",
     "set-metadata": "resedit --in dist/executables/aion.exe --out dist/executables/aion.exe --icon 1,docs/img/aionsmall.ico --original-filename aion.exe --file-description Aion",
-    "build-exe": "npm run make-exe && npm run set-metadata"
+    "build-exe": "npm run make-exe && npm run set-metadata",
+
+
+     "antlr4ts": "antlr4ts -visitor -o ./src/core/antlr/generated src/core/antlr/Aion.g4"
+
+
   },
   "exports": {
     "./package.json": "./package.json",
@@ -43,12 +48,14 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
     "@types/node": "^22.13.4",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
     "resedit-cli": "^2.0.0",
     "tsup": "^8.3.6",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
     "chalk": "^4.1.2"
   }
 }

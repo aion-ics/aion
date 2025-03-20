@@ -1,32 +1,48 @@
-import { Grammar } from './core/grammar/Grammar';
-import * as readline from 'readline';
+import { AionParser } from "./core/antlr/generated/AionParser";
+import { AionLexer } from "./core/antlr/generated/AionLexer";
+import antlr4, { ANTLRInputStream, CommonTokenStream, ParserRuleContext } from 'antlr4ts'
+import { ParseTree } from "antlr4ts/tree/ParseTree";
 
-function generateRandomString(vT: Set<string>): string {
-    let someString = '';
-    const alphabetArray = Array.from(vT);
-    const length = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+import * as fs from 'fs';
+import * as path from 'path';
 
-    for (let i = 0; i < length; i++) {
-        someString += alphabetArray[Math.floor(Math.random() * alphabetArray.length)];
+const filePath = path.join(__dirname, '..', 'docs/examples', 'main.aion');
+const content = fs.readFileSync(filePath, 'utf8');
+
+
+function printParseTree(tree: ParseTree, parser: AionParser, indent: string = "", level: number = 0): string {
+    let output = "";
+
+    // Determine node type: Rule or Terminal
+    if (tree instanceof ParserRuleContext) {
+        const ruleName = parser.ruleNames[tree.ruleIndex];
+        output += `${indent}${level === 0 ? "" : "└─"}<${ruleName}>\n`;
+    } else {
+        const text = tree.text.replace(/\s+/g, ' ').trim();
+        output += `${indent}└─"${text}"\n`;
     }
-    return someString;
+
+    // Recursively print children
+    for (let i = 0; i < tree.childCount; i++) {
+        const child = tree.getChild(i);
+        const childIsLast = (i === tree.childCount - 1);
+        const childIndent = indent + (level > 0 ? (childIsLast ? "   " : "│  ") : "");
+        output += printParseTree(child, parser, childIndent, level + 1);
+    }
+
+    return output;
 }
 
-console.log("DSL: Regular grammars. Finite Automata.\n");
-console.log("----aion----\n");
 
-const vN = new Set(["S", "A", "B", "C"]);
-const vT = new Set(['a', 'b', 'c', 'd']);
-const p = new Map<string, string[]>([
-    ["S", ["dA"]],
-    ["A", ["aB", "bA"]],
-    ["B", ["bC", "aB", "d"]],
-    ["C", ["cB"]]
-]);
-const s = "S";
+let input = 'import "orar-231" as orar;';
 
-const grammar = new Grammar(vN, vT, p, s);
-console.log("Grammar:");
-console.log(grammar.toString());
 
-console.log(grammar.toBnfString())
+let inputStream = new ANTLRInputStream(content);
+let lexer = new AionLexer(inputStream);
+let tokenStream = new CommonTokenStream(lexer);
+let parser = new AionParser(tokenStream);
+console.log(parser)
+const tree = parser.program();
+
+// Print the parse tree
+console.log(printParseTree(tree, parser));

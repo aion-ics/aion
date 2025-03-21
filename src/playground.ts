@@ -13,13 +13,19 @@ const content = fs.readFileSync(filePath, 'utf8');
 function printParseTree(tree: ParseTree, parser: AionParser, indent: string = "", level: number = 0): string {
     let output = "";
 
-    // Determine node type: Rule or Terminal
+    // Parser Rule node
     if (tree instanceof ParserRuleContext) {
         const ruleName = parser.ruleNames[tree.ruleIndex];
         output += `${indent}${level === 0 ? "" : "└─"}<${ruleName}>\n`;
-    } else {
-        const text = tree.text.replace(/\s+/g, ' ').trim();
-        output += `${indent}└─"${text}"\n`;
+    } 
+    // Terminal node (Token)
+    else {
+        const token = tree['symbol']; // Access the token object behind the terminal node
+        const tokenText = tree.text.replace(/\s+/g, ' ').trim();
+        const tokenType = token.type;
+        const tokenTypeName = AionLexer.VOCABULARY.getSymbolicName(tokenType) || "UNKNOWN";
+
+        output += `${indent}└─"${tokenText}" [${tokenTypeName}]\n`;
     }
 
     // Recursively print children

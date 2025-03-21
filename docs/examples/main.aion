@@ -5,7 +5,7 @@ import "work.ics" as work;
 // Constants
 
 // Tasks and events (automatically saved to "calendar.ics")
-new task "kiss my wife" daily at 23:00;
+$$$new task "kiss my wife" daily at 23:00;
 new event "empty the dishwasher" at 18:30 for 10m;
 new event "Buy mum gif" on 8th March at 15:50 for 1h 
 

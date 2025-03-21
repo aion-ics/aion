@@ -280,15 +280,3 @@ export class Lexer {
         return this.tokens;
     }
 }
-
-// Example Usage
-const lexer = new Lexer(`
-// Advanced Event Definitions
-event team_meeting {
-    name: "Team Sync";
-    start: 10:00;
-    duration: 1h;
-    location: "Office";
-}
-    `);
-console.log(lexer.tokenize());

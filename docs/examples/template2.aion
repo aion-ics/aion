@@ -1,0 +1,62 @@
+// --- Imports ---
+import "personal.ics" as personal;
+import "work.ics" as work;
+
+// --- Week Number Assignment ---
+start_week = weeknumber(2025.03.21);
+
+// --- Structured Event ---
+event find_gift {
+    name: "Buy Gift";
+    start: 10:30;
+    duration: 2h;
+    location: "Mall";
+}
+
+// --- Event Declarations ---
+e1 = event "Team Sync" on 12 March from 11:00 to 12:00 at "Office";
+e2 = event "Doctor" every Monday from 10:00 to 11:00 at "Clinic";
+e3 = event "Planning" from 14:00 to 15:00;
+
+// --- Task Declarations ---
+t1 = task named "Daily Summary" at 21:00 on each Monday with alarm;
+t2 = task named "Take Out Trash" find between 20:00 and 22:00 using random;
+t3 = task named "Write Log" at 08:00 on each Friday;
+
+// --- Pomodoro Sessions ---
+p1 = pomodoro "Deep Work" at 08:00 repeat 4 times with 5m break;
+p2 = pomodoro "Study Block" at 10:30 repeat 3 times;
+
+// --- Loop Examples ---
+each month from 2025.01 to 2025.03 {
+    event "Review" every Friday from 09:00 to 10:00;
+    task named "Budget Check" at 19:00 on each Sunday;
+}
+
+each day from 2025.03.25 to 2025.03.28 {
+    task named "Daily Note" at 22:00 on each Monday;
+    event "Short Break" from 16:00 to 16:30;
+}
+
+// --- Conditional Scheduling ---
+if (count(Friday) in month == 4) {
+    event "Date Night" on 2nd Friday from 19:00 to 22:00;
+} else if (count(Friday) in month == 5) {
+    event "Date Night" on 3rd Friday from 19:00 to 22:00;
+} else {
+    event "Date Night" on last Friday from 19:00 to 22:00;
+}
+
+// --- Include Structured Event in a Calendar ---
+include find_gift in personal;
+
+// --- Merging and Filtering ---
+merge personal, work into all_events;
+filter all_events where category == "meeting" into meetings_only;
+filter all_events where category != "work" into personal_only;
+
+// --- Exporting ---
+export meetings_only as "meetings.ics";
+export personal_only;
+export default as "main.ics";
+export all;

@@ -1,5 +1,5 @@
 ## Grammar in BNF form
-
+```bnf
 program         ::= (import_stmt | constant_stmt | event_stmt | loop_stmt | filter_stmt | export_stmt | query_stmt | modify_stmt | conditional_stmt)*
 
 import_stmt     ::= "import" STRING "as" IDENTIFIER ";"
@@ -59,3 +59,4 @@ STRING          ::= "\"" .* "\""
 STRING_LIST     ::= STRING ("," STRING)*
 IDENTIFIER      ::= [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER          ::= [0-9]+
+```

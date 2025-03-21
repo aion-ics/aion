@@ -1,120 +1,48 @@
-// import { Grammar } from './core/grammar/Grammar';
-// import * as readline from 'readline';
+import { AionParser } from "./core/antlr/generated/AionParser";
+import { AionLexer } from "./core/antlr/generated/AionLexer";
+import antlr4, { ANTLRInputStream, CommonTokenStream, ParserRuleContext } from 'antlr4ts'
+import { ParseTree } from "antlr4ts/tree/ParseTree";
 
-// function generateRandomString(vT: Set<string>): string {
-//     let someString = '';
-//     const alphabetArray = Array.from(vT);
-//     const length = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+import * as fs from 'fs';
+import * as path from 'path';
 
-//     for (let i = 0; i < length; i++) {
-//         someString += alphabetArray[Math.floor(Math.random() * alphabetArray.length)];
-//     }
-//     return someString;
-// }
-
-// console.log("DSL: Regular grammars. Finite Automata.\n");
-// console.log("----aion----\n");
-
-// const vN = new Set(["S", "A", "B", "C"]);
-// const vT = new Set(['a', 'b', 'c', 'd']);
-// const p = new Map<string, string[]>([
-//     ["S", ["dA"]],
-//     ["A", ["aB", "bA"]],
-//     ["B", ["bC", "aB", "d"]],
-//     ["C", ["cB"]]
-// ]);
-// const s = "S";
-
-// const grammar = new Grammar(vN, vT, p, s);
-// console.log("Grammar:");
-// console.log(grammar.toString());
-
-// console.log(grammar.toBnfString())
-
-import { tokenizeSource } from "./lexer";
-
-console.log(tokenizeSource(`// Importing Calendar Files
-import "work.ics" as work;
-import "personal.ics" as personal;
+const filePath = path.join(__dirname, '..', 'docs/examples', 'main.aion');
+const content = fs.readFileSync(filePath, 'utf8');
 
 
-// Defining Constants
-today = date.now();
+function printParseTree(tree: ParseTree, parser: AionParser, indent: string = "", level: number = 0): string {
+    let output = "";
 
-// - Creating Events and Tasks - 
-// Basic Event or Task Creation
-new task "Walk the dog" daily at 07:30;
-new event "Doctor's appointment" on 12th March at 10:00 for 1h;
-
-// Creating a Pomodoro Session
-pomodoro "Coding Sprint" at 10:00 repeat 4 times every 25m with 5m pause;
-
-// Advanced Event Definitions
-event team_meeting {
-    name: "Team Sync";
-    start: 10:00;
-    duration: 1h;
-    location: "Office";
-}
-
-
-// Scheduling Events with Loops
-// Loop Over Weeks
-iterate weeks from 1 to 26 {  
-    new event "Weekly Report" every Monday at 09:00 for 1h;
-}
-
-// Loop Over Days
-iterate days from 2025.03.01 to 2025.03.10 step 2 {  
-    new event "Gym Session" at 07:00 for 1h;  
-}
-
-// Loop Over Months (Dynamic Scheduling)
-iterate months from today to today + 12 {
-    if (count(Friday) in month == 4) {
-        new event "Date Night" on 2nd Friday at 19:00;
+    // Determine node type: Rule or Terminal
+    if (tree instanceof ParserRuleContext) {
+        const ruleName = parser.ruleNames[tree.ruleIndex];
+        output += `${indent}${level === 0 ? "" : "└─"}<${ruleName}>\n`;
     } else {
-        new event "Date Night" on last Friday at 19:00;
+        const text = tree.text.replace(/\s+/g, ' ').trim();
+        output += `${indent}└─"${text}"\n`;
     }
+
+    // Recursively print children
+    for (let i = 0; i < tree.childCount; i++) {
+        const child = tree.getChild(i);
+        const childIsLast = (i === tree.childCount - 1);
+        const childIndent = indent + (level > 0 ? (childIsLast ? "   " : "│  ") : "");
+        output += printParseTree(child, parser, childIndent, level + 1);
+    }
+
+    return output;
 }
 
 
-// Querying and Modifying Events
-// Picking Specific Tasks or Events
-urgent_tasks = pick tasks where priority == "high";
-meetings_today = pick events where category == "meeting" and date == today;
-
-// Deleting or Updating Events
-delete all meetings_today;
-update urgent_tasks set status = "completed";
+let input = 'import "orar-231" as orar;';
 
 
-// Filtering and Exporting
-// Merging Multiple Calendars
-merge personal, work into full_calendar;
+let inputStream = new ANTLRInputStream(content);
+let lexer = new AionLexer(inputStream);
+let tokenStream = new CommonTokenStream(lexer);
+let parser = new AionParser(tokenStream);
+console.log(parser)
+const tree = parser.program();
 
-// Filtering Events
-filter full_calendar where category != "work" into personal_only;
-filter full_calendar where category == "meeting" into meetings_only;
-
-// Exporting the Final Calendar
-export personal_only as "personal_filtered.ics";
-export meetings_only;
-export all;
-
-
-// Event Dependencies
-new event "Lunch Break" after "Team Meeting" + 1h;
-new event "Prepare Report" before "Weekly Standup";
-
-
-// Advanced Scheduling with Conditions
-if (count(Saturday) in month == 4) {
-    new event "Family Lunch" on 2nd Saturday at 12:00;
-} else {
-    new event "Family Lunch" on last Saturday at 12:00;
-}
-
-
-
-`));
+// Print the parse tree
+console.log(printParseTree(tree, parser));

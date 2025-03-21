@@ -1,62 +1,84 @@
 ## Grammar in BNF form
+
 ```bnf
-program         ::= (import_stmt | constant_stmt | event_stmt | loop_stmt | filter_stmt | export_stmt | query_stmt | modify_stmt | conditional_stmt)*
+<program> ::= { <statement> }
 
-import_stmt     ::= "import" STRING "as" IDENTIFIER ";"
+<statement> ::= <import_stmt>
+              | <assignment_stmt>
+              | <loop_stmt>
+              | <export_stmt>
+              | <merge_stmt>
+              | <filter_stmt>
+              | <include_stmt>
 
-constant_stmt   ::= IDENTIFIER "=" expression ";"
+<import_stmt> ::= "import" <string> "as" <identifier> ";"
 
-event_stmt      ::= "new" ("task" | "event") STRING (date_time | recurrence) duration? dependencies? ";"
-                 | "pomodoro" STRING "at" time "repeat" INT "times" ( "every" duration "with" duration "pause")? ";"
-                 | "event" IDENTIFIER "{" event_properties "}" ";"
+<assignment_stmt> ::= <identifier> "=" <declaration> ";"
 
-event_properties ::= ("name" ":" STRING ";")? 
-                     ("start" ":" time ";")? 
-                     ("duration" ":" duration ";")? 
-                     ("location" ":" STRING ";")?
+<declaration> ::= <event_decl>
+                | <task_decl>
+                | <pomodoro_decl>
 
-dependencies    ::= "after" STRING | "before" STRING
+<event_decl> ::= "event" <string> <event_timing> [ "at" <string> ]
 
-loop_stmt       ::= "iterate" ("weeks" | "days" | "months") "from" expression "to" expression step? "{" event_stmt* "}"
+<event_timing> ::= "on" <date> "from" <time> "to" <time>
+                 | "every" <weekday> "from" <time> "to" <time>
+                 | "from" <time> "to" <time>   (* No date: used inside loop or default context *)
 
-step            ::= "step" INT
+<task_decl> ::= "task named" <string> <task_timing> [ "with alarm" ]
+              | "task named" <string> "find between" <time> "and" <time> "using" <strategy>
 
-query_stmt      ::= IDENTIFIER "=" "pick" ("tasks" | "events") where_clause? time_range? order_clause? ";"
+<task_timing> ::= "at" <time> "on each" <weekday>
 
-modify_stmt     ::= "delete" ("all" | IDENTIFIER) where_clause? ";"
-                 | "update" IDENTIFIER "set" update_clause ";"
+<pomodoro_decl> ::= "pomodoro" <string> "at" <time> "repeat" <number> "times" [ "with" <duration> "break" ]
 
-update_clause   ::= IDENTIFIER "=" (STRING | NUMBER)
+<loop_stmt> ::= "each" <loop_unit> "from" <date> "to" <date> "{" { <statement> } "}"
 
-filter_stmt     ::= "filter" IDENTIFIER "where" filter_condition "into" IDENTIFIER ";"
+<loop_unit> ::= "day" | "week" | "month"
 
-filter_condition ::= IDENTIFIER comparison_op (STRING | NUMBER | "(" STRING_LIST ")")
+<filter_stmt> ::= "filter" <identifier> "where" <condition> "into" <identifier> ";"
 
-comparison_op   ::= "==" | "!=" | ">" | "<" | ">=" | "<=" | "in"
+<merge_stmt> ::= "merge" <identifier> "," <identifier> "into" <identifier> ";"
 
-export_stmt     ::= "export" (IDENTIFIER | "all") ("as" STRING)? ";"
+<include_stmt> ::= "include" <identifier> "in" <identifier> ";"
 
-conditional_stmt ::= "if" "(" condition ")" "{" (event_stmt | modify_stmt | query_stmt)* "}"
-                     ("else if" "(" condition ")" "{" (event_stmt | modify_stmt | query_stmt)* "}")*
-                     ("else" "{" (event_stmt | modify_stmt | query_stmt)* "}")?
+<export_stmt> ::= "export" <identifier> [ "as" <string> ] ";"
+                | "export all" ";"
 
-expression      ::= NUMBER | STRING | "date.now()" | function_call
+<condition> ::= <identifier> <comparison_op> <value>
 
-function_call   ::= IDENTIFIER "(" expression* ")"
+<comparison_op> ::= "==" | "!=" | "<" | "<=" | ">" | ">="
 
-date_time       ::= "on" date "at" time
-recurrence      ::= ("daily" | "every" STRING) "at" time
-                 | "repeat" INT ("times" | "every" duration)
-                 | "on" day_of_week "at" time
-                 | "on" day_of_week ordinal "at" time
+<strategy> ::= "random" | "earliest" | "latest"
 
-date            ::= INT ("st" | "nd" | "rd" | "th") STRING
-time            ::= INT ":" INT
-day_of_week     ::= "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
-ordinal         ::= "1st" | "2nd" | "3rd" | "4th" | "5th" | "last"
+<date> ::= <day> "." <month>         (* e.g. 12.03 *)
+        | <day> <month_name>         (* e.g. 12 March *)
+        | <year> "." <month> "." <day>
 
-STRING          ::= "\"" .* "\""
-STRING_LIST     ::= STRING ("," STRING)*
-IDENTIFIER      ::= [a-zA-Z_][a-zA-Z0-9_]*
-NUMBER          ::= [0-9]+
+<weekday> ::= "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
+
+<time> ::= <hour> ":" <minute>
+         | <hour_12> ":" <minute> <am_pm>
+
+<duration> ::= <number> "m" | <number> "h"
+
+<value> ::= <string> | <number>
+
+<identifier> ::= (a-z | A-Z) (a-z | A-Z | 0-9 | "_")*
+
+<string> ::= "\"" { any character except "\"" } "\""
+
+<number> ::= digit { digit }
+
+<day> ::= <number>         (* 1-31 *)
+<month> ::= <number>       (* 1-12 *)
+<year> ::= <number>        (* e.g., 2025 *)
+<hour> ::= <number>
+<minute> ::= <number>
+<hour_12> ::= <number>
+<am_pm> ::= "AM" | "PM"
+
+<month_name> ::= "January" | "February" | "March" | "April" | "May" | "June"
+               | "July" | "August" | "September" | "October" | "November" | "December"
+
 ```

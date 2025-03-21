@@ -5,36 +5,35 @@ import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 
 import { ProgramContext } from "./AionParser";
 import { StatementContext } from "./AionParser";
-import { ImportStmtContext } from "./AionParser";
-import { TaskStmtContext } from "./AionParser";
-import { EventStmtContext } from "./AionParser";
-import { PomodoroStmtContext } from "./AionParser";
-import { StructuredEventStmtContext } from "./AionParser";
-import { StructuredEventBodyContext } from "./AionParser";
-import { StructuredEventFieldContext } from "./AionParser";
-import { ExportDefaultStmtContext } from "./AionParser";
-import { StartWeekStmtContext } from "./AionParser";
-import { IterateStmtContext } from "./AionParser";
-import { ConditionalStmtContext } from "./AionParser";
-import { IncludeStmtContext } from "./AionParser";
-import { MergeStmtContext } from "./AionParser";
-import { FilterStmtContext } from "./AionParser";
-import { ExportStmtContext } from "./AionParser";
-import { ExportTargetContext } from "./AionParser";
-import { RecurrenceContext } from "./AionParser";
-import { DateExprContext } from "./AionParser";
-import { DayOfWeekExprContext } from "./AionParser";
-import { OrdinalExprContext } from "./AionParser";
-import { TimeExprContext } from "./AionParser";
-import { DurationExprContext } from "./AionParser";
-import { DurationValueContext } from "./AionParser";
-import { DurationPartContext } from "./AionParser";
-import { PomodoroExtrasContext } from "./AionParser";
-import { IterateFromContext } from "./AionParser";
-import { IterateToContext } from "./AionParser";
-import { StepExprContext } from "./AionParser";
-import { ConditionExprContext } from "./AionParser";
-import { FilterConditionContext } from "./AionParser";
+import { Import_stmtContext } from "./AionParser";
+import { Assignment_stmtContext } from "./AionParser";
+import { Default_declarationContext } from "./AionParser";
+import { DeclarationContext } from "./AionParser";
+import { Event_declContext } from "./AionParser";
+import { Event_timingContext } from "./AionParser";
+import { Structured_event_stmtContext } from "./AionParser";
+import { Structured_event_fieldContext } from "./AionParser";
+import { Week_start_stmtContext } from "./AionParser";
+import { Task_declContext } from "./AionParser";
+import { Task_timingContext } from "./AionParser";
+import { Pomodoro_declContext } from "./AionParser";
+import { Loop_stmtContext } from "./AionParser";
+import { Loop_unitContext } from "./AionParser";
+import { Conditional_stmtContext } from "./AionParser";
+import { Filter_stmtContext } from "./AionParser";
+import { Merge_stmtContext } from "./AionParser";
+import { Include_stmtContext } from "./AionParser";
+import { Export_stmtContext } from "./AionParser";
+import { ConditionContext } from "./AionParser";
+import { Comparison_opContext } from "./AionParser";
+import { StrategyContext } from "./AionParser";
+import { DateContext } from "./AionParser";
+import { WeekdayContext } from "./AionParser";
+import { TimeContext } from "./AionParser";
+import { DurationContext } from "./AionParser";
+import { ValueContext } from "./AionParser";
+import { Am_pmContext } from "./AionParser";
+import { Month_nameContext } from "./AionParser";
 
 
 /**
@@ -60,213 +59,206 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitStatement?: (ctx: StatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.importStmt`.
+	 * Visit a parse tree produced by `AionParser.import_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitImportStmt?: (ctx: ImportStmtContext) => Result;
+	visitImport_stmt?: (ctx: Import_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.taskStmt`.
+	 * Visit a parse tree produced by `AionParser.assignment_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitTaskStmt?: (ctx: TaskStmtContext) => Result;
+	visitAssignment_stmt?: (ctx: Assignment_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.eventStmt`.
+	 * Visit a parse tree produced by `AionParser.default_declaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitEventStmt?: (ctx: EventStmtContext) => Result;
+	visitDefault_declaration?: (ctx: Default_declarationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.pomodoroStmt`.
+	 * Visit a parse tree produced by `AionParser.declaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitPomodoroStmt?: (ctx: PomodoroStmtContext) => Result;
+	visitDeclaration?: (ctx: DeclarationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.structuredEventStmt`.
+	 * Visit a parse tree produced by `AionParser.event_decl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStructuredEventStmt?: (ctx: StructuredEventStmtContext) => Result;
+	visitEvent_decl?: (ctx: Event_declContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.structuredEventBody`.
+	 * Visit a parse tree produced by `AionParser.event_timing`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStructuredEventBody?: (ctx: StructuredEventBodyContext) => Result;
+	visitEvent_timing?: (ctx: Event_timingContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.structuredEventField`.
+	 * Visit a parse tree produced by `AionParser.structured_event_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStructuredEventField?: (ctx: StructuredEventFieldContext) => Result;
+	visitStructured_event_stmt?: (ctx: Structured_event_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.exportDefaultStmt`.
+	 * Visit a parse tree produced by `AionParser.structured_event_field`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitExportDefaultStmt?: (ctx: ExportDefaultStmtContext) => Result;
+	visitStructured_event_field?: (ctx: Structured_event_fieldContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.startWeekStmt`.
+	 * Visit a parse tree produced by `AionParser.week_start_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStartWeekStmt?: (ctx: StartWeekStmtContext) => Result;
+	visitWeek_start_stmt?: (ctx: Week_start_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.iterateStmt`.
+	 * Visit a parse tree produced by `AionParser.task_decl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitIterateStmt?: (ctx: IterateStmtContext) => Result;
+	visitTask_decl?: (ctx: Task_declContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.conditionalStmt`.
+	 * Visit a parse tree produced by `AionParser.task_timing`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitConditionalStmt?: (ctx: ConditionalStmtContext) => Result;
+	visitTask_timing?: (ctx: Task_timingContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.includeStmt`.
+	 * Visit a parse tree produced by `AionParser.pomodoro_decl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitIncludeStmt?: (ctx: IncludeStmtContext) => Result;
+	visitPomodoro_decl?: (ctx: Pomodoro_declContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.mergeStmt`.
+	 * Visit a parse tree produced by `AionParser.loop_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitMergeStmt?: (ctx: MergeStmtContext) => Result;
+	visitLoop_stmt?: (ctx: Loop_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.filterStmt`.
+	 * Visit a parse tree produced by `AionParser.loop_unit`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitFilterStmt?: (ctx: FilterStmtContext) => Result;
+	visitLoop_unit?: (ctx: Loop_unitContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.exportStmt`.
+	 * Visit a parse tree produced by `AionParser.conditional_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitExportStmt?: (ctx: ExportStmtContext) => Result;
+	visitConditional_stmt?: (ctx: Conditional_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.exportTarget`.
+	 * Visit a parse tree produced by `AionParser.filter_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitExportTarget?: (ctx: ExportTargetContext) => Result;
+	visitFilter_stmt?: (ctx: Filter_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.recurrence`.
+	 * Visit a parse tree produced by `AionParser.merge_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitRecurrence?: (ctx: RecurrenceContext) => Result;
+	visitMerge_stmt?: (ctx: Merge_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.dateExpr`.
+	 * Visit a parse tree produced by `AionParser.include_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDateExpr?: (ctx: DateExprContext) => Result;
+	visitInclude_stmt?: (ctx: Include_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.dayOfWeekExpr`.
+	 * Visit a parse tree produced by `AionParser.export_stmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDayOfWeekExpr?: (ctx: DayOfWeekExprContext) => Result;
+	visitExport_stmt?: (ctx: Export_stmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.ordinalExpr`.
+	 * Visit a parse tree produced by `AionParser.condition`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitOrdinalExpr?: (ctx: OrdinalExprContext) => Result;
+	visitCondition?: (ctx: ConditionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.timeExpr`.
+	 * Visit a parse tree produced by `AionParser.comparison_op`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitTimeExpr?: (ctx: TimeExprContext) => Result;
+	visitComparison_op?: (ctx: Comparison_opContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.durationExpr`.
+	 * Visit a parse tree produced by `AionParser.strategy`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDurationExpr?: (ctx: DurationExprContext) => Result;
+	visitStrategy?: (ctx: StrategyContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.durationValue`.
+	 * Visit a parse tree produced by `AionParser.date`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDurationValue?: (ctx: DurationValueContext) => Result;
+	visitDate?: (ctx: DateContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.durationPart`.
+	 * Visit a parse tree produced by `AionParser.weekday`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDurationPart?: (ctx: DurationPartContext) => Result;
+	visitWeekday?: (ctx: WeekdayContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.pomodoroExtras`.
+	 * Visit a parse tree produced by `AionParser.time`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitPomodoroExtras?: (ctx: PomodoroExtrasContext) => Result;
+	visitTime?: (ctx: TimeContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.iterateFrom`.
+	 * Visit a parse tree produced by `AionParser.duration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitIterateFrom?: (ctx: IterateFromContext) => Result;
+	visitDuration?: (ctx: DurationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.iterateTo`.
+	 * Visit a parse tree produced by `AionParser.value`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitIterateTo?: (ctx: IterateToContext) => Result;
+	visitValue?: (ctx: ValueContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.stepExpr`.
+	 * Visit a parse tree produced by `AionParser.am_pm`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStepExpr?: (ctx: StepExprContext) => Result;
+	visitAm_pm?: (ctx: Am_pmContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.conditionExpr`.
+	 * Visit a parse tree produced by `AionParser.month_name`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitConditionExpr?: (ctx: ConditionExprContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `AionParser.filterCondition`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFilterCondition?: (ctx: FilterConditionContext) => Result;
+	visitMonth_name?: (ctx: Month_nameContext) => Result;
 }
 

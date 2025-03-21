@@ -18,6 +18,11 @@
 
 <assignment_stmt> ::= <identifier> "=" <declaration> ";"
 
+<default_declaration> ::= "new" <event_decl>
+                        | "new" <task_decl>
+                        | "new" <pomodoro_decl>
+
+
 <declaration> ::= <event_decl>
                 | <task_decl>
                 | <pomodoro_decl>

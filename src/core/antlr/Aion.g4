@@ -1,6 +1,8 @@
 grammar Aion;
 
+// ---------------------------------------------
 // Parser Rules
+// ---------------------------------------------
 
 program
     : statement* EOF
@@ -8,207 +10,169 @@ program
 
 statement
     : importStmt
-    | taskStmt
-    | eventStmt
-    | pomodoroStmt
-    | structuredEventStmt
-    | exportDefaultStmt
-    | startWeekStmt
-    | iterateStmt
-    | conditionalStmt
-    | includeStmt
+    | assignmentStmt
+    | loopStmt
+    | exportStmt
     | mergeStmt
     | filterStmt
-    | exportStmt
+    | includeStmt
+    | conditionalStmt
+    | structuredEventStmt
+    | weekStartStmt
     ;
 
 importStmt
     : 'import' STRING 'as' ID ';'
     ;
 
-taskStmt
-    : 'new' 'task' STRING recurrence? 'at' timeExpr ';'
+assignmentStmt
+    : ID '=' declaration ';'
     ;
 
-eventStmt
-    : 'new' 'event' STRING recurrence? dateExpr? 'at' timeExpr durationExpr? ';'
+declaration
+    : eventDecl
+    | taskDecl
+    | pomodoroDecl
     ;
 
-pomodoroStmt
-    : ID? '='? 'pomodoro' STRING 'at' timeExpr 'repeat' INT 'times' pomodoroExtras? ';'
+eventDecl
+    : 'event' STRING eventTiming ( 'at' STRING )?
+    ;
+
+eventTiming
+    : 'on' date 'from' time 'to' time
+    | 'every' weekday 'from' time 'to' time
+    | 'from' time 'to' time
     ;
 
 structuredEventStmt
-    : 'event' ID '{' structuredEventBody '}'
-    ;
-
-structuredEventBody
-    : (structuredEventField ';')*
+    : 'event' ID '{' structuredEventField* '}'
     ;
 
 structuredEventField
-    : 'name' ':' STRING
-    | 'start' ':' timeExpr
-    | 'duration' ':' durationExpr
-    | 'location' ':' STRING
+    : 'name' ':' STRING ';'
+    | 'start' ':' time ';'
+    | 'duration' ':' duration ';'
+    | 'location' ':' STRING ';'
     ;
 
-exportDefaultStmt
-    : 'export' 'default' 'as' STRING ';'
+weekStartStmt
+    : ID '=' 'weeknumber' '(' date ')' ';'
     ;
 
-startWeekStmt
-    : ID '=' 'weeknumber' '(' DATE ')' ';'
+taskDecl
+    : 'task' 'named' STRING taskTiming ( 'with' 'alarm' )?
+    | 'task' 'named' STRING 'find' 'between' time 'and' time 'using' strategy
     ;
 
-iterateStmt
-    : 'iterate' ('weeks' | 'days' | 'months') 'from' iterateFrom 'to' iterateTo stepExpr? '{' statement* '}'
+taskTiming
+    : 'at' time 'on' 'each' weekday
+    ;
+
+pomodoroDecl
+    : 'pomodoro' STRING 'at' time 'repeat' INT 'times' ( 'with' duration 'break' )?
+    ;
+
+loopStmt
+    : 'each' loopUnit 'from' date 'to' date '{' statement* '}'
+    ;
+
+loopUnit
+    : 'day' | 'week' | 'month'
     ;
 
 conditionalStmt
-    : 'if' '(' conditionExpr ')' '{' statement* '}' ('else' ('if' '(' conditionExpr ')' '{' statement* '}' | '{' statement* '}'))?
+    : 'if' '(' condition ')' '{' statement* '}'
+      ( 'else' 'if' '(' condition ')' '{' statement* '}' )*
+      ( 'else' '{' statement* '}' )?
+    ;
+
+filterStmt
+    : 'filter' ID 'where' condition 'into' ID ';'
+    ;
+
+mergeStmt
+    : 'merge' ID ',' ID 'into' ID ';'
     ;
 
 includeStmt
     : 'include' ID 'in' ID ';'
     ;
 
-mergeStmt
-    : 'merge' ID (',' ID)* 'into' ID ';'
-    ;
-
-filterStmt
-    : 'filter' ID 'where' filterCondition 'into' ID ';'
-    ;
-
 exportStmt
-    : 'export' exportTarget ('as' STRING)? ';'
+    : 'export' ID ( 'as' STRING )? ';'
+    | 'export' 'default' 'as' STRING ';'
+    | 'export' 'all' ';'
     ;
 
-exportTarget
-    : ID
-    | 'all'
+// ---------------------------------------------
+// Lexer-Compatible Subrules
+// ---------------------------------------------
+
+condition
+    : ID comparisonOp value
+    | 'count' '(' weekday ')' 'in' 'month' comparisonOp INT
     ;
 
-// Fragments and Subrules
-
-recurrence
-    : 'daily'
+comparisonOp
+    : '==' | '!=' | '<' | '<=' | '>' | '>='
     ;
 
-dateExpr
-    : 'on' (DATE | dayOfWeekExpr)
+strategy
+    : 'random' | 'earliest' | 'latest'
     ;
 
-dayOfWeekExpr
-    : DAY_OF_WEEK (ordinalExpr)?
+date
+    : DAY '.' MONTH
+    | DAY monthName
+    | YEAR '.' MONTH '.' DAY
     ;
 
-ordinalExpr
-    : '1st' | '2nd' | '3rd' | '4th' | '5th'
+weekday
+    : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday'
     ;
 
-timeExpr
-    : TIME
+time
+    : HOUR ':' MINUTE
+    | HOUR12 ':' MINUTE AMPM
     ;
 
-durationExpr
-    : 'for' durationValue
+duration
+    : INT 'm'
+    | INT 'h'
     ;
 
-durationValue
-    : durationPart (durationPart)*
+value
+    : STRING
+    | INT
     ;
 
-durationPart
-    : INT 'h'
-    | INT 'm'
+// ---------------------------------------------
+// Tokens
+// ---------------------------------------------
+
+ID      : [a-zA-Z_][a-zA-Z0-9_]* ;
+INT     : [0-9]+ ;
+STRING  : '"' (~["\r\n])* '"' ;
+
+HOUR : '00' .. '23' ;
+MINUTE : '00' .. '59' ;
+HOUR12 : '01' .. '12' ;
+AMPM    : 'AM' | 'PM' ;
+
+DAY : [0-2]?[0-9] | '30' | '31' ;
+MONTH : '01' .. '12' ;
+YEAR    : [0-9]{4} ;
+
+fragment
+monthName
+    : 'January' | 'February' | 'March' | 'April' | 'May' | 'June'
+    | 'July' | 'August' | 'September' | 'October' | 'November' | 'December'
     ;
 
-pomodoroExtras
-    : 'every' durationValue 'with' durationValue 'pause'
-    ;
-
-iterateFrom
-    : DATE
-    | ID
-    | 'today'
-    ;
-
-iterateTo
-    : DATE
-    | '+' INT
-    | 'today' '+' INT
-    ;
-
-stepExpr
-    : 'step' INT
-    ;
-
-conditionExpr
-    : ID '==' INT
-    ;
-
-filterCondition
-    : 'category' ('==' | '!=') STRING
-    ;
-
-// Lexer Rules
-
-ID          : [a-zA-Z_][a-zA-Z0-9_]* ;
-INT         : [0-9]+ ;
-TIME        : [0-2][0-9] ':' [0-5][0-9] ;
-DATE        : [0-9]{4} '.' [0-9]{2} '.' [0-9]{2} ;
-STRING      : '"' (~["\r\n])* '"' ;
-
-DAY_OF_WEEK : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday' ;
-
-// Keywords (match after ID to avoid conflicts)
-fragment
-IMPORT      : 'import' ;
-fragment
-NEW         : 'new' ;
-fragment
-TASK        : 'task' ;
-fragment
-EVENT       : 'event' ;
-fragment
-POMODORO    : 'pomodoro' ;
-fragment
-DAILY       : 'daily' ;
-fragment
-REPEAT      : 'repeat' ;
-fragment
-EVERY       : 'every' ;
-fragment
-WITH        : 'with' ;
-fragment
-PAUSE       : 'pause' ;
-fragment
-INCLUDE     : 'include' ;
-fragment
-MERGE       : 'merge' ;
-fragment
-FILTER      : 'filter' ;
-fragment
-EXPORT      : 'export' ;
-fragment
-DEFAULT     : 'default' ;
-fragment
-AS          : 'as' ;
-fragment
-FROM        : 'from' ;
-fragment
-TO          : 'to' ;
-fragment
-STEP        : 'step' ;
-fragment
-IF          : 'if' ;
-fragment
-ELSE        : 'else' ;
-fragment
-WHERE       : 'where' ;
-
+// ---------------------------------------------
 // Whitespace and Comments
-WS          : [ \t\r\n]+ -> skip ;
-COMMENT     : '//' ~[\r\n]* -> skip ;
+// ---------------------------------------------
+
+WS      : [ \t\r\n]+ -> skip ;
+COMMENT : '//' ~[\r\n]* -> skip ;

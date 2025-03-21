@@ -4,7 +4,7 @@ import "personal.ics" as personal;
 
 
 // Defining Constants
-today = date.now();
+today = now;
 
 // - Creating Events and Tasks - 
 // Basic Event or Task Creation

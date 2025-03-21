@@ -49,6 +49,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "aion-ics": "file:",
     "chalk": "^4.1.2"
   }
 }

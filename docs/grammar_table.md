@@ -2,6 +2,7 @@
 |-------------------------------|----------------|----------------------------------------------------------------------------------------------------|-------------|
 | **Import `.ics` files**        | ✅             | Assigns alias to external calendar files.                                                          | `import "work.ics" as work;` |
 | **Named assignments**          | ✅             | Assigns events, tasks, pomodoros to variables.                                                     | `e1 = event "Meeting" ...;` |
+| **Primitive value assignment** | ✅             | Assign time, date, duration, string, or number to a variable.                                      | `start = 10:00;`, `day = 12.03;`, `loc = "Room A";` |
 | **Events**                     | ✅             | Supports fixed date, recurring days, and time ranges.                                              | `event "Sync" on 12 March from 11:00 to 12:00 at "Office";` |
 | **Tasks**                      | ✅             | Supports both fixed times and smart time-picking.                                                  | `task named "Review" at 21:00 on each Monday;` |
 | **Task alarms**                | ✅             | Alarms can be attached to fixed-time tasks only.                                                   | `task named "Plan" at 20:00 on each Sunday with alarm;` |

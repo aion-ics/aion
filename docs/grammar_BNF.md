@@ -5,18 +5,27 @@
 
 <statement> ::= <import_stmt>
               | <assignment_stmt>
+              | <value_assignment_stmt>
               | <loop_stmt>
               | <export_stmt>
               | <merge_stmt>
               | <filter_stmt>
               | <include_stmt>
               | <conditional_stmt>
-              | <structured_event_stmt>     (* newly added *)
-              | <week_start_stmt>           (* newly added *)
+              | <structured_event_stmt>
+              | <week_start_stmt>
 
 <import_stmt> ::= "import" <string> "as" <identifier> ";"
 
 <assignment_stmt> ::= <identifier> "=" <declaration> ";"
+
+<value_assignment_stmt> ::= <identifier> "=" <value_expr> ";" 
+
+<value_expr> ::= <date>
+               | <time>
+               | <duration>
+               | <string>
+               | <number>
 
 <default_declaration> ::= "new" <event_decl>
                         | "new" <task_decl>

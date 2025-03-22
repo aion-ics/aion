@@ -5,6 +5,12 @@ import "work.ics" as work;
 // --- Week Number Assignment ---
 start_week = weeknumber(2025.03.21);
 
+// --- Primitive Assignments ---
+date1 = 12.03;
+time1 = 09:00;
+duration1 = 2h;
+loc = "Office";
+
 // --- Structured Event ---
 event find_gift {
     name: "Buy Gift";
@@ -59,4 +65,3 @@ filter all_events where category != "work" into personal_only;
 export meetings_only as "meetings.ics";
 export personal_only;
 export default as "main.ics";
-export all;

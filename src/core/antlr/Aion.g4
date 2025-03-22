@@ -6,6 +6,7 @@ program             : statement* ;
 statement
     : import_stmt
     | assignment_stmt
+    | value_assignment_stmt
     | loop_stmt
     | export_stmt
     | merge_stmt
@@ -19,6 +20,9 @@ statement
 import_stmt         : 'import' STRING 'as' IDENTIFIER ';' ;
 
 assignment_stmt     : IDENTIFIER '=' declaration ';' ;
+
+value_assignment_stmt
+                    : IDENTIFIER '=' value_expr ';' ;
 
 default_declaration : 'new' ( event_decl | task_decl | pomodoro_decl ) ;
 
@@ -81,6 +85,13 @@ condition           : IDENTIFIER comparison_op value
 comparison_op       : '==' | '!=' | '<' | '<=' | '>' | '>=' ;
 
 strategy            : 'random' | 'earliest' | 'latest' ;
+
+value_expr          : date
+                    | time
+                    | duration
+                    | STRING
+                    | NUMBER
+                    ;
 
 date                : DAY '.' MONTH
                     | DAY month_name

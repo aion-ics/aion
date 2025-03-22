@@ -7,6 +7,7 @@ import { ProgramContext } from "./AionParser";
 import { StatementContext } from "./AionParser";
 import { Import_stmtContext } from "./AionParser";
 import { Assignment_stmtContext } from "./AionParser";
+import { Value_assignment_stmtContext } from "./AionParser";
 import { Default_declarationContext } from "./AionParser";
 import { DeclarationContext } from "./AionParser";
 import { Event_declContext } from "./AionParser";
@@ -27,6 +28,7 @@ import { Export_stmtContext } from "./AionParser";
 import { ConditionContext } from "./AionParser";
 import { Comparison_opContext } from "./AionParser";
 import { StrategyContext } from "./AionParser";
+import { Value_exprContext } from "./AionParser";
 import { DateContext } from "./AionParser";
 import { WeekdayContext } from "./AionParser";
 import { TimeContext } from "./AionParser";
@@ -71,6 +73,13 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitAssignment_stmt?: (ctx: Assignment_stmtContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `AionParser.value_assignment_stmt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitValue_assignment_stmt?: (ctx: Value_assignment_stmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `AionParser.default_declaration`.
@@ -211,6 +220,13 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitStrategy?: (ctx: StrategyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `AionParser.value_expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitValue_expr?: (ctx: Value_exprContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `AionParser.date`.

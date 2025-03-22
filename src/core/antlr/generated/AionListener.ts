@@ -7,6 +7,7 @@ import { ProgramContext } from "./AionParser";
 import { StatementContext } from "./AionParser";
 import { Import_stmtContext } from "./AionParser";
 import { Assignment_stmtContext } from "./AionParser";
+import { Value_assignment_stmtContext } from "./AionParser";
 import { Default_declarationContext } from "./AionParser";
 import { DeclarationContext } from "./AionParser";
 import { Event_declContext } from "./AionParser";
@@ -27,6 +28,7 @@ import { Export_stmtContext } from "./AionParser";
 import { ConditionContext } from "./AionParser";
 import { Comparison_opContext } from "./AionParser";
 import { StrategyContext } from "./AionParser";
+import { Value_exprContext } from "./AionParser";
 import { DateContext } from "./AionParser";
 import { WeekdayContext } from "./AionParser";
 import { TimeContext } from "./AionParser";
@@ -84,6 +86,17 @@ export interface AionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAssignment_stmt?: (ctx: Assignment_stmtContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.value_assignment_stmt`.
+	 * @param ctx the parse tree
+	 */
+	enterValue_assignment_stmt?: (ctx: Value_assignment_stmtContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.value_assignment_stmt`.
+	 * @param ctx the parse tree
+	 */
+	exitValue_assignment_stmt?: (ctx: Value_assignment_stmtContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `AionParser.default_declaration`.
@@ -304,6 +317,17 @@ export interface AionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitStrategy?: (ctx: StrategyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.value_expr`.
+	 * @param ctx the parse tree
+	 */
+	enterValue_expr?: (ctx: Value_exprContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.value_expr`.
+	 * @param ctx the parse tree
+	 */
+	exitValue_expr?: (ctx: Value_exprContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `AionParser.date`.

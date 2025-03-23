@@ -13,7 +13,6 @@
               | <include_stmt>
               | <conditional_stmt>
               | <structured_event_stmt>
-              | <week_start_stmt>
               | <default_declaration>
 
 <import_stmt> ::= "import" <string> "as" <identifier> ";"
@@ -52,15 +51,13 @@
                            | "location" ":" <string> [","]
                            | "category" ":" <string> [","]
 
-<week_start_stmt> ::= <identifier> "=" "weeknumber" "(" <date> ")" ";"
-
 <task_decl> ::= "task" <string> <temporal_expr> ["for" <duration>]
               | "task" <string> "find" "between" <time> "and" <time> ["using" <strategy>]
 
 <pomodoro_decl> ::= "pomodoro" <string> "at" <time> "repeat" <number> "times" 
                    ["every" <duration>] ["with" <duration> "pause"]
 
-<loop_stmt> ::= "iterate" <loop_unit> "from" <loop_start> "to" <loop_end> ["step" <number>] "{" { <statement> } "}"
+<loop_stmt> ::= "each" <loop_unit> "from" <loop_start> "to" <loop_end> ["step" <number>] "{" { <statement> } "}"
 
 <loop_start> ::= <date>
                | <identifier>
@@ -111,10 +108,6 @@
 
 <date_specifier> ::= <date>
                    | <weekday>
-                   | <ordinal_specifier> <weekday>
-                   | <ordinal_specifier> <month_name>
-
-<ordinal_specifier> ::= <number> ("st"|"nd"|"rd"|"th")
 
 <weekday> ::= "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
             | "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun"
@@ -123,7 +116,7 @@
 
 <duration> ::= <number> <time_unit> {<number> <time_unit>}
 
-<time_unit> ::= "h" | "m" | "min" | "hour" | "hours" | "minute" | "minutes"
+<time_unit> ::= "h" | "m"
 
 <value> ::= <string> | <number> | <identifier>
 

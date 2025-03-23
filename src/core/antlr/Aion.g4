@@ -1,7 +1,7 @@
 grammar Aion;
 
 // Parser Rules
-program             : statement* ;
+program             : statement* EOF ;
 
 statement
     : import_stmt
@@ -14,7 +14,6 @@ statement
     | include_stmt
     | conditional_stmt
     | structured_event_stmt
-    | week_start_stmt
     | default_declaration
     ;
 
@@ -33,7 +32,7 @@ declaration         : event_decl
                     ;
 
 event_decl          : 'event' STRING event_timing
-                    | 'event' STRING temporal_expr ('for' duration)? 
+                    | 'event' STRING temporal_expr ('for' duration)?
                     ;
 
 event_timing        : 'on' date_specifier ('from' time 'to' time)?
@@ -62,8 +61,6 @@ structured_event_field
                     | 'category' ':' STRING ','?
                     ;
 
-week_start_stmt     : IDENTIFIER '=' 'weeknumber' '(' date ')' ';' ;
-
 task_decl           : 'task' STRING temporal_expr ('for' duration)?
                     | 'task' STRING 'find' 'between' time 'and' time ('using' strategy)?
                     ;
@@ -71,7 +68,7 @@ task_decl           : 'task' STRING temporal_expr ('for' duration)?
 pomodoro_decl       : 'pomodoro' STRING 'at' time 'repeat' NUMBER 'times' 
                       ('every' duration)? ('with' duration 'pause')? ;
 
-loop_stmt           : 'iterate' loop_unit 'from' loop_start 'to' loop_end ('step' NUMBER)? '{' statement* '}' ;
+loop_stmt           : 'each' loop_unit 'from' loop_start 'to' loop_end ('step' NUMBER)? '{' statement* '}' ;
 
 loop_start          : date
                     | IDENTIFIER
@@ -130,11 +127,7 @@ date                : NUMBER '.' NUMBER '.' NUMBER     // YYYY.MM.DD
 
 date_specifier      : date
                     | weekday
-                    | ordinal_specifier weekday
-                    | ordinal_specifier month_name
                     ;
-
-ordinal_specifier   : NUMBER ('st'|'nd'|'rd'|'th') ;
 
 weekday             : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday'
                     | 'Friday' | 'Saturday' | 'Sunday'
@@ -147,7 +140,7 @@ time                : NUMBER ':' NUMBER
 duration            : NUMBER time_unit (NUMBER time_unit)*
                     ;
 
-time_unit           : 'h' | 'm' | 'min' | 'hour' | 'hours' | 'minute' | 'minutes'
+time_unit           : 'h' | 'm'
                     ;
 
 value               : STRING
@@ -167,9 +160,21 @@ WS                  : [ \t\r\n]+ -> skip ;
 
 COMMENT             : '//' ~[\r\n]* -> skip ;
 
-month_name          : 'January' | 'February' | 'March' | 'April' | 'May' | 'June'
-                    | 'July' | 'August' | 'September' | 'October' | 'November' | 'December'
-                    | 'Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun'
-                    | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec'
-                    | 'March'
+// Month name fragments
+fragment JAN        : [jJ][aA][nN] | [jJ][aA][nN][uU][aA][rR][yY] ;
+fragment FEB        : [fF][eE][bB] | [fF][eE][bB][rR][uU][aA][rR][yY] ;
+fragment MAR        : [mM][aA][rR] | [mM][aA][rR][cC][hH] ;
+fragment APR        : [aA][pP][rR] | [aA][pP][rR][iI][lL] ;
+fragment MAY        : [mM][aA][yY] ;
+fragment JUN        : [jJ][uU][nN] | [jJ][uU][nN][eE] ;
+fragment JUL        : [jJ][uU][lL] | [jJ][uU][lL][yY] ;
+fragment AUG        : [aA][uU][gG] | [aA][uU][gG][uU][sS][tT] ;
+fragment SEP        : [sS][eE][pP] | [sS][eE][pP][tT][eE][mM][bB][eE][rR] ;
+fragment OCT        : [oO][cC][tT] | [oO][cC][tT][oO][bB][eE][rR] ;
+fragment NOV        : [nN][oO][vV] | [nN][oO][vV][eE][mM][bB][eE][rR] ;
+fragment DEC        : [dD][eE][cC] | [dD][eE][cC][eE][mM][bB][eE][rR] ;
+
+// Combine all month fragments
+MONTH_NAME          : JAN | FEB | MAR | APR | MAY | JUN
+                    | JUL | AUG | SEP | OCT | NOV | DEC
                     ;

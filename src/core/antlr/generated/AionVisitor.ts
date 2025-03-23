@@ -15,7 +15,6 @@ import { Event_timingContext } from "./AionParser";
 import { Temporal_exprContext } from "./AionParser";
 import { Structured_event_stmtContext } from "./AionParser";
 import { Structured_event_fieldContext } from "./AionParser";
-import { Week_start_stmtContext } from "./AionParser";
 import { Task_declContext } from "./AionParser";
 import { Pomodoro_declContext } from "./AionParser";
 import { Loop_stmtContext } from "./AionParser";
@@ -35,13 +34,11 @@ import { Value_exprContext } from "./AionParser";
 import { Function_callContext } from "./AionParser";
 import { DateContext } from "./AionParser";
 import { Date_specifierContext } from "./AionParser";
-import { Ordinal_specifierContext } from "./AionParser";
 import { WeekdayContext } from "./AionParser";
 import { TimeContext } from "./AionParser";
 import { DurationContext } from "./AionParser";
 import { Time_unitContext } from "./AionParser";
 import { ValueContext } from "./AionParser";
-import { Month_nameContext } from "./AionParser";
 
 
 /**
@@ -135,13 +132,6 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitStructured_event_field?: (ctx: Structured_event_fieldContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `AionParser.week_start_stmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitWeek_start_stmt?: (ctx: Week_start_stmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `AionParser.task_decl`.
@@ -277,13 +267,6 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitDate_specifier?: (ctx: Date_specifierContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `AionParser.ordinal_specifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitOrdinal_specifier?: (ctx: Ordinal_specifierContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `AionParser.weekday`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -317,12 +300,5 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitValue?: (ctx: ValueContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `AionParser.month_name`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMonth_name?: (ctx: Month_nameContext) => Result;
 }
 

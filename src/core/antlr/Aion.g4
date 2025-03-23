@@ -15,6 +15,7 @@ statement
     | conditional_stmt
     | structured_event_stmt
     | week_start_stmt
+    | default_declaration
     ;
 
 import_stmt         : 'import' STRING 'as' IDENTIFIER ';' ;
@@ -24,43 +25,65 @@ assignment_stmt     : IDENTIFIER '=' declaration ';' ;
 value_assignment_stmt
                     : IDENTIFIER '=' value_expr ';' ;
 
-default_declaration : 'new' ( event_decl | task_decl | pomodoro_decl ) ;
+default_declaration : ('$$$')? 'new'? ( event_decl | task_decl | pomodoro_decl ) ';' ;
 
 declaration         : event_decl
                     | task_decl
                     | pomodoro_decl
                     ;
 
-event_decl          : 'event' STRING event_timing ( 'at' STRING )? ;
+event_decl          : 'event' STRING event_timing
+                    | 'event' STRING temporal_expr ('for' duration)? 
+                    ;
 
-event_timing        : 'on' date 'from' time 'to' time
-                    | 'every' weekday 'from' time 'to' time
+event_timing        : 'on' date_specifier ('from' time 'to' time)?
+                    | 'on' date_specifier ('at' time)? ('for' duration)?
+                    | 'every' weekday ('from' time 'to' time)?
+                    | 'every' weekday ('at' time)? ('for' duration)?
                     | 'from' time 'to' time
+                    | 'at' time ('for' duration)?
+                    | 'find' 'between' time 'and' time
+                    ;
+
+temporal_expr       : 'daily' ('at' time)?
+                    | 'weekly' ('at' time)?
+                    | 'monthly' ('at' time)?
+                    | 'yearly' ('at' time)?
                     ;
 
 structured_event_stmt
                     : 'event' IDENTIFIER '{' structured_event_field* '}' ;
 
 structured_event_field
-                    : 'name' ':' STRING ';'
-                    | 'start' ':' time ';'
-                    | 'duration' ':' duration ';'
-                    | 'location' ':' STRING ';'
+                    : 'name' ':' STRING ','?
+                    | 'start' ':' time ','?
+                    | 'duration' ':' duration ','?
+                    | 'location' ':' STRING ','?
+                    | 'category' ':' STRING ','?
                     ;
 
 week_start_stmt     : IDENTIFIER '=' 'weeknumber' '(' date ')' ';' ;
 
-task_decl           : 'task' 'named' STRING task_timing ( 'with' 'alarm' )?
-                    | 'task' 'named' STRING 'find' 'between' time 'and' time 'using' strategy
+task_decl           : 'task' STRING temporal_expr ('for' duration)?
+                    | 'task' STRING 'find' 'between' time 'and' time ('using' strategy)?
                     ;
 
-task_timing         : 'at' time 'on' 'each' weekday ;
+pomodoro_decl       : 'pomodoro' STRING 'at' time 'repeat' NUMBER 'times' 
+                      ('every' duration)? ('with' duration 'pause')? ;
 
-pomodoro_decl       : 'pomodoro' STRING 'at' time 'repeat' NUMBER 'times' ( 'with' duration 'break' )? ;
+loop_stmt           : 'iterate' loop_unit 'from' loop_start 'to' loop_end ('step' NUMBER)? '{' statement* '}' ;
 
-loop_stmt           : 'each' loop_unit 'from' date 'to' date '{' statement* '}' ;
+loop_start          : date
+                    | IDENTIFIER
+                    | 'today'
+                    ;
 
-loop_unit           : 'day' | 'week' | 'month' ;
+loop_end            : date
+                    | IDENTIFIER
+                    | loop_start '+' NUMBER
+                    ;
+
+loop_unit           : 'day' | 'days' | 'week' | 'weeks' | 'month' | 'months' ;
 
 conditional_stmt    : 'if' '(' condition ')' '{' statement* '}'
                       ( 'else' 'if' '(' condition ')' '{' statement* '}' )*
@@ -69,7 +92,9 @@ conditional_stmt    : 'if' '(' condition ')' '{' statement* '}'
 
 filter_stmt         : 'filter' IDENTIFIER 'where' condition 'into' IDENTIFIER ';' ;
 
-merge_stmt          : 'merge' IDENTIFIER ',' IDENTIFIER 'into' IDENTIFIER ';' ;
+merge_stmt          : 'merge' identifier_list 'into' IDENTIFIER ';' ;
+
+identifier_list     : IDENTIFIER (',' IDENTIFIER)* ;
 
 include_stmt        : 'include' IDENTIFIER 'in' IDENTIFIER ';' ;
 
@@ -80,6 +105,7 @@ export_stmt         : 'export' IDENTIFIER ( 'as' STRING )? ';'
 
 condition           : IDENTIFIER comparison_op value
                     | 'count' '(' weekday ')' 'in' 'month' comparison_op NUMBER
+                    | 'category' comparison_op STRING
                     ;
 
 comparison_op       : '==' | '!=' | '<' | '<=' | '>' | '>=' ;
@@ -91,27 +117,42 @@ value_expr          : date
                     | duration
                     | STRING
                     | NUMBER
+                    | IDENTIFIER
+                    | function_call
                     ;
 
-date                : DAY '.' MONTH
-                    | DAY month_name
-                    | YEAR '.' MONTH '.' DAY
+function_call       : 'count' '(' weekday ')' 'in' 'month'
+                    | 'weeknumber' '(' date ')'
                     ;
+
+date                : NUMBER '.' NUMBER '.' NUMBER     // YYYY.MM.DD
+                    ;
+
+date_specifier      : date
+                    | weekday
+                    | ordinal_specifier weekday
+                    | ordinal_specifier month_name
+                    ;
+
+ordinal_specifier   : NUMBER ('st'|'nd'|'rd'|'th') ;
 
 weekday             : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday'
                     | 'Friday' | 'Saturday' | 'Sunday'
+                    | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
                     ;
 
-time                : HOUR ':' MINUTE
-                    | HOUR_12 ':' MINUTE am_pm
+time                : NUMBER ':' NUMBER
                     ;
 
-duration            : NUMBER 'm'
-                    | NUMBER 'h'
+duration            : NUMBER time_unit (NUMBER time_unit)*
+                    ;
+
+time_unit           : 'h' | 'm' | 'min' | 'hour' | 'hours' | 'minute' | 'minutes'
                     ;
 
 value               : STRING
                     | NUMBER
+                    | IDENTIFIER
                     ;
 
 // Lexer Rules
@@ -121,31 +162,14 @@ STRING              : '"' ( ~["\\] | '\\' . )* '"' ;
 
 NUMBER              : [0-9]+ ;
 
-DAY                 : [0-9]+ ; // 1-31, but validated elsewhere
-MONTH               : [0-9]+ ; // 1-12, validated elsewhere
-YEAR                : [0-9]+ ;
-
-HOUR                : [0-9]+ ;
-MINUTE              : [0-9]+ ;
-HOUR_12             : [0-9]+ ;
-
-am_pm               : 'AM' | 'PM' ;
-
-month_name          : 'January'
-                    | 'February'
-                    | 'March'
-                    | 'April'
-                    | 'May'
-                    | 'June'
-                    | 'July'
-                    | 'August'
-                    | 'September'
-                    | 'October'
-                    | 'November'
-                    | 'December'
-                    ;
-
 // Skip whitespace and comments
 WS                  : [ \t\r\n]+ -> skip ;
 
 COMMENT             : '//' ~[\r\n]* -> skip ;
+
+month_name          : 'January' | 'February' | 'March' | 'April' | 'May' | 'June'
+                    | 'July' | 'August' | 'September' | 'October' | 'November' | 'December'
+                    | 'Jan' | 'Feb' | 'Mar' | 'Apr' | 'May' | 'Jun'
+                    | 'Jul' | 'Aug' | 'Sep' | 'Oct' | 'Nov' | 'Dec'
+                    | 'March'
+                    ;

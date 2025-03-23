@@ -5,16 +5,16 @@ import "work.ics" as work;
 // Constants
 
 // Tasks and events (automatically saved to "calendar.ics")
-$$$new task "kiss my wife" daily at 23:00;
+$$$ new task "kiss my wife" daily at 23:00;
 new event "empty the dishwasher" at 18:30 for 10m;
-new event "Buy mum gif" on 8th March at 15:50 for 1h 
+new event "Buy mum gift" on 8th March at 15:50 for 1h;
 
 // Pomodoro sessions (not automatically exported)
 pmd = pomodoro "LAB" at 14:30 repeat 4 times;
 pomodoro "LAB2" at 18:30 repeat 5 times every 30m with 10m pause;
 
 // Flexible event scheduling (manual export required)
-meeting = event "meeting" on Friday find between 10:00 and 15:00;
+meeting = event "meeting" find between 10:00 and 15:00;
 event "Reading" daily at 21:00 for 2h 10m;
 
 // Define a structured event (not automatically exported)
@@ -32,7 +32,7 @@ export default as "calendar.ics";
 start_week_number = weeknumber(2025.02.03);
 
 // Different loop types
-iterate weeks from start_week_number to +26 {  
+iterate weeks from start_week_number to start_week_number + 26 {  
     new event "Weekly Report" every Monday at 9:00 for 1h;  
 }
 
@@ -40,11 +40,8 @@ iterate days from 2025.03.01 to 2025.03.10 step 2 {
     new event "Gym Session" at 07:00 for 1h;  
 }
 
-
-
 // Schedule "Date" on the correct Friday
 iterate months from today to today + 50 {
-    
     c = count(Friday) in month;
     
     if (c == 4) {

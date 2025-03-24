@@ -114,32 +114,12 @@ export class AionParser extends Parser {
 	public static readonly T__83 = 84;
 	public static readonly T__84 = 85;
 	public static readonly T__85 = 86;
-	public static readonly T__86 = 87;
-	public static readonly T__87 = 88;
-	public static readonly T__88 = 89;
-	public static readonly T__89 = 90;
-	public static readonly T__90 = 91;
-	public static readonly T__91 = 92;
-	public static readonly T__92 = 93;
-	public static readonly T__93 = 94;
-	public static readonly T__94 = 95;
-	public static readonly T__95 = 96;
-	public static readonly T__96 = 97;
-	public static readonly T__97 = 98;
-	public static readonly T__98 = 99;
-	public static readonly T__99 = 100;
-	public static readonly T__100 = 101;
-	public static readonly T__101 = 102;
-	public static readonly T__102 = 103;
-	public static readonly T__103 = 104;
-	public static readonly T__104 = 105;
-	public static readonly T__105 = 106;
-	public static readonly T__106 = 107;
-	public static readonly Identifier = 108;
-	public static readonly String = 109;
-	public static readonly Number = 110;
-	public static readonly WS = 111;
-	public static readonly LINE_COMMENT = 112;
+	public static readonly IDENTIFIER = 87;
+	public static readonly STRING = 88;
+	public static readonly NUMBER = 89;
+	public static readonly WS = 90;
+	public static readonly COMMENT = 91;
+	public static readonly MONTH_NAME = 92;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
 	public static readonly RULE_import_stmt = 2;
@@ -148,70 +128,63 @@ export class AionParser extends Parser {
 	public static readonly RULE_default_declaration = 5;
 	public static readonly RULE_declaration = 6;
 	public static readonly RULE_event_decl = 7;
-	public static readonly RULE_task_decl = 8;
-	public static readonly RULE_repetition_in_decl = 9;
-	public static readonly RULE_task_time_strict = 10;
-	public static readonly RULE_event_time_strict = 11;
-	public static readonly RULE_event_time_expr = 12;
-	public static readonly RULE_rep_period = 13;
+	public static readonly RULE_recurrence_expr = 8;
+	public static readonly RULE_timing_expr = 9;
+	public static readonly RULE_structured_event_stmt = 10;
+	public static readonly RULE_structured_event_field = 11;
+	public static readonly RULE_task_decl = 12;
+	public static readonly RULE_task_time_spec = 13;
 	public static readonly RULE_pomodoro_decl = 14;
-	public static readonly RULE_structured_event_stmt = 15;
-	public static readonly RULE_structured_event_field = 16;
-	public static readonly RULE_loop_stmt = 17;
-	public static readonly RULE_loop_start = 18;
-	public static readonly RULE_loop_end = 19;
-	public static readonly RULE_loop_unit = 20;
-	public static readonly RULE_conditional_stmt = 21;
-	public static readonly RULE_filter_stmt = 22;
-	public static readonly RULE_merge_stmt = 23;
-	public static readonly RULE_identifier_list = 24;
-	public static readonly RULE_include_stmt = 25;
-	public static readonly RULE_export_stmt = 26;
-	public static readonly RULE_week_start_stmt = 27;
-	public static readonly RULE_condition = 28;
-	public static readonly RULE_comparison_op = 29;
-	public static readonly RULE_strategy = 30;
-	public static readonly RULE_value_expr = 31;
-	public static readonly RULE_function_call = 32;
-	public static readonly RULE_date = 33;
+	public static readonly RULE_loop_stmt = 15;
+	public static readonly RULE_loop_start = 16;
+	public static readonly RULE_loop_end = 17;
+	public static readonly RULE_loop_unit = 18;
+	public static readonly RULE_conditional_stmt = 19;
+	public static readonly RULE_filter_stmt = 20;
+	public static readonly RULE_merge_stmt = 21;
+	public static readonly RULE_identifier_list = 22;
+	public static readonly RULE_include_stmt = 23;
+	public static readonly RULE_export_stmt = 24;
+	public static readonly RULE_condition = 25;
+	public static readonly RULE_comparison_op = 26;
+	public static readonly RULE_strategy = 27;
+	public static readonly RULE_value_expr = 28;
+	public static readonly RULE_function_call = 29;
+	public static readonly RULE_date = 30;
+	public static readonly RULE_date_specifier = 31;
+	public static readonly RULE_weekday_list = 32;
+	public static readonly RULE_weekday = 33;
 	public static readonly RULE_time = 34;
-	public static readonly RULE_duration = 35;
-	public static readonly RULE_time_unit = 36;
-	public static readonly RULE_value = 37;
-	public static readonly RULE_identifier = 38;
-	public static readonly RULE_string = 39;
-	public static readonly RULE_number = 40;
-	public static readonly RULE_weekday = 41;
-	public static readonly RULE_month_name = 42;
+	public static readonly RULE_time_at = 35;
+	public static readonly RULE_time_range = 36;
+	public static readonly RULE_duration = 37;
+	public static readonly RULE_time_unit = 38;
+	public static readonly RULE_value = 39;
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"program", "statement", "import_stmt", "assignment_stmt", "value_assignment_stmt", 
-		"default_declaration", "declaration", "event_decl", "task_decl", "repetition_in_decl", 
-		"task_time_strict", "event_time_strict", "event_time_expr", "rep_period", 
-		"pomodoro_decl", "structured_event_stmt", "structured_event_field", "loop_stmt", 
-		"loop_start", "loop_end", "loop_unit", "conditional_stmt", "filter_stmt", 
-		"merge_stmt", "identifier_list", "include_stmt", "export_stmt", "week_start_stmt", 
-		"condition", "comparison_op", "strategy", "value_expr", "function_call", 
-		"date", "time", "duration", "time_unit", "value", "identifier", "string", 
-		"number", "weekday", "month_name",
+		"default_declaration", "declaration", "event_decl", "recurrence_expr", 
+		"timing_expr", "structured_event_stmt", "structured_event_field", "task_decl", 
+		"task_time_spec", "pomodoro_decl", "loop_stmt", "loop_start", "loop_end", 
+		"loop_unit", "conditional_stmt", "filter_stmt", "merge_stmt", "identifier_list", 
+		"include_stmt", "export_stmt", "condition", "comparison_op", "strategy", 
+		"value_expr", "function_call", "date", "date_specifier", "weekday_list", 
+		"weekday", "time", "time_at", "time_range", "duration", "time_unit", "value",
 	];
 
 	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
-		undefined, "'import'", "'as'", "';'", "'='", "'new'", "'event'", "'task'", 
-		"'each'", "'at'", "'find between'", "'and'", "'using'", "'from'", "'for'", 
-		"'to'", "'on'", "'daily'", "'weekly'", "'yearly'", "'pomodoro'", "'repeat'", 
-		"'times'", "'every'", "'with'", "'pause'", "'{'", "'}'", "'name'", "':'", 
-		"','", "'start'", "'duration'", "'location'", "'category'", "'step'", 
-		"'today'", "'+'", "'day'", "'days'", "'week'", "'weeks'", "'month'", "'months'", 
-		"'if'", "'('", "')'", "'else'", "'filter'", "'where'", "'into'", "'merge'", 
-		"'include'", "'in'", "'export'", "'default'", "'all'", "'weeknumber'", 
-		"'count'", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'random'", "'earliest'", 
-		"'latest'", "'.'", "'h'", "'m'", "'Monday'", "'Tuesday'", "'Wednesday'", 
+		undefined, "'import'", "'as'", "';'", "'='", "'new'", "'event'", "'for'", 
+		"'daily'", "'at'", "'weekly'", "'on'", "'monthly'", "'yearly'", "'every'", 
+		"'from'", "'to'", "'find'", "'between'", "'and'", "'{'", "'}'", "'name'", 
+		"':'", "','", "'start'", "'duration'", "'location'", "'category'", "'task'", 
+		"'using'", "'pomodoro'", "'repeat'", "'times'", "'with'", "'pause'", "'each'", 
+		"'step'", "'today'", "'+'", "'day'", "'days'", "'week'", "'weeks'", "'month'", 
+		"'months'", "'if'", "'('", "')'", "'else'", "'filter'", "'where'", "'into'", 
+		"'merge'", "'include'", "'in'", "'export'", "'default'", "'all'", "'count'", 
+		"'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'random'", "'earliest'", 
+		"'latest'", "'weeknumber'", "'.'", "'Monday'", "'Tuesday'", "'Wednesday'", 
 		"'Thursday'", "'Friday'", "'Saturday'", "'Sunday'", "'Mon'", "'Tue'", 
-		"'Wed'", "'Thu'", "'Fri'", "'Sat'", "'Sun'", "'January'", "'February'", 
-		"'March'", "'April'", "'May'", "'June'", "'July'", "'August'", "'September'", 
-		"'October'", "'November'", "'December'", "'Jan'", "'Feb'", "'Mar'", "'Apr'", 
-		"'Jun'", "'Jul'", "'Aug'", "'Sep'", "'Oct'", "'Nov'", "'Dec'",
+		"'Wed'", "'Thu'", "'Fri'", "'Sat'", "'Sun'", "'h'", "'m'",
 	];
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
@@ -226,11 +199,8 @@ export class AionParser extends Parser {
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, "Identifier", "String", "Number", "WS", 
-		"LINE_COMMENT",
+		undefined, undefined, undefined, "IDENTIFIER", "STRING", "NUMBER", "WS", 
+		"COMMENT", "MONTH_NAME",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(AionParser._LITERAL_NAMES, AionParser._SYMBOLIC_NAMES, []);
 
@@ -266,21 +236,21 @@ export class AionParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 89;
+			this.state = 83;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5) | (1 << AionParser.T__6) | (1 << AionParser.T__7) | (1 << AionParser.T__19))) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & ((1 << (AionParser.T__43 - 44)) | (1 << (AionParser.T__47 - 44)) | (1 << (AionParser.T__50 - 44)) | (1 << (AionParser.T__51 - 44)) | (1 << (AionParser.T__53 - 44)))) !== 0) || _la === AionParser.Identifier) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5))) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (AionParser.T__35 - 36)) | (1 << (AionParser.T__45 - 36)) | (1 << (AionParser.T__49 - 36)) | (1 << (AionParser.T__52 - 36)) | (1 << (AionParser.T__53 - 36)) | (1 << (AionParser.T__55 - 36)))) !== 0) || _la === AionParser.IDENTIFIER) {
 				{
 				{
-				this.state = 86;
+				this.state = 80;
 				this.statement();
 				}
 				}
-				this.state = 91;
+				this.state = 85;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 92;
+			this.state = 86;
 			this.match(AionParser.EOF);
 			}
 		}
@@ -303,13 +273,13 @@ export class AionParser extends Parser {
 		let _localctx: StatementContext = new StatementContext(this._ctx, this.state);
 		this.enterRule(_localctx, 2, AionParser.RULE_statement);
 		try {
-			this.state = 106;
+			this.state = 99;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 1, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 94;
+				this.state = 88;
 				this.import_stmt();
 				}
 				break;
@@ -317,7 +287,7 @@ export class AionParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 95;
+				this.state = 89;
 				this.assignment_stmt();
 				}
 				break;
@@ -325,7 +295,7 @@ export class AionParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 96;
+				this.state = 90;
 				this.value_assignment_stmt();
 				}
 				break;
@@ -333,7 +303,7 @@ export class AionParser extends Parser {
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 97;
+				this.state = 91;
 				this.loop_stmt();
 				}
 				break;
@@ -341,7 +311,7 @@ export class AionParser extends Parser {
 			case 5:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 98;
+				this.state = 92;
 				this.export_stmt();
 				}
 				break;
@@ -349,7 +319,7 @@ export class AionParser extends Parser {
 			case 6:
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 99;
+				this.state = 93;
 				this.merge_stmt();
 				}
 				break;
@@ -357,7 +327,7 @@ export class AionParser extends Parser {
 			case 7:
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 100;
+				this.state = 94;
 				this.filter_stmt();
 				}
 				break;
@@ -365,7 +335,7 @@ export class AionParser extends Parser {
 			case 8:
 				this.enterOuterAlt(_localctx, 8);
 				{
-				this.state = 101;
+				this.state = 95;
 				this.include_stmt();
 				}
 				break;
@@ -373,7 +343,7 @@ export class AionParser extends Parser {
 			case 9:
 				this.enterOuterAlt(_localctx, 9);
 				{
-				this.state = 102;
+				this.state = 96;
 				this.conditional_stmt();
 				}
 				break;
@@ -381,7 +351,7 @@ export class AionParser extends Parser {
 			case 10:
 				this.enterOuterAlt(_localctx, 10);
 				{
-				this.state = 103;
+				this.state = 97;
 				this.structured_event_stmt();
 				}
 				break;
@@ -389,15 +359,7 @@ export class AionParser extends Parser {
 			case 11:
 				this.enterOuterAlt(_localctx, 11);
 				{
-				this.state = 104;
-				this.week_start_stmt();
-				}
-				break;
-
-			case 12:
-				this.enterOuterAlt(_localctx, 12);
-				{
-				this.state = 105;
+				this.state = 98;
 				this.default_declaration();
 				}
 				break;
@@ -424,15 +386,15 @@ export class AionParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 108;
+			this.state = 101;
 			this.match(AionParser.T__0);
-			this.state = 109;
-			this.string();
-			this.state = 110;
+			this.state = 102;
+			this.match(AionParser.STRING);
+			this.state = 103;
 			this.match(AionParser.T__1);
-			this.state = 111;
-			this.identifier();
-			this.state = 112;
+			this.state = 104;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 105;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -457,13 +419,13 @@ export class AionParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 114;
-			this.identifier();
-			this.state = 115;
+			this.state = 107;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 108;
 			this.match(AionParser.T__3);
-			this.state = 116;
+			this.state = 109;
 			this.declaration();
-			this.state = 117;
+			this.state = 110;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -488,13 +450,13 @@ export class AionParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 119;
-			this.identifier();
-			this.state = 120;
+			this.state = 112;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 113;
 			this.match(AionParser.T__3);
-			this.state = 121;
+			this.state = 114;
 			this.value_expr();
-			this.state = 122;
+			this.state = 115;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -516,45 +478,36 @@ export class AionParser extends Parser {
 	public default_declaration(): Default_declarationContext {
 		let _localctx: Default_declarationContext = new Default_declarationContext(this._ctx, this.state);
 		this.enterRule(_localctx, 10, AionParser.RULE_default_declaration);
-		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 125;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if (_la === AionParser.T__4) {
-				{
-				this.state = 124;
-				this.match(AionParser.T__4);
-				}
-			}
-
-			this.state = 130;
+			this.state = 117;
+			this.match(AionParser.T__4);
+			this.state = 121;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case AionParser.T__5:
 				{
-				this.state = 127;
+				this.state = 118;
 				this.event_decl();
 				}
 				break;
-			case AionParser.T__6:
+			case AionParser.T__28:
 				{
-				this.state = 128;
+				this.state = 119;
 				this.task_decl();
 				}
 				break;
-			case AionParser.T__19:
+			case AionParser.T__30:
 				{
-				this.state = 129;
+				this.state = 120;
 				this.pomodoro_decl();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 132;
+			this.state = 123;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -577,27 +530,27 @@ export class AionParser extends Parser {
 		let _localctx: DeclarationContext = new DeclarationContext(this._ctx, this.state);
 		this.enterRule(_localctx, 12, AionParser.RULE_declaration);
 		try {
-			this.state = 137;
+			this.state = 128;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case AionParser.T__5:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 134;
+				this.state = 125;
 				this.event_decl();
 				}
 				break;
-			case AionParser.T__6:
+			case AionParser.T__28:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 135;
+				this.state = 126;
 				this.task_decl();
 				}
 				break;
-			case AionParser.T__19:
+			case AionParser.T__30:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 136;
+				this.state = 127;
 				this.pomodoro_decl();
 				}
 				break;
@@ -623,37 +576,501 @@ export class AionParser extends Parser {
 	public event_decl(): Event_declContext {
 		let _localctx: Event_declContext = new Event_declContext(this._ctx, this.state);
 		this.enterRule(_localctx, 14, AionParser.RULE_event_decl);
+		let _la: number;
 		try {
-			this.state = 149;
+			this.state = 144;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 5, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 6, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 139;
+				this.state = 130;
 				this.match(AionParser.T__5);
-				this.state = 140;
-				this.string();
-				this.state = 141;
-				this.event_time_expr();
-				this.state = 142;
-				this.event_time_strict();
+				this.state = 131;
+				this.match(AionParser.STRING);
+				this.state = 132;
+				this.recurrence_expr();
+				this.state = 135;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__6) {
+					{
+					this.state = 133;
+					this.match(AionParser.T__6);
+					this.state = 134;
+					this.duration();
+					}
+				}
+
 				}
 				break;
 
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 144;
+				this.state = 137;
 				this.match(AionParser.T__5);
-				this.state = 145;
-				this.string();
-				this.state = 146;
-				this.repetition_in_decl();
-				this.state = 147;
-				this.event_time_strict();
+				this.state = 138;
+				this.match(AionParser.STRING);
+				this.state = 139;
+				this.timing_expr();
+				this.state = 142;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__6) {
+					{
+					this.state = 140;
+					this.match(AionParser.T__6);
+					this.state = 141;
+					this.duration();
+					}
+				}
+
 				}
 				break;
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public recurrence_expr(): Recurrence_exprContext {
+		let _localctx: Recurrence_exprContext = new Recurrence_exprContext(this._ctx, this.state);
+		this.enterRule(_localctx, 16, AionParser.RULE_recurrence_expr);
+		let _la: number;
+		try {
+			this.state = 172;
+			this._errHandler.sync(this);
+			switch (this._input.LA(1)) {
+			case AionParser.T__7:
+				this.enterOuterAlt(_localctx, 1);
+				{
+				this.state = 146;
+				this.match(AionParser.T__7);
+				this.state = 149;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__8) {
+					{
+					this.state = 147;
+					this.match(AionParser.T__8);
+					this.state = 148;
+					this.time();
+					}
+				}
+
+				}
+				break;
+			case AionParser.T__9:
+				this.enterOuterAlt(_localctx, 2);
+				{
+				this.state = 151;
+				this.match(AionParser.T__9);
+				this.state = 152;
+				this.match(AionParser.T__10);
+				this.state = 153;
+				this.weekday_list();
+				this.state = 156;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case AionParser.T__14:
+					{
+					this.state = 154;
+					this.time_range();
+					}
+					break;
+				case AionParser.T__8:
+					{
+					this.state = 155;
+					this.time_at();
+					}
+					break;
+				case AionParser.T__2:
+				case AionParser.T__6:
+					break;
+				default:
+					break;
+				}
+				}
+				break;
+			case AionParser.T__11:
+				this.enterOuterAlt(_localctx, 3);
+				{
+				this.state = 158;
+				this.match(AionParser.T__11);
+				this.state = 159;
+				this.match(AionParser.T__10);
+				this.state = 160;
+				this.match(AionParser.NUMBER);
+				this.state = 163;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case AionParser.T__14:
+					{
+					this.state = 161;
+					this.time_range();
+					}
+					break;
+				case AionParser.T__8:
+					{
+					this.state = 162;
+					this.time_at();
+					}
+					break;
+				case AionParser.T__2:
+				case AionParser.T__6:
+					break;
+				default:
+					break;
+				}
+				}
+				break;
+			case AionParser.T__12:
+				this.enterOuterAlt(_localctx, 4);
+				{
+				this.state = 165;
+				this.match(AionParser.T__12);
+				this.state = 166;
+				this.match(AionParser.T__10);
+				this.state = 167;
+				this.date();
+				this.state = 170;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case AionParser.T__14:
+					{
+					this.state = 168;
+					this.time_range();
+					}
+					break;
+				case AionParser.T__8:
+					{
+					this.state = 169;
+					this.time_at();
+					}
+					break;
+				case AionParser.T__2:
+				case AionParser.T__6:
+					break;
+				default:
+					break;
+				}
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public timing_expr(): Timing_exprContext {
+		let _localctx: Timing_exprContext = new Timing_exprContext(this._ctx, this.state);
+		this.enterRule(_localctx, 18, AionParser.RULE_timing_expr);
+		try {
+			this.state = 199;
+			this._errHandler.sync(this);
+			switch (this._input.LA(1)) {
+			case AionParser.T__10:
+				this.enterOuterAlt(_localctx, 1);
+				{
+				this.state = 174;
+				this.match(AionParser.T__10);
+				this.state = 175;
+				this.date();
+				this.state = 178;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case AionParser.T__14:
+					{
+					this.state = 176;
+					this.time_range();
+					}
+					break;
+				case AionParser.T__8:
+					{
+					this.state = 177;
+					this.time_at();
+					}
+					break;
+				case AionParser.T__2:
+				case AionParser.T__6:
+					break;
+				default:
+					break;
+				}
+				}
+				break;
+			case AionParser.T__13:
+				this.enterOuterAlt(_localctx, 2);
+				{
+				this.state = 180;
+				this.match(AionParser.T__13);
+				this.state = 181;
+				this.weekday_list();
+				this.state = 184;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case AionParser.T__14:
+					{
+					this.state = 182;
+					this.time_range();
+					}
+					break;
+				case AionParser.T__8:
+					{
+					this.state = 183;
+					this.time_at();
+					}
+					break;
+				case AionParser.T__2:
+				case AionParser.T__6:
+					break;
+				default:
+					break;
+				}
+				}
+				break;
+			case AionParser.T__14:
+				this.enterOuterAlt(_localctx, 3);
+				{
+				this.state = 186;
+				this.match(AionParser.T__14);
+				this.state = 187;
+				this.time();
+				this.state = 188;
+				this.match(AionParser.T__15);
+				this.state = 189;
+				this.time();
+				}
+				break;
+			case AionParser.T__8:
+				this.enterOuterAlt(_localctx, 4);
+				{
+				this.state = 191;
+				this.match(AionParser.T__8);
+				this.state = 192;
+				this.time();
+				}
+				break;
+			case AionParser.T__16:
+				this.enterOuterAlt(_localctx, 5);
+				{
+				this.state = 193;
+				this.match(AionParser.T__16);
+				this.state = 194;
+				this.match(AionParser.T__17);
+				this.state = 195;
+				this.time();
+				this.state = 196;
+				this.match(AionParser.T__18);
+				this.state = 197;
+				this.time();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public structured_event_stmt(): Structured_event_stmtContext {
+		let _localctx: Structured_event_stmtContext = new Structured_event_stmtContext(this._ctx, this.state);
+		this.enterRule(_localctx, 20, AionParser.RULE_structured_event_stmt);
+		let _la: number;
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 201;
+			this.match(AionParser.T__5);
+			this.state = 202;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 203;
+			this.match(AionParser.T__19);
+			this.state = 207;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__21) | (1 << AionParser.T__24) | (1 << AionParser.T__25) | (1 << AionParser.T__26) | (1 << AionParser.T__27))) !== 0)) {
+				{
+				{
+				this.state = 204;
+				this.structured_event_field();
+				}
+				}
+				this.state = 209;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 210;
+			this.match(AionParser.T__20);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public structured_event_field(): Structured_event_fieldContext {
+		let _localctx: Structured_event_fieldContext = new Structured_event_fieldContext(this._ctx, this.state);
+		this.enterRule(_localctx, 22, AionParser.RULE_structured_event_field);
+		let _la: number;
+		try {
+			this.state = 242;
+			this._errHandler.sync(this);
+			switch (this._input.LA(1)) {
+			case AionParser.T__21:
+				this.enterOuterAlt(_localctx, 1);
+				{
+				this.state = 212;
+				this.match(AionParser.T__21);
+				this.state = 213;
+				this.match(AionParser.T__22);
+				this.state = 214;
+				this.match(AionParser.STRING);
+				this.state = 216;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__23) {
+					{
+					this.state = 215;
+					this.match(AionParser.T__23);
+					}
+				}
+
+				}
+				break;
+			case AionParser.T__24:
+				this.enterOuterAlt(_localctx, 2);
+				{
+				this.state = 218;
+				this.match(AionParser.T__24);
+				this.state = 219;
+				this.match(AionParser.T__22);
+				this.state = 220;
+				this.time();
+				this.state = 222;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__23) {
+					{
+					this.state = 221;
+					this.match(AionParser.T__23);
+					}
+				}
+
+				}
+				break;
+			case AionParser.T__25:
+				this.enterOuterAlt(_localctx, 3);
+				{
+				this.state = 224;
+				this.match(AionParser.T__25);
+				this.state = 225;
+				this.match(AionParser.T__22);
+				this.state = 226;
+				this.duration();
+				this.state = 228;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__23) {
+					{
+					this.state = 227;
+					this.match(AionParser.T__23);
+					}
+				}
+
+				}
+				break;
+			case AionParser.T__26:
+				this.enterOuterAlt(_localctx, 4);
+				{
+				this.state = 230;
+				this.match(AionParser.T__26);
+				this.state = 231;
+				this.match(AionParser.T__22);
+				this.state = 232;
+				this.match(AionParser.STRING);
+				this.state = 234;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__23) {
+					{
+					this.state = 233;
+					this.match(AionParser.T__23);
+					}
+				}
+
+				}
+				break;
+			case AionParser.T__27:
+				this.enterOuterAlt(_localctx, 5);
+				{
+				this.state = 236;
+				this.match(AionParser.T__27);
+				this.state = 237;
+				this.match(AionParser.T__22);
+				this.state = 238;
+				this.match(AionParser.STRING);
+				this.state = 240;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === AionParser.T__23) {
+					{
+					this.state = 239;
+					this.match(AionParser.T__23);
+					}
+				}
+
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
@@ -673,29 +1090,20 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public task_decl(): Task_declContext {
 		let _localctx: Task_declContext = new Task_declContext(this._ctx, this.state);
-		this.enterRule(_localctx, 16, AionParser.RULE_task_decl);
-		let _la: number;
+		this.enterRule(_localctx, 24, AionParser.RULE_task_decl);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 151;
-			this.match(AionParser.T__6);
-			this.state = 152;
-			this.string();
-			this.state = 153;
-			this.event_time_expr();
-			this.state = 155;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__16) | (1 << AionParser.T__17) | (1 << AionParser.T__18))) !== 0)) {
-				{
-				this.state = 154;
-				this.rep_period();
-				}
-			}
-
-			this.state = 157;
-			this.task_time_strict();
+			this.state = 244;
+			this.match(AionParser.T__28);
+			this.state = 245;
+			this.match(AionParser.STRING);
+			this.state = 246;
+			this.match(AionParser.T__10);
+			this.state = 247;
+			this.date();
+			this.state = 248;
+			this.task_time_spec();
 			}
 		}
 		catch (re) {
@@ -713,88 +1121,44 @@ export class AionParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public repetition_in_decl(): Repetition_in_declContext {
-		let _localctx: Repetition_in_declContext = new Repetition_in_declContext(this._ctx, this.state);
-		this.enterRule(_localctx, 18, AionParser.RULE_repetition_in_decl);
+	public task_time_spec(): Task_time_specContext {
+		let _localctx: Task_time_specContext = new Task_time_specContext(this._ctx, this.state);
+		this.enterRule(_localctx, 26, AionParser.RULE_task_time_spec);
+		let _la: number;
 		try {
-			this.state = 162;
+			this.state = 261;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case AionParser.T__7:
+			case AionParser.T__8:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 159;
-				this.match(AionParser.T__7);
-				this.state = 160;
-				this.weekday();
+				this.state = 250;
+				this.match(AionParser.T__8);
+				this.state = 251;
+				this.time();
 				}
 				break;
 			case AionParser.T__16:
-			case AionParser.T__17:
-			case AionParser.T__18:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 161;
-				this.rep_period();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public task_time_strict(): Task_time_strictContext {
-		let _localctx: Task_time_strictContext = new Task_time_strictContext(this._ctx, this.state);
-		this.enterRule(_localctx, 20, AionParser.RULE_task_time_strict);
-		let _la: number;
-		try {
-			this.state = 174;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case AionParser.T__8:
-				this.enterOuterAlt(_localctx, 1);
-				{
-				{
-				this.state = 164;
-				this.match(AionParser.T__8);
-				}
-				this.state = 165;
+				this.state = 252;
+				this.match(AionParser.T__16);
+				this.state = 253;
+				this.match(AionParser.T__17);
+				this.state = 254;
 				this.time();
-				}
-				break;
-			case AionParser.T__9:
-				this.enterOuterAlt(_localctx, 2);
-				{
-				this.state = 166;
-				this.match(AionParser.T__9);
-				this.state = 167;
+				this.state = 255;
+				this.match(AionParser.T__18);
+				this.state = 256;
 				this.time();
-				this.state = 168;
-				this.match(AionParser.T__10);
-				this.state = 169;
-				this.time();
-				this.state = 172;
+				this.state = 259;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la === AionParser.T__11) {
+				if (_la === AionParser.T__29) {
 					{
-					this.state = 170;
-					this.match(AionParser.T__11);
-					this.state = 171;
+					this.state = 257;
+					this.match(AionParser.T__29);
+					this.state = 258;
 					this.strategy();
 					}
 				}
@@ -803,167 +1167,6 @@ export class AionParser extends Parser {
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public event_time_strict(): Event_time_strictContext {
-		let _localctx: Event_time_strictContext = new Event_time_strictContext(this._ctx, this.state);
-		this.enterRule(_localctx, 22, AionParser.RULE_event_time_strict);
-		let _la: number;
-		try {
-			this.state = 192;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case AionParser.T__8:
-			case AionParser.T__12:
-				this.enterOuterAlt(_localctx, 1);
-				{
-				this.state = 176;
-				_la = this._input.LA(1);
-				if (!(_la === AionParser.T__8 || _la === AionParser.T__12)) {
-				this._errHandler.recoverInline(this);
-				} else {
-					if (this._input.LA(1) === Token.EOF) {
-						this.matchedEOF = true;
-					}
-
-					this._errHandler.reportMatch(this);
-					this.consume();
-				}
-				this.state = 177;
-				this.time();
-				this.state = 182;
-				this._errHandler.sync(this);
-				switch (this._input.LA(1)) {
-				case AionParser.T__13:
-					{
-					{
-					this.state = 178;
-					this.match(AionParser.T__13);
-					this.state = 179;
-					this.duration();
-					}
-					}
-					break;
-				case AionParser.T__14:
-					{
-					{
-					this.state = 180;
-					this.match(AionParser.T__14);
-					this.state = 181;
-					this.time();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				}
-				break;
-			case AionParser.T__9:
-				this.enterOuterAlt(_localctx, 2);
-				{
-				this.state = 184;
-				this.match(AionParser.T__9);
-				this.state = 185;
-				this.time();
-				this.state = 186;
-				this.match(AionParser.T__10);
-				this.state = 187;
-				this.time();
-				this.state = 190;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-				if (_la === AionParser.T__11) {
-					{
-					this.state = 188;
-					this.match(AionParser.T__11);
-					this.state = 189;
-					this.strategy();
-					}
-				}
-
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public event_time_expr(): Event_time_exprContext {
-		let _localctx: Event_time_exprContext = new Event_time_exprContext(this._ctx, this.state);
-		this.enterRule(_localctx, 24, AionParser.RULE_event_time_expr);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 194;
-			this.match(AionParser.T__15);
-			this.state = 195;
-			this.date();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public rep_period(): Rep_periodContext {
-		let _localctx: Rep_periodContext = new Rep_periodContext(this._ctx, this.state);
-		this.enterRule(_localctx, 26, AionParser.RULE_rep_period);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 197;
-			_la = this._input.LA(1);
-			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__16) | (1 << AionParser.T__17) | (1 << AionParser.T__18))) !== 0))) {
-			this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
-				}
-
-				this._errHandler.reportMatch(this);
-				this.consume();
-			}
 			}
 		}
 		catch (re) {
@@ -988,183 +1191,50 @@ export class AionParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 199;
-			this.match(AionParser.T__19);
-			this.state = 200;
-			this.string();
-			this.state = 201;
+			this.state = 263;
+			this.match(AionParser.T__30);
+			this.state = 264;
+			this.match(AionParser.STRING);
+			this.state = 265;
+			this.match(AionParser.T__10);
+			this.state = 266;
+			this.date();
+			this.state = 267;
 			this.match(AionParser.T__8);
-			this.state = 202;
+			this.state = 268;
 			this.time();
-			this.state = 203;
-			this.match(AionParser.T__20);
-			this.state = 204;
-			this.number();
-			this.state = 205;
-			this.match(AionParser.T__21);
-			this.state = 208;
+			this.state = 269;
+			this.match(AionParser.T__31);
+			this.state = 270;
+			this.match(AionParser.NUMBER);
+			this.state = 271;
+			this.match(AionParser.T__32);
+			this.state = 274;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === AionParser.T__22) {
+			if (_la === AionParser.T__13) {
 				{
-				this.state = 206;
-				this.match(AionParser.T__22);
-				this.state = 207;
+				this.state = 272;
+				this.match(AionParser.T__13);
+				this.state = 273;
 				this.duration();
 				}
 			}
 
-			this.state = 214;
+			this.state = 280;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === AionParser.T__23) {
+			if (_la === AionParser.T__33) {
 				{
-				this.state = 210;
-				this.match(AionParser.T__23);
-				this.state = 211;
-				this.duration();
-				this.state = 212;
-				this.match(AionParser.T__24);
-				}
-			}
-
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public structured_event_stmt(): Structured_event_stmtContext {
-		let _localctx: Structured_event_stmtContext = new Structured_event_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 30, AionParser.RULE_structured_event_stmt);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 216;
-			this.match(AionParser.T__5);
-			this.state = 217;
-			this.identifier();
-			this.state = 218;
-			this.match(AionParser.T__25);
-			this.state = 222;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (((((_la - 28)) & ~0x1F) === 0 && ((1 << (_la - 28)) & ((1 << (AionParser.T__27 - 28)) | (1 << (AionParser.T__30 - 28)) | (1 << (AionParser.T__31 - 28)) | (1 << (AionParser.T__32 - 28)) | (1 << (AionParser.T__33 - 28)))) !== 0)) {
-				{
-				{
-				this.state = 219;
-				this.structured_event_field();
-				}
-				}
-				this.state = 224;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
-			this.state = 225;
-			this.match(AionParser.T__26);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public structured_event_field(): Structured_event_fieldContext {
-		let _localctx: Structured_event_fieldContext = new Structured_event_fieldContext(this._ctx, this.state);
-		this.enterRule(_localctx, 32, AionParser.RULE_structured_event_field);
-		try {
-			this.state = 252;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case AionParser.T__27:
-				this.enterOuterAlt(_localctx, 1);
-				{
-				this.state = 227;
-				this.match(AionParser.T__27);
-				this.state = 228;
-				this.match(AionParser.T__28);
-				this.state = 229;
-				this.string();
-				this.state = 230;
-				this.match(AionParser.T__29);
-				}
-				break;
-			case AionParser.T__30:
-				this.enterOuterAlt(_localctx, 2);
-				{
-				this.state = 232;
-				this.match(AionParser.T__30);
-				this.state = 233;
-				this.match(AionParser.T__28);
-				this.state = 234;
-				this.time();
-				this.state = 235;
-				this.match(AionParser.T__29);
-				}
-				break;
-			case AionParser.T__31:
-				this.enterOuterAlt(_localctx, 3);
-				{
-				this.state = 237;
-				this.match(AionParser.T__31);
-				this.state = 238;
-				this.match(AionParser.T__28);
-				this.state = 239;
-				this.duration();
-				this.state = 240;
-				this.match(AionParser.T__29);
-				}
-				break;
-			case AionParser.T__32:
-				this.enterOuterAlt(_localctx, 4);
-				{
-				this.state = 242;
-				this.match(AionParser.T__32);
-				this.state = 243;
-				this.match(AionParser.T__28);
-				this.state = 244;
-				this.string();
-				this.state = 245;
-				this.match(AionParser.T__29);
-				}
-				break;
-			case AionParser.T__33:
-				this.enterOuterAlt(_localctx, 5);
-				{
-				this.state = 247;
+				this.state = 276;
 				this.match(AionParser.T__33);
-				this.state = 248;
-				this.match(AionParser.T__28);
-				this.state = 249;
-				this.string();
-				this.state = 250;
-				this.match(AionParser.T__29);
+				this.state = 277;
+				this.duration();
+				this.state = 278;
+				this.match(AionParser.T__34);
 				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			}
+
 			}
 		}
 		catch (re) {
@@ -1184,53 +1254,53 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public loop_stmt(): Loop_stmtContext {
 		let _localctx: Loop_stmtContext = new Loop_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 34, AionParser.RULE_loop_stmt);
+		this.enterRule(_localctx, 30, AionParser.RULE_loop_stmt);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 254;
-			this.match(AionParser.T__7);
-			this.state = 255;
+			this.state = 282;
+			this.match(AionParser.T__35);
+			this.state = 283;
 			this.loop_unit();
-			this.state = 256;
-			this.match(AionParser.T__12);
-			this.state = 257;
-			this.loop_start();
-			this.state = 258;
+			this.state = 284;
 			this.match(AionParser.T__14);
-			this.state = 259;
+			this.state = 285;
+			this.loop_start();
+			this.state = 286;
+			this.match(AionParser.T__15);
+			this.state = 287;
 			this.loop_end();
-			this.state = 262;
+			this.state = 290;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === AionParser.T__34) {
+			if (_la === AionParser.T__36) {
 				{
-				this.state = 260;
-				this.match(AionParser.T__34);
-				this.state = 261;
-				this.number();
+				this.state = 288;
+				this.match(AionParser.T__36);
+				this.state = 289;
+				this.match(AionParser.NUMBER);
 				}
 			}
 
-			this.state = 264;
-			this.match(AionParser.T__25);
-			this.state = 268;
+			this.state = 292;
+			this.match(AionParser.T__19);
+			this.state = 296;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5) | (1 << AionParser.T__6) | (1 << AionParser.T__7) | (1 << AionParser.T__19))) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & ((1 << (AionParser.T__43 - 44)) | (1 << (AionParser.T__47 - 44)) | (1 << (AionParser.T__50 - 44)) | (1 << (AionParser.T__51 - 44)) | (1 << (AionParser.T__53 - 44)))) !== 0) || _la === AionParser.Identifier) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5))) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (AionParser.T__35 - 36)) | (1 << (AionParser.T__45 - 36)) | (1 << (AionParser.T__49 - 36)) | (1 << (AionParser.T__52 - 36)) | (1 << (AionParser.T__53 - 36)) | (1 << (AionParser.T__55 - 36)))) !== 0) || _la === AionParser.IDENTIFIER) {
 				{
 				{
-				this.state = 265;
+				this.state = 293;
 				this.statement();
 				}
 				}
-				this.state = 270;
+				this.state = 298;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 271;
-			this.match(AionParser.T__26);
+			this.state = 299;
+			this.match(AionParser.T__20);
 			}
 		}
 		catch (re) {
@@ -1250,30 +1320,30 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public loop_start(): Loop_startContext {
 		let _localctx: Loop_startContext = new Loop_startContext(this._ctx, this.state);
-		this.enterRule(_localctx, 36, AionParser.RULE_loop_start);
+		this.enterRule(_localctx, 32, AionParser.RULE_loop_start);
 		try {
-			this.state = 276;
+			this.state = 304;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case AionParser.Number:
+			case AionParser.NUMBER:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 273;
+				this.state = 301;
 				this.date();
 				}
 				break;
-			case AionParser.Identifier:
+			case AionParser.IDENTIFIER:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 274;
-				this.identifier();
+				this.state = 302;
+				this.match(AionParser.IDENTIFIER);
 				}
 				break;
-			case AionParser.T__35:
+			case AionParser.T__37:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 275;
-				this.match(AionParser.T__35);
+				this.state = 303;
+				this.match(AionParser.T__37);
 				}
 				break;
 			default:
@@ -1297,15 +1367,15 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public loop_end(): Loop_endContext {
 		let _localctx: Loop_endContext = new Loop_endContext(this._ctx, this.state);
-		this.enterRule(_localctx, 38, AionParser.RULE_loop_end);
+		this.enterRule(_localctx, 34, AionParser.RULE_loop_end);
 		try {
-			this.state = 284;
+			this.state = 312;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 20, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 29, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 278;
+				this.state = 306;
 				this.date();
 				}
 				break;
@@ -1313,20 +1383,20 @@ export class AionParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 279;
-				this.identifier();
+				this.state = 307;
+				this.match(AionParser.IDENTIFIER);
 				}
 				break;
 
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 280;
+				this.state = 308;
 				this.loop_start();
-				this.state = 281;
-				this.match(AionParser.T__36);
-				this.state = 282;
-				this.number();
+				this.state = 309;
+				this.match(AionParser.T__38);
+				this.state = 310;
+				this.match(AionParser.NUMBER);
 				}
 				break;
 			}
@@ -1348,14 +1418,14 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public loop_unit(): Loop_unitContext {
 		let _localctx: Loop_unitContext = new Loop_unitContext(this._ctx, this.state);
-		this.enterRule(_localctx, 40, AionParser.RULE_loop_unit);
+		this.enterRule(_localctx, 36, AionParser.RULE_loop_unit);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 286;
+			this.state = 314;
 			_la = this._input.LA(1);
-			if (!(((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & ((1 << (AionParser.T__37 - 38)) | (1 << (AionParser.T__38 - 38)) | (1 << (AionParser.T__39 - 38)) | (1 << (AionParser.T__40 - 38)) | (1 << (AionParser.T__41 - 38)) | (1 << (AionParser.T__42 - 38)))) !== 0))) {
+			if (!(((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & ((1 << (AionParser.T__39 - 40)) | (1 << (AionParser.T__40 - 40)) | (1 << (AionParser.T__41 - 40)) | (1 << (AionParser.T__42 - 40)) | (1 << (AionParser.T__43 - 40)) | (1 << (AionParser.T__44 - 40)))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -1384,105 +1454,105 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public conditional_stmt(): Conditional_stmtContext {
 		let _localctx: Conditional_stmtContext = new Conditional_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 42, AionParser.RULE_conditional_stmt);
+		this.enterRule(_localctx, 38, AionParser.RULE_conditional_stmt);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 288;
-			this.match(AionParser.T__43);
-			this.state = 289;
-			this.match(AionParser.T__44);
-			this.state = 290;
-			this.condition();
-			this.state = 291;
+			this.state = 316;
 			this.match(AionParser.T__45);
-			this.state = 292;
-			this.match(AionParser.T__25);
-			this.state = 296;
+			this.state = 317;
+			this.match(AionParser.T__46);
+			this.state = 318;
+			this.condition();
+			this.state = 319;
+			this.match(AionParser.T__47);
+			this.state = 320;
+			this.match(AionParser.T__19);
+			this.state = 324;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5) | (1 << AionParser.T__6) | (1 << AionParser.T__7) | (1 << AionParser.T__19))) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & ((1 << (AionParser.T__43 - 44)) | (1 << (AionParser.T__47 - 44)) | (1 << (AionParser.T__50 - 44)) | (1 << (AionParser.T__51 - 44)) | (1 << (AionParser.T__53 - 44)))) !== 0) || _la === AionParser.Identifier) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5))) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (AionParser.T__35 - 36)) | (1 << (AionParser.T__45 - 36)) | (1 << (AionParser.T__49 - 36)) | (1 << (AionParser.T__52 - 36)) | (1 << (AionParser.T__53 - 36)) | (1 << (AionParser.T__55 - 36)))) !== 0) || _la === AionParser.IDENTIFIER) {
 				{
 				{
-				this.state = 293;
+				this.state = 321;
 				this.statement();
 				}
 				}
-				this.state = 298;
+				this.state = 326;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 299;
-			this.match(AionParser.T__26);
-			this.state = 316;
+			this.state = 327;
+			this.match(AionParser.T__20);
+			this.state = 344;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 23, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 32, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 300;
-					this.match(AionParser.T__46);
-					this.state = 301;
-					this.match(AionParser.T__43);
-					this.state = 302;
-					this.match(AionParser.T__44);
-					this.state = 303;
-					this.condition();
-					this.state = 304;
+					this.state = 328;
+					this.match(AionParser.T__48);
+					this.state = 329;
 					this.match(AionParser.T__45);
-					this.state = 305;
-					this.match(AionParser.T__25);
-					this.state = 309;
+					this.state = 330;
+					this.match(AionParser.T__46);
+					this.state = 331;
+					this.condition();
+					this.state = 332;
+					this.match(AionParser.T__47);
+					this.state = 333;
+					this.match(AionParser.T__19);
+					this.state = 337;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5) | (1 << AionParser.T__6) | (1 << AionParser.T__7) | (1 << AionParser.T__19))) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & ((1 << (AionParser.T__43 - 44)) | (1 << (AionParser.T__47 - 44)) | (1 << (AionParser.T__50 - 44)) | (1 << (AionParser.T__51 - 44)) | (1 << (AionParser.T__53 - 44)))) !== 0) || _la === AionParser.Identifier) {
+					while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5))) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (AionParser.T__35 - 36)) | (1 << (AionParser.T__45 - 36)) | (1 << (AionParser.T__49 - 36)) | (1 << (AionParser.T__52 - 36)) | (1 << (AionParser.T__53 - 36)) | (1 << (AionParser.T__55 - 36)))) !== 0) || _la === AionParser.IDENTIFIER) {
 						{
 						{
-						this.state = 306;
+						this.state = 334;
 						this.statement();
 						}
 						}
-						this.state = 311;
+						this.state = 339;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 					}
-					this.state = 312;
-					this.match(AionParser.T__26);
+					this.state = 340;
+					this.match(AionParser.T__20);
 					}
 					}
 				}
-				this.state = 318;
+				this.state = 346;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 23, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 32, this._ctx);
 			}
-			this.state = 328;
+			this.state = 356;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === AionParser.T__46) {
+			if (_la === AionParser.T__48) {
 				{
-				this.state = 319;
-				this.match(AionParser.T__46);
-				this.state = 320;
-				this.match(AionParser.T__25);
-				this.state = 324;
+				this.state = 347;
+				this.match(AionParser.T__48);
+				this.state = 348;
+				this.match(AionParser.T__19);
+				this.state = 352;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5) | (1 << AionParser.T__6) | (1 << AionParser.T__7) | (1 << AionParser.T__19))) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & ((1 << (AionParser.T__43 - 44)) | (1 << (AionParser.T__47 - 44)) | (1 << (AionParser.T__50 - 44)) | (1 << (AionParser.T__51 - 44)) | (1 << (AionParser.T__53 - 44)))) !== 0) || _la === AionParser.Identifier) {
+				while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << AionParser.T__0) | (1 << AionParser.T__4) | (1 << AionParser.T__5))) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (AionParser.T__35 - 36)) | (1 << (AionParser.T__45 - 36)) | (1 << (AionParser.T__49 - 36)) | (1 << (AionParser.T__52 - 36)) | (1 << (AionParser.T__53 - 36)) | (1 << (AionParser.T__55 - 36)))) !== 0) || _la === AionParser.IDENTIFIER) {
 					{
 					{
-					this.state = 321;
+					this.state = 349;
 					this.statement();
 					}
 					}
-					this.state = 326;
+					this.state = 354;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 327;
-				this.match(AionParser.T__26);
+				this.state = 355;
+				this.match(AionParser.T__20);
 				}
 			}
 
@@ -1505,23 +1575,23 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public filter_stmt(): Filter_stmtContext {
 		let _localctx: Filter_stmtContext = new Filter_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 44, AionParser.RULE_filter_stmt);
+		this.enterRule(_localctx, 40, AionParser.RULE_filter_stmt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 330;
-			this.match(AionParser.T__47);
-			this.state = 331;
-			this.identifier();
-			this.state = 332;
-			this.match(AionParser.T__48);
-			this.state = 333;
-			this.condition();
-			this.state = 334;
+			this.state = 358;
 			this.match(AionParser.T__49);
-			this.state = 335;
-			this.identifier();
-			this.state = 336;
+			this.state = 359;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 360;
+			this.match(AionParser.T__50);
+			this.state = 361;
+			this.condition();
+			this.state = 362;
+			this.match(AionParser.T__51);
+			this.state = 363;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 364;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -1542,19 +1612,19 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public merge_stmt(): Merge_stmtContext {
 		let _localctx: Merge_stmtContext = new Merge_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 46, AionParser.RULE_merge_stmt);
+		this.enterRule(_localctx, 42, AionParser.RULE_merge_stmt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 338;
-			this.match(AionParser.T__50);
-			this.state = 339;
+			this.state = 366;
+			this.match(AionParser.T__52);
+			this.state = 367;
 			this.identifier_list();
-			this.state = 340;
-			this.match(AionParser.T__49);
-			this.state = 341;
-			this.identifier();
-			this.state = 342;
+			this.state = 368;
+			this.match(AionParser.T__51);
+			this.state = 369;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 370;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -1575,26 +1645,26 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public identifier_list(): Identifier_listContext {
 		let _localctx: Identifier_listContext = new Identifier_listContext(this._ctx, this.state);
-		this.enterRule(_localctx, 48, AionParser.RULE_identifier_list);
+		this.enterRule(_localctx, 44, AionParser.RULE_identifier_list);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 344;
-			this.identifier();
-			this.state = 349;
+			this.state = 372;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 377;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la === AionParser.T__29) {
+			while (_la === AionParser.T__23) {
 				{
 				{
-				this.state = 345;
-				this.match(AionParser.T__29);
-				this.state = 346;
-				this.identifier();
+				this.state = 373;
+				this.match(AionParser.T__23);
+				this.state = 374;
+				this.match(AionParser.IDENTIFIER);
 				}
 				}
-				this.state = 351;
+				this.state = 379;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1617,19 +1687,19 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public include_stmt(): Include_stmtContext {
 		let _localctx: Include_stmtContext = new Include_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 50, AionParser.RULE_include_stmt);
+		this.enterRule(_localctx, 46, AionParser.RULE_include_stmt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 352;
-			this.match(AionParser.T__51);
-			this.state = 353;
-			this.identifier();
-			this.state = 354;
-			this.match(AionParser.T__52);
-			this.state = 355;
-			this.identifier();
-			this.state = 356;
+			this.state = 380;
+			this.match(AionParser.T__53);
+			this.state = 381;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 382;
+			this.match(AionParser.T__54);
+			this.state = 383;
+			this.match(AionParser.IDENTIFIER);
+			this.state = 384;
 			this.match(AionParser.T__2);
 			}
 		}
@@ -1650,32 +1720,32 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public export_stmt(): Export_stmtContext {
 		let _localctx: Export_stmtContext = new Export_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 52, AionParser.RULE_export_stmt);
+		this.enterRule(_localctx, 48, AionParser.RULE_export_stmt);
 		let _la: number;
 		try {
-			this.state = 375;
+			this.state = 401;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 28, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 37, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 358;
-				this.match(AionParser.T__53);
-				this.state = 359;
-				this.identifier();
-				this.state = 362;
+				this.state = 386;
+				this.match(AionParser.T__55);
+				this.state = 387;
+				this.match(AionParser.IDENTIFIER);
+				this.state = 390;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === AionParser.T__1) {
 					{
-					this.state = 360;
+					this.state = 388;
 					this.match(AionParser.T__1);
-					this.state = 361;
-					this.string();
+					this.state = 389;
+					this.match(AionParser.STRING);
 					}
 				}
 
-				this.state = 364;
+				this.state = 392;
 				this.match(AionParser.T__2);
 				}
 				break;
@@ -1683,15 +1753,15 @@ export class AionParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 366;
-				this.match(AionParser.T__53);
-				this.state = 367;
-				this.match(AionParser.T__54);
-				this.state = 368;
+				this.state = 393;
+				this.match(AionParser.T__55);
+				this.state = 394;
+				this.match(AionParser.T__56);
+				this.state = 395;
 				this.match(AionParser.T__1);
-				this.state = 369;
-				this.string();
-				this.state = 370;
+				this.state = 396;
+				this.match(AionParser.STRING);
+				this.state = 397;
 				this.match(AionParser.T__2);
 				}
 				break;
@@ -1699,51 +1769,14 @@ export class AionParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 372;
-				this.match(AionParser.T__53);
-				this.state = 373;
+				this.state = 398;
 				this.match(AionParser.T__55);
-				this.state = 374;
+				this.state = 399;
+				this.match(AionParser.T__57);
+				this.state = 400;
 				this.match(AionParser.T__2);
 				}
 				break;
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public week_start_stmt(): Week_start_stmtContext {
-		let _localctx: Week_start_stmtContext = new Week_start_stmtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 54, AionParser.RULE_week_start_stmt);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 377;
-			this.identifier();
-			this.state = 378;
-			this.match(AionParser.T__3);
-			this.state = 379;
-			this.match(AionParser.T__56);
-			this.state = 380;
-			this.match(AionParser.T__44);
-			this.state = 381;
-			this.date();
-			this.state = 382;
-			this.match(AionParser.T__45);
-			this.state = 383;
-			this.match(AionParser.T__2);
 			}
 		}
 		catch (re) {
@@ -1763,52 +1796,52 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public condition(): ConditionContext {
 		let _localctx: ConditionContext = new ConditionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 56, AionParser.RULE_condition);
+		this.enterRule(_localctx, 50, AionParser.RULE_condition);
 		try {
-			this.state = 402;
+			this.state = 420;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case AionParser.Identifier:
+			case AionParser.IDENTIFIER:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 385;
-				this.identifier();
-				this.state = 386;
+				this.state = 403;
+				this.match(AionParser.IDENTIFIER);
+				this.state = 404;
 				this.comparison_op();
-				this.state = 387;
+				this.state = 405;
 				this.value();
 				}
 				break;
-			case AionParser.T__57:
+			case AionParser.T__58:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 389;
-				this.match(AionParser.T__57);
-				this.state = 390;
-				this.match(AionParser.T__44);
-				this.state = 391;
+				this.state = 407;
+				this.match(AionParser.T__58);
+				this.state = 408;
+				this.match(AionParser.T__46);
+				this.state = 409;
 				this.weekday();
-				this.state = 392;
-				this.match(AionParser.T__45);
-				this.state = 393;
-				this.match(AionParser.T__52);
-				this.state = 394;
-				this.match(AionParser.T__41);
-				this.state = 395;
+				this.state = 410;
+				this.match(AionParser.T__47);
+				this.state = 411;
+				this.match(AionParser.T__54);
+				this.state = 412;
+				this.match(AionParser.T__43);
+				this.state = 413;
 				this.comparison_op();
-				this.state = 396;
-				this.number();
+				this.state = 414;
+				this.match(AionParser.NUMBER);
 				}
 				break;
-			case AionParser.T__33:
+			case AionParser.T__27:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 398;
-				this.match(AionParser.T__33);
-				this.state = 399;
+				this.state = 416;
+				this.match(AionParser.T__27);
+				this.state = 417;
 				this.comparison_op();
-				this.state = 400;
-				this.string();
+				this.state = 418;
+				this.match(AionParser.STRING);
 				}
 				break;
 			default:
@@ -1832,14 +1865,14 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public comparison_op(): Comparison_opContext {
 		let _localctx: Comparison_opContext = new Comparison_opContext(this._ctx, this.state);
-		this.enterRule(_localctx, 58, AionParser.RULE_comparison_op);
+		this.enterRule(_localctx, 52, AionParser.RULE_comparison_op);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 404;
+			this.state = 422;
 			_la = this._input.LA(1);
-			if (!(((((_la - 59)) & ~0x1F) === 0 && ((1 << (_la - 59)) & ((1 << (AionParser.T__58 - 59)) | (1 << (AionParser.T__59 - 59)) | (1 << (AionParser.T__60 - 59)) | (1 << (AionParser.T__61 - 59)) | (1 << (AionParser.T__62 - 59)) | (1 << (AionParser.T__63 - 59)))) !== 0))) {
+			if (!(((((_la - 60)) & ~0x1F) === 0 && ((1 << (_la - 60)) & ((1 << (AionParser.T__59 - 60)) | (1 << (AionParser.T__60 - 60)) | (1 << (AionParser.T__61 - 60)) | (1 << (AionParser.T__62 - 60)) | (1 << (AionParser.T__63 - 60)) | (1 << (AionParser.T__64 - 60)))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -1868,14 +1901,14 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public strategy(): StrategyContext {
 		let _localctx: StrategyContext = new StrategyContext(this._ctx, this.state);
-		this.enterRule(_localctx, 60, AionParser.RULE_strategy);
+		this.enterRule(_localctx, 54, AionParser.RULE_strategy);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 406;
+			this.state = 424;
 			_la = this._input.LA(1);
-			if (!(((((_la - 65)) & ~0x1F) === 0 && ((1 << (_la - 65)) & ((1 << (AionParser.T__64 - 65)) | (1 << (AionParser.T__65 - 65)) | (1 << (AionParser.T__66 - 65)))) !== 0))) {
+			if (!(((((_la - 66)) & ~0x1F) === 0 && ((1 << (_la - 66)) & ((1 << (AionParser.T__65 - 66)) | (1 << (AionParser.T__66 - 66)) | (1 << (AionParser.T__67 - 66)))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -1904,15 +1937,15 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public value_expr(): Value_exprContext {
 		let _localctx: Value_exprContext = new Value_exprContext(this._ctx, this.state);
-		this.enterRule(_localctx, 62, AionParser.RULE_value_expr);
+		this.enterRule(_localctx, 56, AionParser.RULE_value_expr);
 		try {
-			this.state = 415;
+			this.state = 433;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 30, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 39, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 408;
+				this.state = 426;
 				this.date();
 				}
 				break;
@@ -1920,7 +1953,7 @@ export class AionParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 409;
+				this.state = 427;
 				this.time();
 				}
 				break;
@@ -1928,7 +1961,7 @@ export class AionParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 410;
+				this.state = 428;
 				this.duration();
 				}
 				break;
@@ -1936,31 +1969,31 @@ export class AionParser extends Parser {
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 411;
-				this.string();
+				this.state = 429;
+				this.match(AionParser.STRING);
 				}
 				break;
 
 			case 5:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 412;
-				this.number();
+				this.state = 430;
+				this.match(AionParser.NUMBER);
 				}
 				break;
 
 			case 6:
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 413;
-				this.identifier();
+				this.state = 431;
+				this.match(AionParser.IDENTIFIER);
 				}
 				break;
 
 			case 7:
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 414;
+				this.state = 432;
 				this.function_call();
 				}
 				break;
@@ -1983,39 +2016,39 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public function_call(): Function_callContext {
 		let _localctx: Function_callContext = new Function_callContext(this._ctx, this.state);
-		this.enterRule(_localctx, 64, AionParser.RULE_function_call);
+		this.enterRule(_localctx, 58, AionParser.RULE_function_call);
 		try {
-			this.state = 429;
+			this.state = 447;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case AionParser.T__57:
+			case AionParser.T__58:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 417;
-				this.match(AionParser.T__57);
-				this.state = 418;
-				this.match(AionParser.T__44);
-				this.state = 419;
+				this.state = 435;
+				this.match(AionParser.T__58);
+				this.state = 436;
+				this.match(AionParser.T__46);
+				this.state = 437;
 				this.weekday();
-				this.state = 420;
-				this.match(AionParser.T__45);
-				this.state = 421;
-				this.match(AionParser.T__52);
-				this.state = 422;
-				this.match(AionParser.T__41);
+				this.state = 438;
+				this.match(AionParser.T__47);
+				this.state = 439;
+				this.match(AionParser.T__54);
+				this.state = 440;
+				this.match(AionParser.T__43);
 				}
 				break;
-			case AionParser.T__56:
+			case AionParser.T__68:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 424;
-				this.match(AionParser.T__56);
-				this.state = 425;
-				this.match(AionParser.T__44);
-				this.state = 426;
+				this.state = 442;
+				this.match(AionParser.T__68);
+				this.state = 443;
+				this.match(AionParser.T__46);
+				this.state = 444;
 				this.date();
-				this.state = 427;
-				this.match(AionParser.T__45);
+				this.state = 445;
+				this.match(AionParser.T__47);
 				}
 				break;
 			default:
@@ -2039,138 +2072,29 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public date(): DateContext {
 		let _localctx: DateContext = new DateContext(this._ctx, this.state);
-		this.enterRule(_localctx, 66, AionParser.RULE_date);
+		this.enterRule(_localctx, 60, AionParser.RULE_date);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 431;
-			this.number();
-			this.state = 432;
-			this.match(AionParser.T__67);
-			this.state = 433;
-			this.number();
-			this.state = 436;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if (_la === AionParser.T__67) {
-				{
-				this.state = 434;
-				this.match(AionParser.T__67);
-				this.state = 435;
-				this.number();
-				}
-			}
-
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public time(): TimeContext {
-		let _localctx: TimeContext = new TimeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 68, AionParser.RULE_time);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 438;
-			this.number();
-			this.state = 439;
-			this.match(AionParser.T__28);
-			this.state = 440;
-			this.number();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public duration(): DurationContext {
-		let _localctx: DurationContext = new DurationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 70, AionParser.RULE_duration);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 442;
-			this.number();
-			this.state = 443;
-			this.time_unit();
 			this.state = 449;
+			this.match(AionParser.NUMBER);
+			this.state = 450;
+			this.match(AionParser.T__69);
+			this.state = 451;
+			this.match(AionParser.NUMBER);
+			this.state = 454;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la === AionParser.Number) {
+			if (_la === AionParser.T__69) {
 				{
-				{
-				this.state = 444;
-				this.number();
-				this.state = 445;
-				this.time_unit();
+				this.state = 452;
+				this.match(AionParser.T__69);
+				this.state = 453;
+				this.match(AionParser.NUMBER);
 				}
-				}
-				this.state = 451;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
 			}
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public time_unit(): Time_unitContext {
-		let _localctx: Time_unitContext = new Time_unitContext(this._ctx, this.state);
-		this.enterRule(_localctx, 72, AionParser.RULE_time_unit);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 452;
-			_la = this._input.LA(1);
-			if (!(_la === AionParser.T__68 || _la === AionParser.T__69)) {
-			this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
-				}
 
-				this._errHandler.reportMatch(this);
-				this.consume();
-			}
 			}
 		}
 		catch (re) {
@@ -2188,32 +2112,38 @@ export class AionParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public value(): ValueContext {
-		let _localctx: ValueContext = new ValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 74, AionParser.RULE_value);
+	public date_specifier(): Date_specifierContext {
+		let _localctx: Date_specifierContext = new Date_specifierContext(this._ctx, this.state);
+		this.enterRule(_localctx, 62, AionParser.RULE_date_specifier);
 		try {
-			this.state = 457;
+			this.state = 458;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case AionParser.String:
+			case AionParser.NUMBER:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 454;
-				this.string();
+				this.state = 456;
+				this.date();
 				}
 				break;
-			case AionParser.Number:
+			case AionParser.T__70:
+			case AionParser.T__71:
+			case AionParser.T__72:
+			case AionParser.T__73:
+			case AionParser.T__74:
+			case AionParser.T__75:
+			case AionParser.T__76:
+			case AionParser.T__77:
+			case AionParser.T__78:
+			case AionParser.T__79:
+			case AionParser.T__80:
+			case AionParser.T__81:
+			case AionParser.T__82:
+			case AionParser.T__83:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 455;
-				this.number();
-				}
-				break;
-			case AionParser.Identifier:
-				this.enterOuterAlt(_localctx, 3);
-				{
-				this.state = 456;
-				this.identifier();
+				this.state = 457;
+				this.weekday();
 				}
 				break;
 			default:
@@ -2235,64 +2165,31 @@ export class AionParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public identifier(): IdentifierContext {
-		let _localctx: IdentifierContext = new IdentifierContext(this._ctx, this.state);
-		this.enterRule(_localctx, 76, AionParser.RULE_identifier);
+	public weekday_list(): Weekday_listContext {
+		let _localctx: Weekday_listContext = new Weekday_listContext(this._ctx, this.state);
+		this.enterRule(_localctx, 64, AionParser.RULE_weekday_list);
+		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 459;
-			this.match(AionParser.Identifier);
+			this.state = 460;
+			this.weekday();
+			this.state = 465;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la === AionParser.T__23) {
+				{
+				{
+				this.state = 461;
+				this.match(AionParser.T__23);
+				this.state = 462;
+				this.weekday();
+				}
+				}
+				this.state = 467;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
 			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public string(): StringContext {
-		let _localctx: StringContext = new StringContext(this._ctx, this.state);
-		this.enterRule(_localctx, 78, AionParser.RULE_string);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 461;
-			this.match(AionParser.String);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public number(): NumberContext {
-		let _localctx: NumberContext = new NumberContext(this._ctx, this.state);
-		this.enterRule(_localctx, 80, AionParser.RULE_number);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 463;
-			this.match(AionParser.Number);
 			}
 		}
 		catch (re) {
@@ -2312,12 +2209,12 @@ export class AionParser extends Parser {
 	// @RuleVersion(0)
 	public weekday(): WeekdayContext {
 		let _localctx: WeekdayContext = new WeekdayContext(this._ctx, this.state);
-		this.enterRule(_localctx, 82, AionParser.RULE_weekday);
+		this.enterRule(_localctx, 66, AionParser.RULE_weekday);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 465;
+			this.state = 468;
 			_la = this._input.LA(1);
 			if (!(((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & ((1 << (AionParser.T__70 - 71)) | (1 << (AionParser.T__71 - 71)) | (1 << (AionParser.T__72 - 71)) | (1 << (AionParser.T__73 - 71)) | (1 << (AionParser.T__74 - 71)) | (1 << (AionParser.T__75 - 71)) | (1 << (AionParser.T__76 - 71)) | (1 << (AionParser.T__77 - 71)) | (1 << (AionParser.T__78 - 71)) | (1 << (AionParser.T__79 - 71)) | (1 << (AionParser.T__80 - 71)) | (1 << (AionParser.T__81 - 71)) | (1 << (AionParser.T__82 - 71)) | (1 << (AionParser.T__83 - 71)))) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -2346,16 +2243,183 @@ export class AionParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public month_name(): Month_nameContext {
-		let _localctx: Month_nameContext = new Month_nameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 84, AionParser.RULE_month_name);
+	public time(): TimeContext {
+		let _localctx: TimeContext = new TimeContext(this._ctx, this.state);
+		this.enterRule(_localctx, 68, AionParser.RULE_time);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 470;
+			this.match(AionParser.NUMBER);
+			this.state = 471;
+			this.match(AionParser.T__22);
+			this.state = 472;
+			this.match(AionParser.NUMBER);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public time_at(): Time_atContext {
+		let _localctx: Time_atContext = new Time_atContext(this._ctx, this.state);
+		this.enterRule(_localctx, 70, AionParser.RULE_time_at);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 474;
+			this.match(AionParser.T__8);
+			this.state = 475;
+			this.time();
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public time_range(): Time_rangeContext {
+		let _localctx: Time_rangeContext = new Time_rangeContext(this._ctx, this.state);
+		this.enterRule(_localctx, 72, AionParser.RULE_time_range);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 477;
+			this.match(AionParser.T__14);
+			this.state = 478;
+			this.time();
+			this.state = 479;
+			this.match(AionParser.T__15);
+			this.state = 480;
+			this.time();
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public duration(): DurationContext {
+		let _localctx: DurationContext = new DurationContext(this._ctx, this.state);
+		this.enterRule(_localctx, 74, AionParser.RULE_duration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 467;
+			this.state = 482;
+			this.match(AionParser.NUMBER);
+			this.state = 483;
+			this.time_unit();
+			this.state = 488;
+			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (!(((((_la - 85)) & ~0x1F) === 0 && ((1 << (_la - 85)) & ((1 << (AionParser.T__84 - 85)) | (1 << (AionParser.T__85 - 85)) | (1 << (AionParser.T__86 - 85)) | (1 << (AionParser.T__87 - 85)) | (1 << (AionParser.T__88 - 85)) | (1 << (AionParser.T__89 - 85)) | (1 << (AionParser.T__90 - 85)) | (1 << (AionParser.T__91 - 85)) | (1 << (AionParser.T__92 - 85)) | (1 << (AionParser.T__93 - 85)) | (1 << (AionParser.T__94 - 85)) | (1 << (AionParser.T__95 - 85)) | (1 << (AionParser.T__96 - 85)) | (1 << (AionParser.T__97 - 85)) | (1 << (AionParser.T__98 - 85)) | (1 << (AionParser.T__99 - 85)) | (1 << (AionParser.T__100 - 85)) | (1 << (AionParser.T__101 - 85)) | (1 << (AionParser.T__102 - 85)) | (1 << (AionParser.T__103 - 85)) | (1 << (AionParser.T__104 - 85)) | (1 << (AionParser.T__105 - 85)) | (1 << (AionParser.T__106 - 85)))) !== 0))) {
+			while (_la === AionParser.NUMBER) {
+				{
+				{
+				this.state = 484;
+				this.match(AionParser.NUMBER);
+				this.state = 485;
+				this.time_unit();
+				}
+				}
+				this.state = 490;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public time_unit(): Time_unitContext {
+		let _localctx: Time_unitContext = new Time_unitContext(this._ctx, this.state);
+		this.enterRule(_localctx, 76, AionParser.RULE_time_unit);
+		let _la: number;
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 491;
+			_la = this._input.LA(1);
+			if (!(_la === AionParser.T__84 || _la === AionParser.T__85)) {
+			this._errHandler.recoverInline(this);
+			} else {
+				if (this._input.LA(1) === Token.EOF) {
+					this.matchedEOF = true;
+				}
+
+				this._errHandler.reportMatch(this);
+				this.consume();
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public value(): ValueContext {
+		let _localctx: ValueContext = new ValueContext(this._ctx, this.state);
+		this.enterRule(_localctx, 78, AionParser.RULE_value);
+		let _la: number;
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 493;
+			_la = this._input.LA(1);
+			if (!(((((_la - 87)) & ~0x1F) === 0 && ((1 << (_la - 87)) & ((1 << (AionParser.IDENTIFIER - 87)) | (1 << (AionParser.STRING - 87)) | (1 << (AionParser.NUMBER - 87)))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -2383,224 +2447,245 @@ export class AionParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03r\u01D8\x04\x02" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03^\u01F2\x04\x02" +
 		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
 		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r\x04" +
 		"\x0E\t\x0E\x04\x0F\t\x0F\x04\x10\t\x10\x04\x11\t\x11\x04\x12\t\x12\x04" +
 		"\x13\t\x13\x04\x14\t\x14\x04\x15\t\x15\x04\x16\t\x16\x04\x17\t\x17\x04" +
 		"\x18\t\x18\x04\x19\t\x19\x04\x1A\t\x1A\x04\x1B\t\x1B\x04\x1C\t\x1C\x04" +
 		"\x1D\t\x1D\x04\x1E\t\x1E\x04\x1F\t\x1F\x04 \t \x04!\t!\x04\"\t\"\x04#" +
-		"\t#\x04$\t$\x04%\t%\x04&\t&\x04\'\t\'\x04(\t(\x04)\t)\x04*\t*\x04+\t+" +
-		"\x04,\t,\x03\x02\x07\x02Z\n\x02\f\x02\x0E\x02]\v\x02\x03\x02\x03\x02\x03" +
-		"\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03" +
-		"\x03\x03\x03\x03\x03\x05\x03m\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x03" +
-		"\x04\x03\x04\x03\x05\x03\x05\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03" +
-		"\x06\x03\x06\x03\x06\x03\x07\x05\x07\x80\n\x07\x03\x07\x03\x07\x03\x07" +
-		"\x05\x07\x85\n\x07\x03\x07\x03\x07\x03\b\x03\b\x03\b\x05\b\x8C\n\b\x03" +
-		"\t\x03\t\x03\t\x03\t\x03\t\x03\t\x03\t\x03\t\x03\t\x03\t\x05\t\x98\n\t" +
-		"\x03\n\x03\n\x03\n\x03\n\x05\n\x9E\n\n\x03\n\x03\n\x03\v\x03\v\x03\v\x05" +
-		"\v\xA5\n\v\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x05\f\xAF\n" +
-		"\f\x05\f\xB1\n\f\x03\r\x03\r\x03\r\x03\r\x03\r\x03\r\x05\r\xB9\n\r\x03" +
-		"\r\x03\r\x03\r\x03\r\x03\r\x03\r\x05\r\xC1\n\r\x05\r\xC3\n\r\x03\x0E\x03" +
-		"\x0E\x03\x0E\x03\x0F\x03\x0F\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10\x03" +
-		"\x10\x03\x10\x03\x10\x03\x10\x05\x10\xD3\n\x10\x03\x10\x03\x10\x03\x10" +
-		"\x03\x10\x05\x10\xD9\n\x10\x03\x11\x03\x11\x03\x11\x03\x11\x07\x11\xDF" +
-		"\n\x11\f\x11\x0E\x11\xE2\v\x11\x03\x11\x03\x11\x03\x12\x03\x12\x03\x12" +
-		"\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12" +
-		"\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12" +
-		"\x03\x12\x03\x12\x03\x12\x03\x12\x05\x12\xFF\n\x12\x03\x13\x03\x13\x03" +
-		"\x13\x03\x13\x03\x13\x03\x13\x03\x13\x03\x13\x05\x13\u0109\n\x13\x03\x13" +
-		"\x03\x13\x07\x13\u010D\n\x13\f\x13\x0E\x13\u0110\v\x13\x03\x13\x03\x13" +
-		"\x03\x14\x03\x14\x03\x14\x05\x14\u0117\n\x14\x03\x15\x03\x15\x03\x15\x03" +
-		"\x15\x03\x15\x03\x15\x05\x15\u011F\n\x15\x03\x16\x03\x16\x03\x17\x03\x17" +
-		"\x03\x17\x03\x17\x03\x17\x03\x17\x07\x17\u0129\n\x17\f\x17\x0E\x17\u012C" +
-		"\v\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17" +
-		"\x07\x17\u0136\n\x17\f\x17\x0E\x17\u0139\v\x17\x03\x17\x03\x17\x07\x17" +
-		"\u013D\n\x17\f\x17\x0E\x17\u0140\v\x17\x03\x17\x03\x17\x03\x17\x07\x17" +
-		"\u0145\n\x17\f\x17\x0E\x17\u0148\v\x17\x03\x17\x05\x17\u014B\n\x17\x03" +
-		"\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x19\x03" +
-		"\x19\x03\x19\x03\x19\x03\x19\x03\x19\x03\x1A\x03\x1A\x03\x1A\x07\x1A\u015E" +
-		"\n\x1A\f\x1A\x0E\x1A\u0161\v\x1A\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B" +
-		"\x03\x1B\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x05\x1C\u016D\n\x1C\x03\x1C\x03" +
-		"\x1C\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x03\x1C\x03" +
-		"\x1C\x05\x1C\u017A\n\x1C\x03\x1D\x03\x1D\x03\x1D\x03\x1D\x03\x1D\x03\x1D" +
-		"\x03\x1D\x03\x1D\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E" +
-		"\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E" +
-		"\x03\x1E\x05\x1E\u0195\n\x1E\x03\x1F\x03\x1F\x03 \x03 \x03!\x03!\x03!" +
-		"\x03!\x03!\x03!\x03!\x05!\u01A2\n!\x03\"\x03\"\x03\"\x03\"\x03\"\x03\"" +
-		"\x03\"\x03\"\x03\"\x03\"\x03\"\x03\"\x05\"\u01B0\n\"\x03#\x03#\x03#\x03" +
-		"#\x03#\x05#\u01B7\n#\x03$\x03$\x03$\x03$\x03%\x03%\x03%\x03%\x03%\x07" +
-		"%\u01C2\n%\f%\x0E%\u01C5\v%\x03&\x03&\x03\'\x03\'\x03\'\x05\'\u01CC\n" +
-		"\'\x03(\x03(\x03)\x03)\x03*\x03*\x03+\x03+\x03,\x03,\x03,\x02\x02\x02" +
-		"-\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02\x10\x02\x12\x02\x14" +
-		"\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02\"\x02$\x02&\x02(\x02" +
-		"*\x02,\x02.\x020\x022\x024\x026\x028\x02:\x02<\x02>\x02@\x02B\x02D\x02" +
-		"F\x02H\x02J\x02L\x02N\x02P\x02R\x02T\x02V\x02\x02\n\x04\x02\v\v\x0F\x0F" +
-		"\x03\x02\x13\x15\x03\x02(-\x03\x02=B\x03\x02CE\x03\x02GH\x03\x02IV\x03" +
-		"\x02Wm\x02\u01E8\x02[\x03\x02\x02\x02\x04l\x03\x02\x02\x02\x06n\x03\x02" +
-		"\x02\x02\bt\x03\x02\x02\x02\ny\x03\x02\x02\x02\f\x7F\x03\x02\x02\x02\x0E" +
-		"\x8B\x03\x02\x02\x02\x10\x97\x03\x02\x02\x02\x12\x99\x03\x02\x02\x02\x14" +
-		"\xA4\x03\x02\x02\x02\x16\xB0\x03\x02\x02\x02\x18\xC2\x03\x02\x02\x02\x1A" +
-		"\xC4\x03\x02\x02\x02\x1C\xC7\x03\x02\x02\x02\x1E\xC9\x03\x02\x02\x02 " +
-		"\xDA\x03\x02\x02\x02\"\xFE\x03\x02\x02\x02$\u0100\x03\x02\x02\x02&\u0116" +
-		"\x03\x02\x02\x02(\u011E\x03\x02\x02\x02*\u0120\x03\x02\x02\x02,\u0122" +
-		"\x03\x02\x02\x02.\u014C\x03\x02\x02\x020\u0154\x03\x02\x02\x022\u015A" +
-		"\x03\x02\x02\x024\u0162\x03\x02\x02\x026\u0179\x03\x02\x02\x028\u017B" +
-		"\x03\x02\x02\x02:\u0194\x03\x02\x02\x02<\u0196\x03\x02\x02\x02>\u0198" +
-		"\x03\x02\x02\x02@\u01A1\x03\x02\x02\x02B\u01AF\x03\x02\x02\x02D\u01B1" +
-		"\x03\x02\x02\x02F\u01B8\x03\x02\x02\x02H\u01BC\x03\x02\x02\x02J\u01C6" +
-		"\x03\x02\x02\x02L\u01CB\x03\x02\x02\x02N\u01CD\x03\x02\x02\x02P\u01CF" +
-		"\x03\x02\x02\x02R\u01D1\x03\x02\x02\x02T\u01D3\x03\x02\x02\x02V\u01D5" +
-		"\x03\x02\x02\x02XZ\x05\x04\x03\x02YX\x03\x02\x02\x02Z]\x03\x02\x02\x02" +
-		"[Y\x03\x02\x02\x02[\\\x03\x02\x02\x02\\^\x03\x02\x02\x02][\x03\x02\x02" +
-		"\x02^_\x07\x02\x02\x03_\x03\x03\x02\x02\x02`m\x05\x06\x04\x02am\x05\b" +
-		"\x05\x02bm\x05\n\x06\x02cm\x05$\x13\x02dm\x056\x1C\x02em\x050\x19\x02" +
-		"fm\x05.\x18\x02gm\x054\x1B\x02hm\x05,\x17\x02im\x05 \x11\x02jm\x058\x1D" +
-		"\x02km\x05\f\x07\x02l`\x03\x02\x02\x02la\x03\x02\x02\x02lb\x03\x02\x02" +
-		"\x02lc\x03\x02\x02\x02ld\x03\x02\x02\x02le\x03\x02\x02\x02lf\x03\x02\x02" +
-		"\x02lg\x03\x02\x02\x02lh\x03\x02\x02\x02li\x03\x02\x02\x02lj\x03\x02\x02" +
-		"\x02lk\x03\x02\x02\x02m\x05\x03\x02\x02\x02no\x07\x03\x02\x02op\x05P)" +
-		"\x02pq\x07\x04\x02\x02qr\x05N(\x02rs\x07\x05\x02\x02s\x07\x03\x02\x02" +
-		"\x02tu\x05N(\x02uv\x07\x06\x02\x02vw\x05\x0E\b\x02wx\x07\x05\x02\x02x" +
-		"\t\x03\x02\x02\x02yz\x05N(\x02z{\x07\x06\x02\x02{|\x05@!\x02|}\x07\x05" +
-		"\x02\x02}\v\x03\x02\x02\x02~\x80\x07\x07\x02\x02\x7F~\x03\x02\x02\x02" +
-		"\x7F\x80\x03\x02\x02\x02\x80\x84\x03\x02\x02\x02\x81\x85\x05\x10\t\x02" +
-		"\x82\x85\x05\x12\n\x02\x83\x85\x05\x1E\x10\x02\x84\x81\x03\x02\x02\x02" +
-		"\x84\x82\x03\x02\x02\x02\x84\x83\x03\x02\x02\x02\x85\x86\x03\x02\x02\x02" +
-		"\x86\x87\x07\x05\x02\x02\x87\r\x03\x02\x02\x02\x88\x8C\x05\x10\t\x02\x89" +
-		"\x8C\x05\x12\n\x02\x8A\x8C\x05\x1E\x10\x02\x8B\x88\x03\x02\x02\x02\x8B" +
-		"\x89\x03\x02\x02\x02\x8B\x8A\x03\x02\x02\x02\x8C\x0F\x03\x02\x02\x02\x8D" +
-		"\x8E\x07\b\x02\x02\x8E\x8F\x05P)\x02\x8F\x90\x05\x1A\x0E\x02\x90\x91\x05" +
-		"\x18\r\x02\x91\x98\x03\x02\x02\x02\x92\x93\x07\b\x02\x02\x93\x94\x05P" +
-		")\x02\x94\x95\x05\x14\v\x02\x95\x96\x05\x18\r\x02\x96\x98\x03\x02\x02" +
-		"\x02\x97\x8D\x03\x02\x02\x02\x97\x92\x03\x02\x02\x02\x98\x11\x03\x02\x02" +
-		"\x02\x99\x9A\x07\t\x02\x02\x9A\x9B\x05P)\x02\x9B\x9D\x05\x1A\x0E\x02\x9C" +
-		"\x9E\x05\x1C\x0F\x02\x9D\x9C\x03\x02\x02\x02\x9D\x9E\x03\x02\x02\x02\x9E" +
-		"\x9F\x03\x02\x02\x02\x9F\xA0\x05\x16\f\x02\xA0\x13\x03\x02\x02\x02\xA1" +
-		"\xA2\x07\n\x02\x02\xA2\xA5\x05T+\x02\xA3\xA5\x05\x1C\x0F\x02\xA4\xA1\x03" +
-		"\x02\x02\x02\xA4\xA3\x03\x02\x02\x02\xA5\x15\x03\x02\x02\x02\xA6\xA7\x07" +
-		"\v\x02\x02\xA7\xB1\x05F$\x02\xA8\xA9\x07\f\x02\x02\xA9\xAA\x05F$\x02\xAA" +
-		"\xAB\x07\r\x02\x02\xAB\xAE\x05F$\x02\xAC\xAD\x07\x0E\x02\x02\xAD\xAF\x05" +
-		"> \x02\xAE\xAC\x03\x02\x02\x02\xAE\xAF\x03\x02\x02\x02\xAF\xB1\x03\x02" +
-		"\x02\x02\xB0\xA6\x03\x02\x02\x02\xB0\xA8\x03\x02\x02\x02\xB1\x17\x03\x02" +
-		"\x02\x02\xB2\xB3\t\x02\x02\x02\xB3\xB8\x05F$\x02\xB4\xB5\x07\x10\x02\x02" +
-		"\xB5\xB9\x05H%\x02\xB6\xB7\x07\x11\x02\x02\xB7\xB9\x05F$\x02\xB8\xB4\x03" +
-		"\x02\x02\x02\xB8\xB6\x03\x02\x02\x02\xB9\xC3\x03\x02\x02\x02\xBA\xBB\x07" +
-		"\f\x02\x02\xBB\xBC\x05F$\x02\xBC\xBD\x07\r\x02\x02\xBD\xC0\x05F$\x02\xBE" +
-		"\xBF\x07\x0E\x02\x02\xBF\xC1\x05> \x02\xC0\xBE\x03\x02\x02\x02\xC0\xC1" +
-		"\x03\x02\x02\x02\xC1\xC3\x03\x02\x02\x02\xC2\xB2\x03\x02\x02\x02\xC2\xBA" +
-		"\x03\x02\x02\x02\xC3\x19\x03\x02\x02\x02\xC4\xC5\x07\x12\x02\x02\xC5\xC6" +
-		"\x05D#\x02\xC6\x1B\x03\x02\x02\x02\xC7\xC8\t\x03\x02\x02\xC8\x1D\x03\x02" +
-		"\x02\x02\xC9\xCA\x07\x16\x02\x02\xCA\xCB\x05P)\x02\xCB\xCC\x07\v\x02\x02" +
-		"\xCC\xCD\x05F$\x02\xCD\xCE\x07\x17\x02\x02\xCE\xCF\x05R*\x02\xCF\xD2\x07" +
-		"\x18\x02\x02\xD0\xD1\x07\x19\x02\x02\xD1\xD3\x05H%\x02\xD2\xD0\x03\x02" +
-		"\x02\x02\xD2\xD3\x03\x02\x02\x02\xD3\xD8\x03\x02\x02\x02\xD4\xD5\x07\x1A" +
-		"\x02\x02\xD5\xD6\x05H%\x02\xD6\xD7\x07\x1B\x02\x02\xD7\xD9\x03\x02\x02" +
-		"\x02\xD8\xD4\x03\x02\x02\x02\xD8\xD9\x03\x02\x02\x02\xD9\x1F\x03\x02\x02" +
-		"\x02\xDA\xDB\x07\b\x02\x02\xDB\xDC\x05N(\x02\xDC\xE0\x07\x1C\x02\x02\xDD" +
-		"\xDF\x05\"\x12\x02\xDE\xDD\x03\x02\x02\x02\xDF\xE2\x03\x02\x02\x02\xE0" +
-		"\xDE\x03\x02\x02\x02\xE0\xE1\x03\x02\x02\x02\xE1\xE3\x03\x02\x02\x02\xE2" +
-		"\xE0\x03\x02\x02\x02\xE3\xE4\x07\x1D\x02\x02\xE4!\x03\x02\x02\x02\xE5" +
-		"\xE6\x07\x1E\x02\x02\xE6\xE7\x07\x1F\x02\x02\xE7\xE8\x05P)\x02\xE8\xE9" +
-		"\x07 \x02\x02\xE9\xFF\x03\x02\x02\x02\xEA\xEB\x07!\x02\x02\xEB\xEC\x07" +
-		"\x1F\x02\x02\xEC\xED\x05F$\x02\xED\xEE\x07 \x02\x02\xEE\xFF\x03\x02\x02" +
-		"\x02\xEF\xF0\x07\"\x02\x02\xF0\xF1\x07\x1F\x02\x02\xF1\xF2\x05H%\x02\xF2" +
-		"\xF3\x07 \x02\x02\xF3\xFF\x03\x02\x02\x02\xF4\xF5\x07#\x02\x02\xF5\xF6" +
-		"\x07\x1F\x02\x02\xF6\xF7\x05P)\x02\xF7\xF8\x07 \x02\x02\xF8\xFF\x03\x02" +
-		"\x02\x02\xF9\xFA\x07$\x02\x02\xFA\xFB\x07\x1F\x02\x02\xFB\xFC\x05P)\x02" +
-		"\xFC\xFD\x07 \x02\x02\xFD\xFF\x03\x02\x02\x02\xFE\xE5\x03\x02\x02\x02" +
-		"\xFE\xEA\x03\x02\x02\x02\xFE\xEF\x03\x02\x02\x02\xFE\xF4\x03\x02\x02\x02" +
-		"\xFE\xF9\x03\x02\x02\x02\xFF#\x03\x02\x02\x02\u0100\u0101\x07\n\x02\x02" +
-		"\u0101\u0102\x05*\x16\x02\u0102\u0103\x07\x0F\x02\x02\u0103\u0104\x05" +
-		"&\x14\x02\u0104\u0105\x07\x11\x02\x02\u0105\u0108\x05(\x15\x02\u0106\u0107" +
-		"\x07%\x02\x02\u0107\u0109\x05R*\x02\u0108\u0106\x03\x02\x02\x02\u0108" +
-		"\u0109\x03\x02\x02\x02\u0109\u010A\x03\x02\x02\x02\u010A\u010E\x07\x1C" +
-		"\x02\x02\u010B\u010D\x05\x04\x03\x02\u010C\u010B\x03\x02\x02\x02\u010D" +
-		"\u0110\x03\x02\x02\x02\u010E\u010C\x03\x02\x02\x02\u010E\u010F\x03\x02" +
-		"\x02\x02\u010F\u0111\x03\x02\x02\x02\u0110\u010E\x03\x02\x02\x02\u0111" +
-		"\u0112\x07\x1D\x02\x02\u0112%\x03\x02\x02\x02\u0113\u0117\x05D#\x02\u0114" +
-		"\u0117\x05N(\x02\u0115\u0117\x07&\x02\x02\u0116\u0113\x03\x02\x02\x02" +
-		"\u0116\u0114\x03\x02\x02\x02\u0116\u0115\x03\x02\x02\x02\u0117\'\x03\x02" +
-		"\x02\x02\u0118\u011F\x05D#\x02\u0119\u011F\x05N(\x02\u011A\u011B\x05&" +
-		"\x14\x02\u011B\u011C\x07\'\x02\x02\u011C\u011D\x05R*\x02\u011D\u011F\x03" +
-		"\x02\x02\x02\u011E\u0118\x03\x02\x02\x02\u011E\u0119\x03\x02\x02\x02\u011E" +
-		"\u011A\x03\x02\x02\x02\u011F)\x03\x02\x02\x02\u0120\u0121\t\x04\x02\x02" +
-		"\u0121+\x03\x02\x02\x02\u0122\u0123\x07.\x02\x02\u0123\u0124\x07/\x02" +
-		"\x02\u0124\u0125\x05:\x1E\x02\u0125\u0126\x070\x02\x02\u0126\u012A\x07" +
-		"\x1C\x02\x02\u0127\u0129\x05\x04\x03\x02\u0128\u0127\x03\x02\x02\x02\u0129" +
-		"\u012C\x03\x02\x02\x02\u012A\u0128\x03\x02\x02\x02\u012A\u012B\x03\x02" +
-		"\x02\x02\u012B\u012D\x03\x02\x02\x02\u012C\u012A\x03\x02\x02\x02\u012D" +
-		"\u013E\x07\x1D\x02\x02\u012E\u012F\x071\x02\x02\u012F\u0130\x07.\x02\x02" +
-		"\u0130\u0131\x07/\x02\x02\u0131\u0132\x05:\x1E\x02\u0132\u0133\x070\x02" +
-		"\x02\u0133\u0137\x07\x1C\x02\x02\u0134\u0136\x05\x04\x03\x02\u0135\u0134" +
-		"\x03\x02\x02\x02\u0136\u0139\x03\x02\x02\x02\u0137\u0135\x03\x02\x02\x02" +
-		"\u0137\u0138\x03\x02\x02\x02\u0138\u013A\x03\x02\x02\x02\u0139\u0137\x03" +
-		"\x02\x02\x02\u013A\u013B\x07\x1D\x02\x02\u013B\u013D\x03\x02\x02\x02\u013C" +
-		"\u012E\x03\x02\x02\x02\u013D\u0140\x03\x02\x02\x02\u013E\u013C\x03\x02" +
-		"\x02\x02\u013E\u013F\x03\x02\x02\x02\u013F\u014A\x03\x02\x02\x02\u0140" +
-		"\u013E\x03\x02\x02\x02\u0141\u0142\x071\x02\x02\u0142\u0146\x07\x1C\x02" +
-		"\x02\u0143\u0145\x05\x04\x03\x02\u0144\u0143\x03\x02\x02\x02\u0145\u0148" +
-		"\x03\x02\x02\x02\u0146\u0144\x03\x02\x02\x02\u0146\u0147\x03\x02\x02\x02" +
-		"\u0147\u0149\x03\x02\x02\x02\u0148\u0146\x03\x02\x02\x02\u0149\u014B\x07" +
-		"\x1D\x02\x02\u014A\u0141\x03\x02\x02\x02\u014A\u014B\x03\x02\x02\x02\u014B" +
-		"-\x03\x02\x02\x02\u014C\u014D\x072\x02\x02\u014D\u014E\x05N(\x02\u014E" +
-		"\u014F\x073\x02\x02\u014F\u0150\x05:\x1E\x02\u0150\u0151\x074\x02\x02" +
-		"\u0151\u0152\x05N(\x02\u0152\u0153\x07\x05\x02\x02\u0153/\x03\x02\x02" +
-		"\x02\u0154\u0155\x075\x02\x02\u0155\u0156\x052\x1A\x02\u0156\u0157\x07" +
-		"4\x02\x02\u0157\u0158\x05N(\x02\u0158\u0159\x07\x05\x02\x02\u01591\x03" +
-		"\x02\x02\x02\u015A\u015F\x05N(\x02\u015B\u015C\x07 \x02\x02\u015C\u015E" +
-		"\x05N(\x02\u015D\u015B\x03\x02\x02\x02\u015E\u0161\x03\x02\x02\x02\u015F" +
-		"\u015D\x03\x02\x02\x02\u015F\u0160\x03\x02\x02\x02\u01603\x03\x02\x02" +
-		"\x02\u0161\u015F\x03\x02\x02\x02\u0162\u0163\x076\x02\x02\u0163\u0164" +
-		"\x05N(\x02\u0164\u0165\x077\x02\x02\u0165\u0166\x05N(\x02\u0166\u0167" +
-		"\x07\x05\x02\x02\u01675\x03\x02\x02\x02\u0168\u0169\x078\x02\x02\u0169" +
-		"\u016C\x05N(\x02\u016A\u016B\x07\x04\x02\x02\u016B\u016D\x05P)\x02\u016C" +
-		"\u016A\x03\x02\x02\x02\u016C\u016D\x03\x02\x02\x02\u016D\u016E\x03\x02" +
-		"\x02\x02\u016E\u016F\x07\x05\x02\x02\u016F\u017A\x03\x02\x02\x02\u0170" +
-		"\u0171\x078\x02\x02\u0171\u0172\x079\x02\x02\u0172\u0173\x07\x04\x02\x02" +
-		"\u0173\u0174\x05P)\x02\u0174\u0175\x07\x05\x02\x02\u0175\u017A\x03\x02" +
-		"\x02\x02\u0176\u0177\x078\x02\x02\u0177\u0178\x07:\x02\x02\u0178\u017A" +
-		"\x07\x05\x02\x02\u0179\u0168\x03\x02\x02\x02\u0179\u0170\x03\x02\x02\x02" +
-		"\u0179\u0176\x03\x02\x02\x02\u017A7\x03\x02\x02\x02\u017B\u017C\x05N(" +
-		"\x02\u017C\u017D\x07\x06\x02\x02\u017D\u017E\x07;\x02\x02\u017E\u017F" +
-		"\x07/\x02\x02\u017F\u0180\x05D#\x02\u0180\u0181\x070\x02\x02\u0181\u0182" +
-		"\x07\x05\x02\x02\u01829\x03\x02\x02\x02\u0183\u0184\x05N(\x02\u0184\u0185" +
-		"\x05<\x1F\x02\u0185\u0186\x05L\'\x02\u0186\u0195\x03\x02\x02\x02\u0187" +
-		"\u0188\x07<\x02\x02\u0188\u0189\x07/\x02\x02\u0189\u018A\x05T+\x02\u018A" +
-		"\u018B\x070\x02\x02\u018B\u018C\x077\x02\x02\u018C\u018D\x07,\x02\x02" +
-		"\u018D\u018E\x05<\x1F\x02\u018E\u018F\x05R*\x02\u018F\u0195\x03\x02\x02" +
-		"\x02\u0190\u0191\x07$\x02\x02\u0191\u0192\x05<\x1F\x02\u0192\u0193\x05" +
-		"P)\x02\u0193\u0195\x03\x02\x02\x02\u0194\u0183\x03\x02\x02\x02\u0194\u0187" +
-		"\x03\x02\x02\x02\u0194\u0190\x03\x02\x02\x02\u0195;\x03\x02\x02\x02\u0196" +
-		"\u0197\t\x05\x02\x02\u0197=\x03\x02\x02\x02\u0198\u0199\t\x06\x02\x02" +
-		"\u0199?\x03\x02\x02\x02\u019A\u01A2\x05D#\x02\u019B\u01A2\x05F$\x02\u019C" +
-		"\u01A2\x05H%\x02\u019D\u01A2\x05P)\x02\u019E\u01A2\x05R*\x02\u019F\u01A2" +
-		"\x05N(\x02\u01A0\u01A2\x05B\"\x02\u01A1\u019A\x03\x02\x02\x02\u01A1\u019B" +
-		"\x03\x02\x02\x02\u01A1\u019C\x03\x02\x02\x02\u01A1\u019D\x03\x02\x02\x02" +
-		"\u01A1\u019E\x03\x02\x02\x02\u01A1\u019F\x03\x02\x02\x02\u01A1\u01A0\x03" +
-		"\x02\x02\x02\u01A2A\x03\x02\x02\x02\u01A3\u01A4\x07<\x02\x02\u01A4\u01A5" +
-		"\x07/\x02\x02\u01A5\u01A6\x05T+\x02\u01A6\u01A7\x070\x02\x02\u01A7\u01A8" +
-		"\x077\x02\x02\u01A8\u01A9\x07,\x02\x02\u01A9\u01B0\x03\x02\x02\x02\u01AA" +
-		"\u01AB\x07;\x02\x02\u01AB\u01AC\x07/\x02\x02\u01AC\u01AD\x05D#\x02\u01AD" +
-		"\u01AE\x070\x02\x02\u01AE\u01B0\x03\x02\x02\x02\u01AF\u01A3\x03\x02\x02" +
-		"\x02\u01AF\u01AA\x03\x02\x02\x02\u01B0C\x03\x02\x02\x02\u01B1\u01B2\x05" +
-		"R*\x02\u01B2\u01B3\x07F\x02\x02\u01B3\u01B6\x05R*\x02\u01B4\u01B5\x07" +
-		"F\x02\x02\u01B5\u01B7\x05R*\x02\u01B6\u01B4\x03\x02\x02\x02\u01B6\u01B7" +
-		"\x03\x02\x02\x02\u01B7E\x03\x02\x02\x02\u01B8\u01B9\x05R*\x02\u01B9\u01BA" +
-		"\x07\x1F\x02\x02\u01BA\u01BB\x05R*\x02\u01BBG\x03\x02\x02\x02\u01BC\u01BD" +
-		"\x05R*\x02\u01BD\u01C3\x05J&\x02\u01BE\u01BF\x05R*\x02\u01BF\u01C0\x05" +
-		"J&\x02\u01C0\u01C2\x03\x02\x02\x02\u01C1\u01BE\x03\x02\x02\x02\u01C2\u01C5" +
-		"\x03\x02\x02\x02\u01C3\u01C1\x03\x02\x02\x02\u01C3\u01C4\x03\x02\x02\x02" +
-		"\u01C4I\x03\x02\x02\x02\u01C5\u01C3\x03\x02\x02\x02\u01C6\u01C7\t\x07" +
-		"\x02\x02\u01C7K\x03\x02\x02\x02\u01C8\u01CC\x05P)\x02\u01C9\u01CC\x05" +
-		"R*\x02\u01CA\u01CC\x05N(\x02\u01CB\u01C8\x03\x02\x02\x02\u01CB\u01C9\x03" +
-		"\x02\x02\x02\u01CB\u01CA\x03\x02\x02\x02\u01CCM\x03\x02\x02\x02\u01CD" +
-		"\u01CE\x07n\x02\x02\u01CEO\x03\x02\x02\x02\u01CF\u01D0\x07o\x02\x02\u01D0" +
-		"Q\x03\x02\x02\x02\u01D1\u01D2\x07p\x02\x02\u01D2S\x03\x02\x02\x02\u01D3" +
-		"\u01D4\t\b\x02\x02\u01D4U\x03\x02\x02\x02\u01D5\u01D6\t\t\x02\x02\u01D6" +
-		"W\x03\x02\x02\x02%[l\x7F\x84\x8B\x97\x9D\xA4\xAE\xB0\xB8\xC0\xC2\xD2\xD8" +
-		"\xE0\xFE\u0108\u010E\u0116\u011E\u012A\u0137\u013E\u0146\u014A\u015F\u016C" +
-		"\u0179\u0194\u01A1\u01AF\u01B6\u01C3\u01CB";
+		"\t#\x04$\t$\x04%\t%\x04&\t&\x04\'\t\'\x04(\t(\x04)\t)\x03\x02\x07\x02" +
+		"T\n\x02\f\x02\x0E\x02W\v\x02\x03\x02\x03\x02\x03\x03\x03\x03\x03\x03\x03" +
+		"\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x05\x03f" +
+		"\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x05\x03\x05" +
+		"\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07" +
+		"\x03\x07\x03\x07\x03\x07\x05\x07|\n\x07\x03\x07\x03\x07\x03\b\x03\b\x03" +
+		"\b\x05\b\x83\n\b\x03\t\x03\t\x03\t\x03\t\x03\t\x05\t\x8A\n\t\x03\t\x03" +
+		"\t\x03\t\x03\t\x03\t\x05\t\x91\n\t\x05\t\x93\n\t\x03\n\x03\n\x03\n\x05" +
+		"\n\x98\n\n\x03\n\x03\n\x03\n\x03\n\x03\n\x05\n\x9F\n\n\x03\n\x03\n\x03" +
+		"\n\x03\n\x03\n\x05\n\xA6\n\n\x03\n\x03\n\x03\n\x03\n\x03\n\x05\n\xAD\n" +
+		"\n\x05\n\xAF\n\n\x03\v\x03\v\x03\v\x03\v\x05\v\xB5\n\v\x03\v\x03\v\x03" +
+		"\v\x03\v\x05\v\xBB\n\v\x03\v\x03\v\x03\v\x03\v\x03\v\x03\v\x03\v\x03\v" +
+		"\x03\v\x03\v\x03\v\x03\v\x03\v\x05\v\xCA\n\v\x03\f\x03\f\x03\f\x03\f\x07" +
+		"\f\xD0\n\f\f\f\x0E\f\xD3\v\f\x03\f\x03\f\x03\r\x03\r\x03\r\x03\r\x05\r" +
+		"\xDB\n\r\x03\r\x03\r\x03\r\x03\r\x05\r\xE1\n\r\x03\r\x03\r\x03\r\x03\r" +
+		"\x05\r\xE7\n\r\x03\r\x03\r\x03\r\x03\r\x05\r\xED\n\r\x03\r\x03\r\x03\r" +
+		"\x03\r\x05\r\xF3\n\r\x05\r\xF5\n\r\x03\x0E\x03\x0E\x03\x0E\x03\x0E\x03" +
+		"\x0E\x03\x0E\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03" +
+		"\x0F\x03\x0F\x05\x0F\u0106\n\x0F\x05\x0F\u0108\n\x0F\x03\x10\x03\x10\x03" +
+		"\x10\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10\x05" +
+		"\x10\u0115\n\x10\x03\x10\x03\x10\x03\x10\x03\x10\x05\x10\u011B\n\x10\x03" +
+		"\x11\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x05\x11\u0125" +
+		"\n\x11\x03\x11\x03\x11\x07\x11\u0129\n\x11\f\x11\x0E\x11\u012C\v\x11\x03" +
+		"\x11\x03\x11\x03\x12\x03\x12\x03\x12\x05\x12\u0133\n\x12\x03\x13\x03\x13" +
+		"\x03\x13\x03\x13\x03\x13\x03\x13\x05\x13\u013B\n\x13\x03\x14\x03\x14\x03" +
+		"\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03\x15\x07\x15\u0145\n\x15\f\x15" +
+		"\x0E\x15\u0148\v\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03" +
+		"\x15\x03\x15\x07\x15\u0152\n\x15\f\x15\x0E\x15\u0155\v\x15\x03\x15\x03" +
+		"\x15\x07\x15\u0159\n\x15\f\x15\x0E\x15\u015C\v\x15\x03\x15\x03\x15\x03" +
+		"\x15\x07\x15\u0161\n\x15\f\x15\x0E\x15\u0164\v\x15\x03\x15\x05\x15\u0167" +
+		"\n\x15\x03\x16\x03\x16\x03\x16\x03\x16\x03\x16\x03\x16\x03\x16\x03\x16" +
+		"\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x18\x03\x18\x03\x18" +
+		"\x07\x18\u017A\n\x18\f\x18\x0E\x18\u017D\v\x18\x03\x19\x03\x19\x03\x19" +
+		"\x03\x19\x03\x19\x03\x19\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x05\x1A\u0189" +
+		"\n\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A" +
+		"\x03\x1A\x05\x1A\u0194\n\x1A\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03" +
+		"\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03" +
+		"\x1B\x03\x1B\x03\x1B\x05\x1B\u01A7\n\x1B\x03\x1C\x03\x1C\x03\x1D\x03\x1D" +
+		"\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x03\x1E\x05\x1E\u01B4" +
+		"\n\x1E\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x03\x1F" +
+		"\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x05\x1F\u01C2\n\x1F\x03 \x03 \x03 \x03" +
+		" \x03 \x05 \u01C9\n \x03!\x03!\x05!\u01CD\n!\x03\"\x03\"\x03\"\x07\"\u01D2" +
+		"\n\"\f\"\x0E\"\u01D5\v\"\x03#\x03#\x03$\x03$\x03$\x03$\x03%\x03%\x03%" +
+		"\x03&\x03&\x03&\x03&\x03&\x03\'\x03\'\x03\'\x03\'\x07\'\u01E9\n\'\f\'" +
+		"\x0E\'\u01EC\v\'\x03(\x03(\x03)\x03)\x03)\x02\x02\x02*\x02\x02\x04\x02" +
+		"\x06\x02\b\x02\n\x02\f\x02\x0E\x02\x10\x02\x12\x02\x14\x02\x16\x02\x18" +
+		"\x02\x1A\x02\x1C\x02\x1E\x02 \x02\"\x02$\x02&\x02(\x02*\x02,\x02.\x02" +
+		"0\x022\x024\x026\x028\x02:\x02<\x02>\x02@\x02B\x02D\x02F\x02H\x02J\x02" +
+		"L\x02N\x02P\x02\x02\b\x03\x02*/\x03\x02>C\x03\x02DF\x03\x02IV\x03\x02" +
+		"WX\x03\x02Y[\x02\u0217\x02U\x03\x02\x02\x02\x04e\x03\x02\x02\x02\x06g" +
+		"\x03\x02\x02\x02\bm\x03\x02\x02\x02\nr\x03\x02\x02\x02\fw\x03\x02\x02" +
+		"\x02\x0E\x82\x03\x02\x02\x02\x10\x92\x03\x02\x02\x02\x12\xAE\x03\x02\x02" +
+		"\x02\x14\xC9\x03\x02\x02\x02\x16\xCB\x03\x02\x02\x02\x18\xF4\x03\x02\x02" +
+		"\x02\x1A\xF6\x03\x02\x02\x02\x1C\u0107\x03\x02\x02\x02\x1E\u0109\x03\x02" +
+		"\x02\x02 \u011C\x03\x02\x02\x02\"\u0132\x03\x02\x02\x02$\u013A\x03\x02" +
+		"\x02\x02&\u013C\x03\x02\x02\x02(\u013E\x03\x02\x02\x02*\u0168\x03\x02" +
+		"\x02\x02,\u0170\x03\x02\x02\x02.\u0176\x03\x02\x02\x020\u017E\x03\x02" +
+		"\x02\x022\u0193\x03\x02\x02\x024\u01A6\x03\x02\x02\x026\u01A8\x03\x02" +
+		"\x02\x028\u01AA\x03\x02\x02\x02:\u01B3\x03\x02\x02\x02<\u01C1\x03\x02" +
+		"\x02\x02>\u01C3\x03\x02\x02\x02@\u01CC\x03\x02\x02\x02B\u01CE\x03\x02" +
+		"\x02\x02D\u01D6\x03\x02\x02\x02F\u01D8\x03\x02\x02\x02H\u01DC\x03\x02" +
+		"\x02\x02J\u01DF\x03\x02\x02\x02L\u01E4\x03\x02\x02\x02N\u01ED\x03\x02" +
+		"\x02\x02P\u01EF\x03\x02\x02\x02RT\x05\x04\x03\x02SR\x03\x02\x02\x02TW" +
+		"\x03\x02\x02\x02US\x03\x02\x02\x02UV\x03\x02\x02\x02VX\x03\x02\x02\x02" +
+		"WU\x03\x02\x02\x02XY\x07\x02\x02\x03Y\x03\x03\x02\x02\x02Zf\x05\x06\x04" +
+		"\x02[f\x05\b\x05\x02\\f\x05\n\x06\x02]f\x05 \x11\x02^f\x052\x1A\x02_f" +
+		"\x05,\x17\x02`f\x05*\x16\x02af\x050\x19\x02bf\x05(\x15\x02cf\x05\x16\f" +
+		"\x02df\x05\f\x07\x02eZ\x03\x02\x02\x02e[\x03\x02\x02\x02e\\\x03\x02\x02" +
+		"\x02e]\x03\x02\x02\x02e^\x03\x02\x02\x02e_\x03\x02\x02\x02e`\x03\x02\x02" +
+		"\x02ea\x03\x02\x02\x02eb\x03\x02\x02\x02ec\x03\x02\x02\x02ed\x03\x02\x02" +
+		"\x02f\x05\x03\x02\x02\x02gh\x07\x03\x02\x02hi\x07Z\x02\x02ij\x07\x04\x02" +
+		"\x02jk\x07Y\x02\x02kl\x07\x05\x02\x02l\x07\x03\x02\x02\x02mn\x07Y\x02" +
+		"\x02no\x07\x06\x02\x02op\x05\x0E\b\x02pq\x07\x05\x02\x02q\t\x03\x02\x02" +
+		"\x02rs\x07Y\x02\x02st\x07\x06\x02\x02tu\x05:\x1E\x02uv\x07\x05\x02\x02" +
+		"v\v\x03\x02\x02\x02w{\x07\x07\x02\x02x|\x05\x10\t\x02y|\x05\x1A\x0E\x02" +
+		"z|\x05\x1E\x10\x02{x\x03\x02\x02\x02{y\x03\x02\x02\x02{z\x03\x02\x02\x02" +
+		"|}\x03\x02\x02\x02}~\x07\x05\x02\x02~\r\x03\x02\x02\x02\x7F\x83\x05\x10" +
+		"\t\x02\x80\x83\x05\x1A\x0E\x02\x81\x83\x05\x1E\x10\x02\x82\x7F\x03\x02" +
+		"\x02\x02\x82\x80\x03\x02\x02\x02\x82\x81\x03\x02\x02\x02\x83\x0F\x03\x02" +
+		"\x02\x02\x84\x85\x07\b\x02\x02\x85\x86\x07Z\x02\x02\x86\x89\x05\x12\n" +
+		"\x02\x87\x88\x07\t\x02\x02\x88\x8A\x05L\'\x02\x89\x87\x03\x02\x02\x02" +
+		"\x89\x8A\x03\x02\x02\x02\x8A\x93\x03\x02\x02\x02\x8B\x8C\x07\b\x02\x02" +
+		"\x8C\x8D\x07Z\x02\x02\x8D\x90\x05\x14\v\x02\x8E\x8F\x07\t\x02\x02\x8F" +
+		"\x91\x05L\'\x02\x90\x8E\x03\x02\x02\x02\x90\x91\x03\x02\x02\x02\x91\x93" +
+		"\x03\x02\x02\x02\x92\x84\x03\x02\x02\x02\x92\x8B\x03\x02\x02\x02\x93\x11" +
+		"\x03\x02\x02\x02\x94\x97\x07\n\x02\x02\x95\x96\x07\v\x02\x02\x96\x98\x05" +
+		"F$\x02\x97\x95\x03\x02\x02\x02\x97\x98\x03\x02\x02\x02\x98\xAF\x03\x02" +
+		"\x02\x02\x99\x9A\x07\f\x02\x02\x9A\x9B\x07\r\x02\x02\x9B\x9E\x05B\"\x02" +
+		"\x9C\x9F\x05J&\x02\x9D\x9F\x05H%\x02\x9E\x9C\x03\x02\x02\x02\x9E\x9D\x03" +
+		"\x02\x02\x02\x9E\x9F\x03\x02\x02\x02\x9F\xAF\x03\x02\x02\x02\xA0\xA1\x07" +
+		"\x0E\x02\x02\xA1\xA2\x07\r\x02\x02\xA2\xA5\x07[\x02\x02\xA3\xA6\x05J&" +
+		"\x02\xA4\xA6\x05H%\x02\xA5\xA3\x03\x02\x02\x02\xA5\xA4\x03\x02\x02\x02" +
+		"\xA5\xA6\x03\x02\x02\x02\xA6\xAF\x03\x02\x02\x02\xA7\xA8\x07\x0F\x02\x02" +
+		"\xA8\xA9\x07\r\x02\x02\xA9\xAC\x05> \x02\xAA\xAD\x05J&\x02\xAB\xAD\x05" +
+		"H%\x02\xAC\xAA\x03\x02\x02\x02\xAC\xAB\x03\x02\x02\x02\xAC\xAD\x03\x02" +
+		"\x02\x02\xAD\xAF\x03\x02\x02\x02\xAE\x94\x03\x02\x02\x02\xAE\x99\x03\x02" +
+		"\x02\x02\xAE\xA0\x03\x02\x02\x02\xAE\xA7\x03\x02\x02\x02\xAF\x13\x03\x02" +
+		"\x02\x02\xB0\xB1\x07\r\x02\x02\xB1\xB4\x05> \x02\xB2\xB5\x05J&\x02\xB3" +
+		"\xB5\x05H%\x02\xB4\xB2\x03\x02\x02\x02\xB4\xB3\x03\x02\x02\x02\xB4\xB5" +
+		"\x03\x02\x02\x02\xB5\xCA\x03\x02\x02\x02\xB6\xB7\x07\x10\x02\x02\xB7\xBA" +
+		"\x05B\"\x02\xB8\xBB\x05J&\x02\xB9\xBB\x05H%\x02\xBA\xB8\x03\x02\x02\x02" +
+		"\xBA\xB9\x03\x02\x02\x02\xBA\xBB\x03\x02\x02\x02\xBB\xCA\x03\x02\x02\x02" +
+		"\xBC\xBD\x07\x11\x02\x02\xBD\xBE\x05F$\x02\xBE\xBF\x07\x12\x02\x02\xBF" +
+		"\xC0\x05F$\x02\xC0\xCA\x03\x02\x02\x02\xC1\xC2\x07\v\x02\x02\xC2\xCA\x05" +
+		"F$\x02\xC3\xC4\x07\x13\x02\x02\xC4\xC5\x07\x14\x02\x02\xC5\xC6\x05F$\x02" +
+		"\xC6\xC7\x07\x15\x02\x02\xC7\xC8\x05F$\x02\xC8\xCA\x03\x02\x02\x02\xC9" +
+		"\xB0\x03\x02\x02\x02\xC9\xB6\x03\x02\x02\x02\xC9\xBC\x03\x02\x02\x02\xC9" +
+		"\xC1\x03\x02\x02\x02\xC9\xC3\x03\x02\x02\x02\xCA\x15\x03\x02\x02\x02\xCB" +
+		"\xCC\x07\b\x02\x02\xCC\xCD\x07Y\x02\x02\xCD\xD1\x07\x16\x02\x02\xCE\xD0" +
+		"\x05\x18\r\x02\xCF\xCE\x03\x02\x02\x02\xD0\xD3\x03\x02\x02\x02\xD1\xCF" +
+		"\x03\x02\x02\x02\xD1\xD2\x03\x02\x02\x02\xD2\xD4\x03\x02\x02\x02\xD3\xD1" +
+		"\x03\x02\x02\x02\xD4\xD5\x07\x17\x02\x02\xD5\x17\x03\x02\x02\x02\xD6\xD7" +
+		"\x07\x18\x02\x02\xD7\xD8\x07\x19\x02\x02\xD8\xDA\x07Z\x02\x02\xD9\xDB" +
+		"\x07\x1A\x02\x02\xDA\xD9\x03\x02\x02\x02\xDA\xDB\x03\x02\x02\x02\xDB\xF5" +
+		"\x03\x02\x02\x02\xDC\xDD\x07\x1B\x02\x02\xDD\xDE\x07\x19\x02\x02\xDE\xE0" +
+		"\x05F$\x02\xDF\xE1\x07\x1A\x02\x02\xE0\xDF\x03\x02\x02\x02\xE0\xE1\x03" +
+		"\x02\x02\x02\xE1\xF5\x03\x02\x02\x02\xE2\xE3\x07\x1C\x02\x02\xE3\xE4\x07" +
+		"\x19\x02\x02\xE4\xE6\x05L\'\x02\xE5\xE7\x07\x1A\x02\x02\xE6\xE5\x03\x02" +
+		"\x02\x02\xE6\xE7\x03\x02\x02\x02\xE7\xF5\x03\x02\x02\x02\xE8\xE9\x07\x1D" +
+		"\x02\x02\xE9\xEA\x07\x19\x02\x02\xEA\xEC\x07Z\x02\x02\xEB\xED\x07\x1A" +
+		"\x02\x02\xEC\xEB\x03\x02\x02\x02\xEC\xED\x03\x02\x02\x02\xED\xF5\x03\x02" +
+		"\x02\x02\xEE\xEF\x07\x1E\x02\x02\xEF\xF0\x07\x19\x02\x02\xF0\xF2\x07Z" +
+		"\x02\x02\xF1\xF3\x07\x1A\x02\x02\xF2\xF1\x03\x02\x02\x02\xF2\xF3\x03\x02" +
+		"\x02\x02\xF3\xF5\x03\x02\x02\x02\xF4\xD6\x03\x02\x02\x02\xF4\xDC\x03\x02" +
+		"\x02\x02\xF4\xE2\x03\x02\x02\x02\xF4\xE8\x03\x02\x02\x02\xF4\xEE\x03\x02" +
+		"\x02\x02\xF5\x19\x03\x02\x02\x02\xF6\xF7\x07\x1F\x02\x02\xF7\xF8\x07Z" +
+		"\x02\x02\xF8\xF9\x07\r\x02\x02\xF9\xFA\x05> \x02\xFA\xFB\x05\x1C\x0F\x02" +
+		"\xFB\x1B\x03\x02\x02\x02\xFC\xFD\x07\v\x02\x02\xFD\u0108\x05F$\x02\xFE" +
+		"\xFF\x07\x13\x02\x02\xFF\u0100\x07\x14\x02\x02\u0100\u0101\x05F$\x02\u0101" +
+		"\u0102\x07\x15\x02\x02\u0102\u0105\x05F$\x02\u0103\u0104\x07 \x02\x02" +
+		"\u0104\u0106\x058\x1D\x02\u0105\u0103\x03\x02\x02\x02\u0105\u0106\x03" +
+		"\x02\x02\x02\u0106\u0108\x03\x02\x02\x02\u0107\xFC\x03\x02\x02\x02\u0107" +
+		"\xFE\x03\x02\x02\x02\u0108\x1D\x03\x02\x02\x02\u0109\u010A\x07!\x02\x02" +
+		"\u010A\u010B\x07Z\x02\x02\u010B\u010C\x07\r\x02\x02\u010C\u010D\x05> " +
+		"\x02\u010D\u010E\x07\v\x02\x02\u010E\u010F\x05F$\x02\u010F\u0110\x07\"" +
+		"\x02\x02\u0110\u0111\x07[\x02\x02\u0111\u0114\x07#\x02\x02\u0112\u0113" +
+		"\x07\x10\x02\x02\u0113\u0115\x05L\'\x02\u0114\u0112\x03\x02\x02\x02\u0114" +
+		"\u0115\x03\x02\x02\x02\u0115\u011A\x03\x02\x02\x02\u0116\u0117\x07$\x02" +
+		"\x02\u0117\u0118\x05L\'\x02\u0118\u0119\x07%\x02\x02\u0119\u011B\x03\x02" +
+		"\x02\x02\u011A\u0116\x03\x02\x02\x02\u011A\u011B\x03\x02\x02\x02\u011B" +
+		"\x1F\x03\x02\x02\x02\u011C\u011D\x07&\x02\x02\u011D\u011E\x05&\x14\x02" +
+		"\u011E\u011F\x07\x11\x02\x02\u011F\u0120\x05\"\x12\x02\u0120\u0121\x07" +
+		"\x12\x02\x02\u0121\u0124\x05$\x13\x02\u0122\u0123\x07\'\x02\x02\u0123" +
+		"\u0125\x07[\x02\x02\u0124\u0122\x03\x02\x02\x02\u0124\u0125\x03\x02\x02" +
+		"\x02\u0125\u0126\x03\x02\x02\x02\u0126\u012A\x07\x16\x02\x02\u0127\u0129" +
+		"\x05\x04\x03\x02\u0128\u0127\x03\x02\x02\x02\u0129\u012C\x03\x02\x02\x02" +
+		"\u012A\u0128\x03\x02\x02\x02\u012A\u012B\x03\x02\x02\x02\u012B\u012D\x03" +
+		"\x02\x02\x02\u012C\u012A\x03\x02\x02\x02\u012D\u012E\x07\x17\x02\x02\u012E" +
+		"!\x03\x02\x02\x02\u012F\u0133\x05> \x02\u0130\u0133\x07Y\x02\x02\u0131" +
+		"\u0133\x07(\x02\x02\u0132\u012F\x03\x02\x02\x02\u0132\u0130\x03\x02\x02" +
+		"\x02\u0132\u0131\x03\x02\x02\x02\u0133#\x03\x02\x02\x02\u0134\u013B\x05" +
+		"> \x02\u0135\u013B\x07Y\x02\x02\u0136\u0137\x05\"\x12\x02\u0137\u0138" +
+		"\x07)\x02\x02\u0138\u0139\x07[\x02\x02\u0139\u013B\x03\x02\x02\x02\u013A" +
+		"\u0134\x03\x02\x02\x02\u013A\u0135\x03\x02\x02\x02\u013A\u0136\x03\x02" +
+		"\x02\x02\u013B%\x03\x02\x02\x02\u013C\u013D\t\x02\x02\x02\u013D\'\x03" +
+		"\x02\x02\x02\u013E\u013F\x070\x02\x02\u013F\u0140\x071\x02\x02\u0140\u0141" +
+		"\x054\x1B\x02\u0141\u0142\x072\x02\x02\u0142\u0146\x07\x16\x02\x02\u0143" +
+		"\u0145\x05\x04\x03\x02\u0144\u0143\x03\x02\x02\x02\u0145\u0148\x03\x02" +
+		"\x02\x02\u0146\u0144\x03\x02\x02\x02\u0146\u0147\x03\x02\x02\x02\u0147" +
+		"\u0149\x03\x02\x02\x02\u0148\u0146\x03\x02\x02\x02\u0149\u015A\x07\x17" +
+		"\x02\x02\u014A\u014B\x073\x02\x02\u014B\u014C\x070\x02\x02\u014C\u014D" +
+		"\x071\x02\x02\u014D\u014E\x054\x1B\x02\u014E\u014F\x072\x02\x02\u014F" +
+		"\u0153\x07\x16\x02\x02\u0150\u0152\x05\x04\x03\x02\u0151\u0150\x03\x02" +
+		"\x02\x02\u0152\u0155\x03\x02\x02\x02\u0153\u0151\x03\x02\x02\x02\u0153" +
+		"\u0154\x03\x02\x02\x02\u0154\u0156\x03\x02\x02\x02\u0155\u0153\x03\x02" +
+		"\x02\x02\u0156\u0157\x07\x17\x02\x02\u0157\u0159\x03\x02\x02\x02\u0158" +
+		"\u014A\x03\x02\x02\x02\u0159\u015C\x03\x02\x02\x02\u015A\u0158\x03\x02" +
+		"\x02\x02\u015A\u015B\x03\x02\x02\x02\u015B\u0166\x03\x02\x02\x02\u015C" +
+		"\u015A\x03\x02\x02\x02\u015D\u015E\x073\x02\x02\u015E\u0162\x07\x16\x02" +
+		"\x02\u015F\u0161\x05\x04\x03\x02\u0160\u015F\x03\x02\x02\x02\u0161\u0164" +
+		"\x03\x02\x02\x02\u0162\u0160\x03\x02\x02\x02\u0162\u0163\x03\x02\x02\x02" +
+		"\u0163\u0165\x03\x02\x02\x02\u0164\u0162\x03\x02\x02\x02\u0165\u0167\x07" +
+		"\x17\x02\x02\u0166\u015D\x03\x02\x02\x02\u0166\u0167\x03\x02\x02\x02\u0167" +
+		")\x03\x02\x02\x02\u0168\u0169\x074\x02\x02\u0169\u016A\x07Y\x02\x02\u016A" +
+		"\u016B\x075\x02\x02\u016B\u016C\x054\x1B\x02\u016C\u016D\x076\x02\x02" +
+		"\u016D\u016E\x07Y\x02\x02\u016E\u016F\x07\x05\x02\x02\u016F+\x03\x02\x02" +
+		"\x02\u0170\u0171\x077\x02\x02\u0171\u0172\x05.\x18\x02\u0172\u0173\x07" +
+		"6\x02\x02\u0173\u0174\x07Y\x02\x02\u0174\u0175\x07\x05\x02\x02\u0175-" +
+		"\x03\x02\x02\x02\u0176\u017B\x07Y\x02\x02\u0177\u0178\x07\x1A\x02\x02" +
+		"\u0178\u017A\x07Y\x02\x02\u0179\u0177\x03\x02\x02\x02\u017A\u017D\x03" +
+		"\x02\x02\x02\u017B\u0179\x03\x02\x02\x02\u017B\u017C\x03\x02\x02\x02\u017C" +
+		"/\x03\x02\x02\x02\u017D\u017B\x03\x02\x02\x02\u017E\u017F\x078\x02\x02" +
+		"\u017F\u0180\x07Y\x02\x02\u0180\u0181\x079\x02\x02\u0181\u0182\x07Y\x02" +
+		"\x02\u0182\u0183\x07\x05\x02\x02\u01831\x03\x02\x02\x02\u0184\u0185\x07" +
+		":\x02\x02\u0185\u0188\x07Y\x02\x02\u0186\u0187\x07\x04\x02\x02\u0187\u0189" +
+		"\x07Z\x02\x02\u0188\u0186\x03\x02\x02\x02\u0188\u0189\x03\x02\x02\x02" +
+		"\u0189\u018A\x03\x02\x02\x02\u018A\u0194\x07\x05\x02\x02\u018B\u018C\x07" +
+		":\x02\x02\u018C\u018D\x07;\x02\x02\u018D\u018E\x07\x04\x02\x02\u018E\u018F" +
+		"\x07Z\x02\x02\u018F\u0194\x07\x05\x02\x02\u0190\u0191\x07:\x02\x02\u0191" +
+		"\u0192\x07<\x02\x02\u0192\u0194\x07\x05\x02\x02\u0193\u0184\x03\x02\x02" +
+		"\x02\u0193\u018B\x03\x02\x02\x02\u0193\u0190\x03\x02\x02\x02\u01943\x03" +
+		"\x02\x02\x02\u0195\u0196\x07Y\x02\x02\u0196\u0197\x056\x1C\x02\u0197\u0198" +
+		"\x05P)\x02\u0198\u01A7\x03\x02\x02\x02\u0199\u019A\x07=\x02\x02\u019A" +
+		"\u019B\x071\x02\x02\u019B\u019C\x05D#\x02\u019C\u019D\x072\x02\x02\u019D" +
+		"\u019E\x079\x02\x02\u019E\u019F\x07.\x02\x02\u019F\u01A0\x056\x1C\x02" +
+		"\u01A0\u01A1\x07[\x02\x02\u01A1\u01A7\x03\x02\x02\x02\u01A2\u01A3\x07" +
+		"\x1E\x02\x02\u01A3\u01A4\x056\x1C\x02\u01A4\u01A5\x07Z\x02\x02\u01A5\u01A7" +
+		"\x03\x02\x02\x02\u01A6\u0195\x03\x02\x02\x02\u01A6\u0199\x03\x02\x02\x02" +
+		"\u01A6\u01A2\x03\x02\x02\x02\u01A75\x03\x02\x02\x02\u01A8\u01A9\t\x03" +
+		"\x02\x02\u01A97\x03\x02\x02\x02\u01AA\u01AB\t\x04\x02\x02\u01AB9\x03\x02" +
+		"\x02\x02\u01AC\u01B4\x05> \x02\u01AD\u01B4\x05F$\x02\u01AE\u01B4\x05L" +
+		"\'\x02\u01AF\u01B4\x07Z\x02\x02\u01B0\u01B4\x07[\x02\x02\u01B1\u01B4\x07" +
+		"Y\x02\x02\u01B2\u01B4\x05<\x1F\x02\u01B3\u01AC\x03\x02\x02\x02\u01B3\u01AD" +
+		"\x03\x02\x02\x02\u01B3\u01AE\x03\x02\x02\x02\u01B3\u01AF\x03\x02\x02\x02" +
+		"\u01B3\u01B0\x03\x02\x02\x02\u01B3\u01B1\x03\x02\x02\x02\u01B3\u01B2\x03" +
+		"\x02\x02\x02\u01B4;\x03\x02\x02\x02\u01B5\u01B6\x07=\x02\x02\u01B6\u01B7" +
+		"\x071\x02\x02\u01B7\u01B8\x05D#\x02\u01B8\u01B9\x072\x02\x02\u01B9\u01BA" +
+		"\x079\x02\x02\u01BA\u01BB\x07.\x02\x02\u01BB\u01C2\x03\x02\x02\x02\u01BC" +
+		"\u01BD\x07G\x02\x02\u01BD\u01BE\x071\x02\x02\u01BE\u01BF\x05> \x02\u01BF" +
+		"\u01C0\x072\x02\x02\u01C0\u01C2\x03\x02\x02\x02\u01C1\u01B5\x03\x02\x02" +
+		"\x02\u01C1\u01BC\x03\x02\x02\x02\u01C2=\x03\x02\x02\x02\u01C3\u01C4\x07" +
+		"[\x02\x02\u01C4\u01C5\x07H\x02\x02\u01C5\u01C8\x07[\x02\x02\u01C6\u01C7" +
+		"\x07H\x02\x02\u01C7\u01C9\x07[\x02\x02\u01C8\u01C6\x03\x02\x02\x02\u01C8" +
+		"\u01C9\x03\x02\x02\x02\u01C9?\x03\x02\x02\x02\u01CA\u01CD\x05> \x02\u01CB" +
+		"\u01CD\x05D#\x02\u01CC\u01CA\x03\x02\x02\x02\u01CC\u01CB\x03\x02\x02\x02" +
+		"\u01CDA\x03\x02\x02\x02\u01CE\u01D3\x05D#\x02\u01CF\u01D0\x07\x1A\x02" +
+		"\x02\u01D0\u01D2\x05D#\x02\u01D1\u01CF\x03\x02\x02\x02\u01D2\u01D5\x03" +
+		"\x02\x02\x02\u01D3\u01D1\x03\x02\x02\x02\u01D3\u01D4\x03\x02\x02\x02\u01D4" +
+		"C\x03\x02\x02\x02\u01D5\u01D3\x03\x02\x02\x02\u01D6\u01D7\t\x05\x02\x02" +
+		"\u01D7E\x03\x02\x02\x02\u01D8\u01D9\x07[\x02\x02\u01D9\u01DA\x07\x19\x02" +
+		"\x02\u01DA\u01DB\x07[\x02\x02\u01DBG\x03\x02\x02\x02\u01DC\u01DD\x07\v" +
+		"\x02\x02\u01DD\u01DE\x05F$\x02\u01DEI\x03\x02\x02\x02\u01DF\u01E0\x07" +
+		"\x11\x02\x02\u01E0\u01E1\x05F$\x02\u01E1\u01E2\x07\x12\x02\x02\u01E2\u01E3" +
+		"\x05F$\x02\u01E3K\x03\x02\x02\x02\u01E4\u01E5\x07[\x02\x02\u01E5\u01EA" +
+		"\x05N(\x02\u01E6\u01E7\x07[\x02\x02\u01E7\u01E9\x05N(\x02\u01E8\u01E6" +
+		"\x03\x02\x02\x02\u01E9\u01EC\x03\x02\x02\x02\u01EA\u01E8\x03\x02\x02\x02" +
+		"\u01EA\u01EB\x03\x02\x02\x02\u01EBM\x03\x02\x02\x02\u01EC\u01EA\x03\x02" +
+		"\x02\x02\u01ED\u01EE\t\x06\x02\x02\u01EEO\x03\x02\x02\x02\u01EF\u01F0" +
+		"\t\x07\x02\x02\u01F0Q\x03\x02\x02\x02/Ue{\x82\x89\x90\x92\x97\x9E\xA5" +
+		"\xAC\xAE\xB4\xBA\xC9\xD1\xDA\xE0\xE6\xEC\xF2\xF4\u0105\u0107\u0114\u011A" +
+		"\u0124\u012A\u0132\u013A\u0146\u0153\u015A\u0162\u0166\u017B\u0188\u0193" +
+		"\u01A6\u01B3\u01C1\u01C8\u01CC\u01D3\u01EA";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!AionParser.__ATN) {
@@ -2682,9 +2767,6 @@ export class StatementContext extends ParserRuleContext {
 	public structured_event_stmt(): Structured_event_stmtContext | undefined {
 		return this.tryGetRuleContext(0, Structured_event_stmtContext);
 	}
-	public week_start_stmt(): Week_start_stmtContext | undefined {
-		return this.tryGetRuleContext(0, Week_start_stmtContext);
-	}
 	public default_declaration(): Default_declarationContext | undefined {
 		return this.tryGetRuleContext(0, Default_declarationContext);
 	}
@@ -2717,12 +2799,8 @@ export class StatementContext extends ParserRuleContext {
 
 
 export class Import_stmtContext extends ParserRuleContext {
-	public string(): StringContext {
-		return this.getRuleContext(0, StringContext);
-	}
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
+	public STRING(): TerminalNode { return this.getToken(AionParser.STRING, 0); }
+	public IDENTIFIER(): TerminalNode { return this.getToken(AionParser.IDENTIFIER, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -2752,9 +2830,7 @@ export class Import_stmtContext extends ParserRuleContext {
 
 
 export class Assignment_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode { return this.getToken(AionParser.IDENTIFIER, 0); }
 	public declaration(): DeclarationContext {
 		return this.getRuleContext(0, DeclarationContext);
 	}
@@ -2787,9 +2863,7 @@ export class Assignment_stmtContext extends ParserRuleContext {
 
 
 export class Value_assignment_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode { return this.getToken(AionParser.IDENTIFIER, 0); }
 	public value_expr(): Value_exprContext {
 		return this.getRuleContext(0, Value_exprContext);
 	}
@@ -2898,17 +2972,15 @@ export class DeclarationContext extends ParserRuleContext {
 
 
 export class Event_declContext extends ParserRuleContext {
-	public string(): StringContext {
-		return this.getRuleContext(0, StringContext);
+	public STRING(): TerminalNode { return this.getToken(AionParser.STRING, 0); }
+	public recurrence_expr(): Recurrence_exprContext | undefined {
+		return this.tryGetRuleContext(0, Recurrence_exprContext);
 	}
-	public event_time_expr(): Event_time_exprContext | undefined {
-		return this.tryGetRuleContext(0, Event_time_exprContext);
+	public duration(): DurationContext | undefined {
+		return this.tryGetRuleContext(0, DurationContext);
 	}
-	public event_time_strict(): Event_time_strictContext {
-		return this.getRuleContext(0, Event_time_strictContext);
-	}
-	public repetition_in_decl(): Repetition_in_declContext | undefined {
-		return this.tryGetRuleContext(0, Repetition_in_declContext);
+	public timing_expr(): Timing_exprContext | undefined {
+		return this.tryGetRuleContext(0, Timing_exprContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -2938,40 +3010,44 @@ export class Event_declContext extends ParserRuleContext {
 }
 
 
-export class Task_declContext extends ParserRuleContext {
-	public string(): StringContext {
-		return this.getRuleContext(0, StringContext);
+export class Recurrence_exprContext extends ParserRuleContext {
+	public time(): TimeContext | undefined {
+		return this.tryGetRuleContext(0, TimeContext);
 	}
-	public event_time_expr(): Event_time_exprContext {
-		return this.getRuleContext(0, Event_time_exprContext);
+	public weekday_list(): Weekday_listContext | undefined {
+		return this.tryGetRuleContext(0, Weekday_listContext);
 	}
-	public task_time_strict(): Task_time_strictContext {
-		return this.getRuleContext(0, Task_time_strictContext);
+	public time_range(): Time_rangeContext | undefined {
+		return this.tryGetRuleContext(0, Time_rangeContext);
 	}
-	public rep_period(): Rep_periodContext | undefined {
-		return this.tryGetRuleContext(0, Rep_periodContext);
+	public time_at(): Time_atContext | undefined {
+		return this.tryGetRuleContext(0, Time_atContext);
+	}
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
+	public date(): DateContext | undefined {
+		return this.tryGetRuleContext(0, DateContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
 	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_task_decl; }
+	public get ruleIndex(): number { return AionParser.RULE_recurrence_expr; }
 	// @Override
 	public enterRule(listener: AionListener): void {
-		if (listener.enterTask_decl) {
-			listener.enterTask_decl(this);
+		if (listener.enterRecurrence_expr) {
+			listener.enterRecurrence_expr(this);
 		}
 	}
 	// @Override
 	public exitRule(listener: AionListener): void {
-		if (listener.exitTask_decl) {
-			listener.exitTask_decl(this);
+		if (listener.exitRecurrence_expr) {
+			listener.exitRecurrence_expr(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitTask_decl) {
-			return visitor.visitTask_decl(this);
+		if (visitor.visitRecurrence_expr) {
+			return visitor.visitRecurrence_expr(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -2979,42 +3055,19 @@ export class Task_declContext extends ParserRuleContext {
 }
 
 
-export class Repetition_in_declContext extends ParserRuleContext {
-	public weekday(): WeekdayContext | undefined {
-		return this.tryGetRuleContext(0, WeekdayContext);
+export class Timing_exprContext extends ParserRuleContext {
+	public date(): DateContext | undefined {
+		return this.tryGetRuleContext(0, DateContext);
 	}
-	public rep_period(): Rep_periodContext | undefined {
-		return this.tryGetRuleContext(0, Rep_periodContext);
+	public time_range(): Time_rangeContext | undefined {
+		return this.tryGetRuleContext(0, Time_rangeContext);
 	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
+	public time_at(): Time_atContext | undefined {
+		return this.tryGetRuleContext(0, Time_atContext);
 	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_repetition_in_decl; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterRepetition_in_decl) {
-			listener.enterRepetition_in_decl(this);
-		}
+	public weekday_list(): Weekday_listContext | undefined {
+		return this.tryGetRuleContext(0, Weekday_listContext);
 	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitRepetition_in_decl) {
-			listener.exitRepetition_in_decl(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitRepetition_in_decl) {
-			return visitor.visitRepetition_in_decl(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Task_time_strictContext extends ParserRuleContext {
 	public time(): TimeContext[];
 	public time(i: number): TimeContext;
 	public time(i?: number): TimeContext | TimeContext[] {
@@ -3024,182 +3077,27 @@ export class Task_time_strictContext extends ParserRuleContext {
 			return this.getRuleContext(i, TimeContext);
 		}
 	}
-	public strategy(): StrategyContext | undefined {
-		return this.tryGetRuleContext(0, StrategyContext);
-	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
 	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_task_time_strict; }
+	public get ruleIndex(): number { return AionParser.RULE_timing_expr; }
 	// @Override
 	public enterRule(listener: AionListener): void {
-		if (listener.enterTask_time_strict) {
-			listener.enterTask_time_strict(this);
+		if (listener.enterTiming_expr) {
+			listener.enterTiming_expr(this);
 		}
 	}
 	// @Override
 	public exitRule(listener: AionListener): void {
-		if (listener.exitTask_time_strict) {
-			listener.exitTask_time_strict(this);
+		if (listener.exitTiming_expr) {
+			listener.exitTiming_expr(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitTask_time_strict) {
-			return visitor.visitTask_time_strict(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Event_time_strictContext extends ParserRuleContext {
-	public time(): TimeContext[];
-	public time(i: number): TimeContext;
-	public time(i?: number): TimeContext | TimeContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(TimeContext);
-		} else {
-			return this.getRuleContext(i, TimeContext);
-		}
-	}
-	public duration(): DurationContext | undefined {
-		return this.tryGetRuleContext(0, DurationContext);
-	}
-	public strategy(): StrategyContext | undefined {
-		return this.tryGetRuleContext(0, StrategyContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_event_time_strict; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterEvent_time_strict) {
-			listener.enterEvent_time_strict(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitEvent_time_strict) {
-			listener.exitEvent_time_strict(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitEvent_time_strict) {
-			return visitor.visitEvent_time_strict(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Event_time_exprContext extends ParserRuleContext {
-	public date(): DateContext {
-		return this.getRuleContext(0, DateContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_event_time_expr; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterEvent_time_expr) {
-			listener.enterEvent_time_expr(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitEvent_time_expr) {
-			listener.exitEvent_time_expr(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitEvent_time_expr) {
-			return visitor.visitEvent_time_expr(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Rep_periodContext extends ParserRuleContext {
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_rep_period; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterRep_period) {
-			listener.enterRep_period(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitRep_period) {
-			listener.exitRep_period(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitRep_period) {
-			return visitor.visitRep_period(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Pomodoro_declContext extends ParserRuleContext {
-	public string(): StringContext {
-		return this.getRuleContext(0, StringContext);
-	}
-	public time(): TimeContext {
-		return this.getRuleContext(0, TimeContext);
-	}
-	public number(): NumberContext {
-		return this.getRuleContext(0, NumberContext);
-	}
-	public duration(): DurationContext[];
-	public duration(i: number): DurationContext;
-	public duration(i?: number): DurationContext | DurationContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(DurationContext);
-		} else {
-			return this.getRuleContext(i, DurationContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_pomodoro_decl; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterPomodoro_decl) {
-			listener.enterPomodoro_decl(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitPomodoro_decl) {
-			listener.exitPomodoro_decl(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitPomodoro_decl) {
-			return visitor.visitPomodoro_decl(this);
+		if (visitor.visitTiming_expr) {
+			return visitor.visitTiming_expr(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -3208,9 +3106,7 @@ export class Pomodoro_declContext extends ParserRuleContext {
 
 
 export class Structured_event_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode { return this.getToken(AionParser.IDENTIFIER, 0); }
 	public structured_event_field(): Structured_event_fieldContext[];
 	public structured_event_field(i: number): Structured_event_fieldContext;
 	public structured_event_field(i?: number): Structured_event_fieldContext | Structured_event_fieldContext[] {
@@ -3249,9 +3145,7 @@ export class Structured_event_stmtContext extends ParserRuleContext {
 
 
 export class Structured_event_fieldContext extends ParserRuleContext {
-	public string(): StringContext | undefined {
-		return this.tryGetRuleContext(0, StringContext);
-	}
+	public STRING(): TerminalNode | undefined { return this.tryGetToken(AionParser.STRING, 0); }
 	public time(): TimeContext | undefined {
 		return this.tryGetRuleContext(0, TimeContext);
 	}
@@ -3286,6 +3180,129 @@ export class Structured_event_fieldContext extends ParserRuleContext {
 }
 
 
+export class Task_declContext extends ParserRuleContext {
+	public STRING(): TerminalNode { return this.getToken(AionParser.STRING, 0); }
+	public date(): DateContext {
+		return this.getRuleContext(0, DateContext);
+	}
+	public task_time_spec(): Task_time_specContext {
+		return this.getRuleContext(0, Task_time_specContext);
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_task_decl; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterTask_decl) {
+			listener.enterTask_decl(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitTask_decl) {
+			listener.exitTask_decl(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitTask_decl) {
+			return visitor.visitTask_decl(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class Task_time_specContext extends ParserRuleContext {
+	public time(): TimeContext[];
+	public time(i: number): TimeContext;
+	public time(i?: number): TimeContext | TimeContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(TimeContext);
+		} else {
+			return this.getRuleContext(i, TimeContext);
+		}
+	}
+	public strategy(): StrategyContext | undefined {
+		return this.tryGetRuleContext(0, StrategyContext);
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_task_time_spec; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterTask_time_spec) {
+			listener.enterTask_time_spec(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitTask_time_spec) {
+			listener.exitTask_time_spec(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitTask_time_spec) {
+			return visitor.visitTask_time_spec(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class Pomodoro_declContext extends ParserRuleContext {
+	public STRING(): TerminalNode { return this.getToken(AionParser.STRING, 0); }
+	public date(): DateContext {
+		return this.getRuleContext(0, DateContext);
+	}
+	public time(): TimeContext {
+		return this.getRuleContext(0, TimeContext);
+	}
+	public NUMBER(): TerminalNode { return this.getToken(AionParser.NUMBER, 0); }
+	public duration(): DurationContext[];
+	public duration(i: number): DurationContext;
+	public duration(i?: number): DurationContext | DurationContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(DurationContext);
+		} else {
+			return this.getRuleContext(i, DurationContext);
+		}
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_pomodoro_decl; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterPomodoro_decl) {
+			listener.enterPomodoro_decl(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitPomodoro_decl) {
+			listener.exitPomodoro_decl(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitPomodoro_decl) {
+			return visitor.visitPomodoro_decl(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
 export class Loop_stmtContext extends ParserRuleContext {
 	public loop_unit(): Loop_unitContext {
 		return this.getRuleContext(0, Loop_unitContext);
@@ -3296,9 +3313,7 @@ export class Loop_stmtContext extends ParserRuleContext {
 	public loop_end(): Loop_endContext {
 		return this.getRuleContext(0, Loop_endContext);
 	}
-	public number(): NumberContext | undefined {
-		return this.tryGetRuleContext(0, NumberContext);
-	}
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
 	public statement(): StatementContext[];
 	public statement(i: number): StatementContext;
 	public statement(i?: number): StatementContext | StatementContext[] {
@@ -3340,9 +3355,7 @@ export class Loop_startContext extends ParserRuleContext {
 	public date(): DateContext | undefined {
 		return this.tryGetRuleContext(0, DateContext);
 	}
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -3375,15 +3388,11 @@ export class Loop_endContext extends ParserRuleContext {
 	public date(): DateContext | undefined {
 		return this.tryGetRuleContext(0, DateContext);
 	}
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
 	public loop_start(): Loop_startContext | undefined {
 		return this.tryGetRuleContext(0, Loop_startContext);
 	}
-	public number(): NumberContext | undefined {
-		return this.tryGetRuleContext(0, NumberContext);
-	}
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -3489,13 +3498,13 @@ export class Conditional_stmtContext extends ParserRuleContext {
 
 
 export class Filter_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext[];
-	public identifier(i: number): IdentifierContext;
-	public identifier(i?: number): IdentifierContext | IdentifierContext[] {
+	public IDENTIFIER(): TerminalNode[];
+	public IDENTIFIER(i: number): TerminalNode;
+	public IDENTIFIER(i?: number): TerminalNode | TerminalNode[] {
 		if (i === undefined) {
-			return this.getRuleContexts(IdentifierContext);
+			return this.getTokens(AionParser.IDENTIFIER);
 		} else {
-			return this.getRuleContext(i, IdentifierContext);
+			return this.getToken(AionParser.IDENTIFIER, i);
 		}
 	}
 	public condition(): ConditionContext {
@@ -3533,9 +3542,7 @@ export class Merge_stmtContext extends ParserRuleContext {
 	public identifier_list(): Identifier_listContext {
 		return this.getRuleContext(0, Identifier_listContext);
 	}
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode { return this.getToken(AionParser.IDENTIFIER, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -3565,13 +3572,13 @@ export class Merge_stmtContext extends ParserRuleContext {
 
 
 export class Identifier_listContext extends ParserRuleContext {
-	public identifier(): IdentifierContext[];
-	public identifier(i: number): IdentifierContext;
-	public identifier(i?: number): IdentifierContext | IdentifierContext[] {
+	public IDENTIFIER(): TerminalNode[];
+	public IDENTIFIER(i: number): TerminalNode;
+	public IDENTIFIER(i?: number): TerminalNode | TerminalNode[] {
 		if (i === undefined) {
-			return this.getRuleContexts(IdentifierContext);
+			return this.getTokens(AionParser.IDENTIFIER);
 		} else {
-			return this.getRuleContext(i, IdentifierContext);
+			return this.getToken(AionParser.IDENTIFIER, i);
 		}
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
@@ -3603,13 +3610,13 @@ export class Identifier_listContext extends ParserRuleContext {
 
 
 export class Include_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext[];
-	public identifier(i: number): IdentifierContext;
-	public identifier(i?: number): IdentifierContext | IdentifierContext[] {
+	public IDENTIFIER(): TerminalNode[];
+	public IDENTIFIER(i: number): TerminalNode;
+	public IDENTIFIER(i?: number): TerminalNode | TerminalNode[] {
 		if (i === undefined) {
-			return this.getRuleContexts(IdentifierContext);
+			return this.getTokens(AionParser.IDENTIFIER);
 		} else {
-			return this.getRuleContext(i, IdentifierContext);
+			return this.getToken(AionParser.IDENTIFIER, i);
 		}
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
@@ -3641,12 +3648,8 @@ export class Include_stmtContext extends ParserRuleContext {
 
 
 export class Export_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
-	public string(): StringContext | undefined {
-		return this.tryGetRuleContext(0, StringContext);
-	}
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
+	public STRING(): TerminalNode | undefined { return this.tryGetToken(AionParser.STRING, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -3675,45 +3678,8 @@ export class Export_stmtContext extends ParserRuleContext {
 }
 
 
-export class Week_start_stmtContext extends ParserRuleContext {
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
-	}
-	public date(): DateContext {
-		return this.getRuleContext(0, DateContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_week_start_stmt; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterWeek_start_stmt) {
-			listener.enterWeek_start_stmt(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitWeek_start_stmt) {
-			listener.exitWeek_start_stmt(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitWeek_start_stmt) {
-			return visitor.visitWeek_start_stmt(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class ConditionContext extends ParserRuleContext {
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
 	public comparison_op(): Comparison_opContext {
 		return this.getRuleContext(0, Comparison_opContext);
 	}
@@ -3723,12 +3689,8 @@ export class ConditionContext extends ParserRuleContext {
 	public weekday(): WeekdayContext | undefined {
 		return this.tryGetRuleContext(0, WeekdayContext);
 	}
-	public number(): NumberContext | undefined {
-		return this.tryGetRuleContext(0, NumberContext);
-	}
-	public string(): StringContext | undefined {
-		return this.tryGetRuleContext(0, StringContext);
-	}
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
+	public STRING(): TerminalNode | undefined { return this.tryGetToken(AionParser.STRING, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -3825,15 +3787,9 @@ export class Value_exprContext extends ParserRuleContext {
 	public duration(): DurationContext | undefined {
 		return this.tryGetRuleContext(0, DurationContext);
 	}
-	public string(): StringContext | undefined {
-		return this.tryGetRuleContext(0, StringContext);
-	}
-	public number(): NumberContext | undefined {
-		return this.tryGetRuleContext(0, NumberContext);
-	}
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
+	public STRING(): TerminalNode | undefined { return this.tryGetToken(AionParser.STRING, 0); }
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
 	public function_call(): Function_callContext | undefined {
 		return this.tryGetRuleContext(0, Function_callContext);
 	}
@@ -3901,13 +3857,13 @@ export class Function_callContext extends ParserRuleContext {
 
 
 export class DateContext extends ParserRuleContext {
-	public number(): NumberContext[];
-	public number(i: number): NumberContext;
-	public number(i?: number): NumberContext | NumberContext[] {
+	public NUMBER(): TerminalNode[];
+	public NUMBER(i: number): TerminalNode;
+	public NUMBER(i?: number): TerminalNode | TerminalNode[] {
 		if (i === undefined) {
-			return this.getRuleContexts(NumberContext);
+			return this.getTokens(AionParser.NUMBER);
 		} else {
-			return this.getRuleContext(i, NumberContext);
+			return this.getToken(AionParser.NUMBER, i);
 		}
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
@@ -3938,14 +3894,116 @@ export class DateContext extends ParserRuleContext {
 }
 
 
-export class TimeContext extends ParserRuleContext {
-	public number(): NumberContext[];
-	public number(i: number): NumberContext;
-	public number(i?: number): NumberContext | NumberContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(NumberContext);
+export class Date_specifierContext extends ParserRuleContext {
+	public date(): DateContext | undefined {
+		return this.tryGetRuleContext(0, DateContext);
+	}
+	public weekday(): WeekdayContext | undefined {
+		return this.tryGetRuleContext(0, WeekdayContext);
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_date_specifier; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterDate_specifier) {
+			listener.enterDate_specifier(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitDate_specifier) {
+			listener.exitDate_specifier(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitDate_specifier) {
+			return visitor.visitDate_specifier(this);
 		} else {
-			return this.getRuleContext(i, NumberContext);
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class Weekday_listContext extends ParserRuleContext {
+	public weekday(): WeekdayContext[];
+	public weekday(i: number): WeekdayContext;
+	public weekday(i?: number): WeekdayContext | WeekdayContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(WeekdayContext);
+		} else {
+			return this.getRuleContext(i, WeekdayContext);
+		}
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_weekday_list; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterWeekday_list) {
+			listener.enterWeekday_list(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitWeekday_list) {
+			listener.exitWeekday_list(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitWeekday_list) {
+			return visitor.visitWeekday_list(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class WeekdayContext extends ParserRuleContext {
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_weekday; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterWeekday) {
+			listener.enterWeekday(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitWeekday) {
+			listener.exitWeekday(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitWeekday) {
+			return visitor.visitWeekday(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class TimeContext extends ParserRuleContext {
+	public NUMBER(): TerminalNode[];
+	public NUMBER(i: number): TerminalNode;
+	public NUMBER(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(AionParser.NUMBER);
+		} else {
+			return this.getToken(AionParser.NUMBER, i);
 		}
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
@@ -3976,14 +4034,84 @@ export class TimeContext extends ParserRuleContext {
 }
 
 
-export class DurationContext extends ParserRuleContext {
-	public number(): NumberContext[];
-	public number(i: number): NumberContext;
-	public number(i?: number): NumberContext | NumberContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(NumberContext);
+export class Time_atContext extends ParserRuleContext {
+	public time(): TimeContext {
+		return this.getRuleContext(0, TimeContext);
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_time_at; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterTime_at) {
+			listener.enterTime_at(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitTime_at) {
+			listener.exitTime_at(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitTime_at) {
+			return visitor.visitTime_at(this);
 		} else {
-			return this.getRuleContext(i, NumberContext);
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class Time_rangeContext extends ParserRuleContext {
+	public time(): TimeContext[];
+	public time(i: number): TimeContext;
+	public time(i?: number): TimeContext | TimeContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(TimeContext);
+		} else {
+			return this.getRuleContext(i, TimeContext);
+		}
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return AionParser.RULE_time_range; }
+	// @Override
+	public enterRule(listener: AionListener): void {
+		if (listener.enterTime_range) {
+			listener.enterTime_range(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: AionListener): void {
+		if (listener.exitTime_range) {
+			listener.exitTime_range(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: AionVisitor<Result>): Result {
+		if (visitor.visitTime_range) {
+			return visitor.visitTime_range(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class DurationContext extends ParserRuleContext {
+	public NUMBER(): TerminalNode[];
+	public NUMBER(i: number): TerminalNode;
+	public NUMBER(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(AionParser.NUMBER);
+		} else {
+			return this.getToken(AionParser.NUMBER, i);
 		}
 	}
 	public time_unit(): Time_unitContext[];
@@ -4053,15 +4181,9 @@ export class Time_unitContext extends ParserRuleContext {
 
 
 export class ValueContext extends ParserRuleContext {
-	public string(): StringContext | undefined {
-		return this.tryGetRuleContext(0, StringContext);
-	}
-	public number(): NumberContext | undefined {
-		return this.tryGetRuleContext(0, NumberContext);
-	}
-	public identifier(): IdentifierContext | undefined {
-		return this.tryGetRuleContext(0, IdentifierContext);
-	}
+	public STRING(): TerminalNode | undefined { return this.tryGetToken(AionParser.STRING, 0); }
+	public NUMBER(): TerminalNode | undefined { return this.tryGetToken(AionParser.NUMBER, 0); }
+	public IDENTIFIER(): TerminalNode | undefined { return this.tryGetToken(AionParser.IDENTIFIER, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -4083,154 +4205,6 @@ export class ValueContext extends ParserRuleContext {
 	public accept<Result>(visitor: AionVisitor<Result>): Result {
 		if (visitor.visitValue) {
 			return visitor.visitValue(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class IdentifierContext extends ParserRuleContext {
-	public Identifier(): TerminalNode { return this.getToken(AionParser.Identifier, 0); }
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_identifier; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterIdentifier) {
-			listener.enterIdentifier(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitIdentifier) {
-			listener.exitIdentifier(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitIdentifier) {
-			return visitor.visitIdentifier(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class StringContext extends ParserRuleContext {
-	public String(): TerminalNode { return this.getToken(AionParser.String, 0); }
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_string; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterString) {
-			listener.enterString(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitString) {
-			listener.exitString(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitString) {
-			return visitor.visitString(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class NumberContext extends ParserRuleContext {
-	public Number(): TerminalNode { return this.getToken(AionParser.Number, 0); }
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_number; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterNumber) {
-			listener.enterNumber(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitNumber) {
-			listener.exitNumber(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitNumber) {
-			return visitor.visitNumber(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class WeekdayContext extends ParserRuleContext {
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_weekday; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterWeekday) {
-			listener.enterWeekday(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitWeekday) {
-			listener.exitWeekday(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitWeekday) {
-			return visitor.visitWeekday(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class Month_nameContext extends ParserRuleContext {
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return AionParser.RULE_month_name; }
-	// @Override
-	public enterRule(listener: AionListener): void {
-		if (listener.enterMonth_name) {
-			listener.enterMonth_name(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: AionListener): void {
-		if (listener.exitMonth_name) {
-			listener.exitMonth_name(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: AionVisitor<Result>): Result {
-		if (visitor.visitMonth_name) {
-			return visitor.visitMonth_name(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

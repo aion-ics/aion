@@ -1,8 +1,14 @@
 grammar Aion;
 
-// Parser Rules
-program             : statement* EOF ;
+// ==================
+//   Parser Rules
+// ==================
 
+program
+    : statement* EOF
+    ;
+
+// ----- Statements -----
 statement
     : import_stmt
     | assignment_stmt
@@ -17,164 +23,272 @@ statement
     | default_declaration
     ;
 
-import_stmt         : 'import' STRING 'as' IDENTIFIER ';' ;
+// ----- Imports -----
+import_stmt
+    : 'import' STRING 'as' IDENTIFIER ';'
+    ;
 
-assignment_stmt     : IDENTIFIER '=' declaration ';' ;
+// ----- Assignments -----
+assignment_stmt
+    : IDENTIFIER '=' declaration ';'
+    ;
 
 value_assignment_stmt
-                    : IDENTIFIER '=' value_expr ';' ;
+    : IDENTIFIER '=' value_expr ';'
+    ;
 
-default_declaration : ('$$$')? 'new'? ( event_decl | task_decl | pomodoro_decl ) ';' ;
+default_declaration
+    : 'new' ( event_decl | task_decl | pomodoro_decl ) ';'
+    ;
 
-declaration         : event_decl
-                    | task_decl
-                    | pomodoro_decl
-                    ;
+declaration
+    : event_decl
+    | task_decl
+    | pomodoro_decl
+    ;
 
-event_decl          : 'event' STRING event_timing
-                    | 'event' STRING temporal_expr ('for' duration)?
-                    ;
+// ==================
+//   Event Declarations
+// ==================
 
-event_timing        : 'on' date_specifier ('from' time 'to' time)?
-                    | 'on' date_specifier ('at' time)? ('for' duration)?
-                    | 'every' weekday ('from' time 'to' time)?
-                    | 'every' weekday ('at' time)? ('for' duration)?
-                    | 'from' time 'to' time
-                    | 'at' time ('for' duration)?
-                    | 'find' 'between' time 'and' time
-                    ;
+event_decl
+    : 'event' STRING recurrence_expr ('for' duration)?                    // Simple event declaration
+    | 'event' STRING timing_expr ('for' duration)?                        // Another form of timing
+    ;
 
-temporal_expr       : 'daily' ('at' time)?
-                    | 'weekly' ('at' time)?
-                    | 'monthly' ('at' time)?
-                    | 'yearly' ('at' time)?
-                    ;
+// ----- Recurrence Types -----
+recurrence_expr
+    : 'daily' ('at' time)?
+    | 'weekly' 'on' weekday_list (time_range | time_at)?
+    | 'monthly' 'on' NUMBER (time_range | time_at)?
+    | 'yearly' 'on' date (time_range | time_at)?
+    ;
 
+// ----- Direct Timing -----
+timing_expr
+    : 'on' date (time_range | time_at)?
+    | 'every' weekday_list (time_range | time_at)?
+    | 'from' time 'to' time
+    | 'at' time
+    | 'find' 'between' time 'and' time
+    ;
+
+// ----- Structured Event Block -----
 structured_event_stmt
-                    : 'event' IDENTIFIER '{' structured_event_field* '}' ;
+    : 'event' IDENTIFIER '{' structured_event_field* '}'
+    ;
 
 structured_event_field
-                    : 'name' ':' STRING ','?
-                    | 'start' ':' time ','?
-                    | 'duration' ':' duration ','?
-                    | 'location' ':' STRING ','?
-                    | 'category' ':' STRING ','?
-                    ;
+    : 'name' ':' STRING ','?
+    | 'start' ':' time ','?
+    | 'duration' ':' duration ','?
+    | 'location' ':' STRING ','?
+    | 'category' ':' STRING ','?
+    ;
 
-task_decl           : 'task' STRING temporal_expr ('for' duration)?
-                    | 'task' STRING 'find' 'between' time 'and' time ('using' strategy)?
-                    ;
+// ==================
+//   Task & Pomodoro
+// ==================
 
-pomodoro_decl       : 'pomodoro' STRING 'at' time 'repeat' NUMBER 'times' 
-                      ('every' duration)? ('with' duration 'pause')? ;
+// ----- Task Declaration -----
+task_decl
+    : 'task' STRING 'on' date task_time_spec
+    ;
 
-loop_stmt           : 'each' loop_unit 'from' loop_start 'to' loop_end ('step' NUMBER)? '{' statement* '}' ;
+task_time_spec
+    : 'at' time
+    | 'find' 'between' time 'and' time ('using' strategy)?
+    ;
 
-loop_start          : date
-                    | IDENTIFIER
-                    | 'today'
-                    ;
+// ----- Pomodoro Declaration -----
+pomodoro_decl
+    : 'pomodoro' STRING 'on' date 'at' time
+      'repeat' NUMBER 'times'
+      ('every' duration)?
+      ('with' duration 'pause')?
+    ;
 
-loop_end            : date
-                    | IDENTIFIER
-                    | loop_start '+' NUMBER
-                    ;
+// ==================
+//   Loops & Conditionals
+// ==================
 
-loop_unit           : 'day' | 'days' | 'week' | 'weeks' | 'month' | 'months' ;
+loop_stmt
+    : 'each' loop_unit 'from' loop_start 'to' loop_end ('step' NUMBER)? '{' statement* '}'
+    ;
 
-conditional_stmt    : 'if' '(' condition ')' '{' statement* '}'
-                      ( 'else' 'if' '(' condition ')' '{' statement* '}' )*
-                      ( 'else' '{' statement* '}' )?
-                      ;
+loop_start
+    : date
+    | IDENTIFIER
+    | 'today'
+    ;
 
-filter_stmt         : 'filter' IDENTIFIER 'where' condition 'into' IDENTIFIER ';' ;
+loop_end
+    : date
+    | IDENTIFIER
+    | loop_start '+' NUMBER
+    ;
 
-merge_stmt          : 'merge' identifier_list 'into' IDENTIFIER ';' ;
+loop_unit
+    : 'day' | 'days' | 'week' | 'weeks' | 'month' | 'months'
+    ;
 
-identifier_list     : IDENTIFIER (',' IDENTIFIER)* ;
+conditional_stmt
+    : 'if' '(' condition ')' '{' statement* '}'
+      ( 'else' 'if' '(' condition ')' '{' statement* '}' )*
+      ( 'else' '{' statement* '}' )?
+    ;
 
-include_stmt        : 'include' IDENTIFIER 'in' IDENTIFIER ';' ;
+// ==================
+//   Merging & Filtering
+// ==================
 
-export_stmt         : 'export' IDENTIFIER ( 'as' STRING )? ';'
-                    | 'export' 'default' 'as' STRING ';'
-                    | 'export' 'all' ';'
-                    ;
+filter_stmt
+    : 'filter' IDENTIFIER 'where' condition 'into' IDENTIFIER ';'
+    ;
 
-condition           : IDENTIFIER comparison_op value
-                    | 'count' '(' weekday ')' 'in' 'month' comparison_op NUMBER
-                    | 'category' comparison_op STRING
-                    ;
+merge_stmt
+    : 'merge' identifier_list 'into' IDENTIFIER ';'
+    ;
 
-comparison_op       : '==' | '!=' | '<' | '<=' | '>' | '>=' ;
+identifier_list
+    : IDENTIFIER (',' IDENTIFIER)*
+    ;
 
-strategy            : 'random' | 'earliest' | 'latest' ;
+include_stmt
+    : 'include' IDENTIFIER 'in' IDENTIFIER ';'
+    ;
 
-value_expr          : date
-                    | time
-                    | duration
-                    | STRING
-                    | NUMBER
-                    | IDENTIFIER
-                    | function_call
-                    ;
+export_stmt
+    : 'export' IDENTIFIER ( 'as' STRING )? ';'
+    | 'export' 'default' 'as' STRING ';'
+    | 'export' 'all' ';'
+    ;
 
-function_call       : 'count' '(' weekday ')' 'in' 'month'
-                    | 'weeknumber' '(' date ')'
-                    ;
+// ==================
+//   Helpers & Expressions
+// ==================
 
-date                : NUMBER '.' NUMBER '.' NUMBER     // YYYY.MM.DD
-                    ;
+condition
+    : IDENTIFIER comparison_op value
+    | 'count' '(' weekday ')' 'in' 'month' comparison_op NUMBER
+    | 'category' comparison_op STRING
+    ;
 
-date_specifier      : date
-                    | weekday
-                    ;
+comparison_op
+    : '==' | '!=' | '<' | '<=' | '>' | '>='
+    ;
 
-weekday             : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday'
-                    | 'Friday' | 'Saturday' | 'Sunday'
-                    | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
-                    ;
+strategy
+    : 'random' | 'earliest' | 'latest'
+    ;
 
-time                : NUMBER ':' NUMBER
-                    ;
+value_expr
+    : date
+    | time
+    | duration
+    | STRING
+    | NUMBER
+    | IDENTIFIER
+    | function_call
+    ;
 
-duration            : NUMBER time_unit (NUMBER time_unit)*
-                    ;
+function_call
+    : 'count' '(' weekday ')' 'in' 'month'
+    | 'weeknumber' '(' date ')'
+    ;
 
-time_unit           : 'h' | 'm'
-                    ;
+// ==================
+//   Date & Time
+// ==================
 
-value               : STRING
-                    | NUMBER
-                    | IDENTIFIER
-                    ;
+date
+    : NUMBER '.' NUMBER ('.' NUMBER)?                     // DD.MM or DD.MM.YYYY
+    ;
 
-// Lexer Rules
-IDENTIFIER          : [a-zA-Z_] [a-zA-Z0-9_]* ;
+date_specifier
+    : date
+    | weekday
+    ;
 
-STRING              : '"' ( ~["\\] | '\\' . )* '"' ;
+weekday_list
+    : weekday (',' weekday)*
+    ;
 
-NUMBER              : [0-9]+ ;
+weekday
+    : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday'
+    | 'Friday' | 'Saturday' | 'Sunday'
+    | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
+    ;
+
+time
+    : NUMBER ':' NUMBER
+    ;
+
+time_at
+    : 'at' time
+    ;
+
+time_range
+    : 'from' time 'to' time
+    ;
+
+duration
+    : NUMBER time_unit (NUMBER time_unit)*
+    ;
+
+time_unit
+    : 'h' | 'm'
+    ;
+
+value
+    : STRING
+    | NUMBER
+    | IDENTIFIER
+    ;
+
+// ==================
+//   Lexer Rules
+// ==================
+
+IDENTIFIER
+    : [a-zA-Z_] [a-zA-Z0-9_]*
+    ;
+
+STRING
+    : '"' ( ~["\\] | '\\' . )* '"'
+    ;
+
+NUMBER
+    : [0-9]+
+    ;
 
 // Skip whitespace and comments
-WS                  : [ \t\r\n]+ -> skip ;
+WS
+    : [ \t\r\n]+ -> skip
+    ;
 
-COMMENT             : '//' ~[\r\n]* -> skip ;
+COMMENT
+    : '//' ~[\r\n]* -> skip
+    ;
 
-// Month name fragments
-fragment JAN        : [jJ][aA][nN] | [jJ][aA][nN][uU][aA][rR][yY] ;
-fragment FEB        : [fF][eE][bB] | [fF][eE][bB][rR][uU][aA][rR][yY] ;
-fragment MAR        : [mM][aA][rR] | [mM][aA][rR][cC][hH] ;
-fragment APR        : [aA][pP][rR] | [aA][pP][rR][iI][lL] ;
-fragment MAY        : [mM][aA][yY] ;
-fragment JUN        : [jJ][uU][nN] | [jJ][uU][nN][eE] ;
-fragment JUL        : [jJ][uU][lL] | [jJ][uU][lL][yY] ;
-fragment AUG        : [aA][uU][gG] | [aA][uU][gG][uU][sS][tT] ;
-fragment SEP        : [sS][eE][pP] | [sS][eE][pP][tT][eE][mM][bB][eE][rR] ;
-fragment OCT        : [oO][cC][tT] | [oO][cC][tT][oO][bB][eE][rR] ;
-fragment NOV        : [nN][oO][vV] | [nN][oO][vV][eE][mM][bB][eE][rR] ;
-fragment DEC        : [dD][eE][cC] | [dD][eE][cC][eE][mM][bB][eE][rR] ;
+// ==================
+//   Month Name Fragments
+// ==================
 
-// Combine all month fragments
-MONTH_NAME          : JAN | FEB | MAR | APR | MAY | JUN
-                    | JUL | AUG | SEP | OCT | NOV | DEC
-                    ;
+fragment JAN : [jJ][aA][nN] | [jJ][aA][nN][uU][aA][rR][yY] ;
+fragment FEB : [fF][eE][bB] | [fF][eE][bB][rR][uU][aA][rR][yY] ;
+fragment MAR : [mM][aA][rR] | [mM][aA][rR][cC][hH] ;
+fragment APR : [aA][pP][rR] | [aA][pP][rR][iI][lL] ;
+fragment MAY : [mM][aA][yY] ;
+fragment JUN : [jJ][uU][nN] | [jJ][uU][nN][eE] ;
+fragment JUL : [jJ][uU][lL] | [jJ][uU][lL][yY] ;
+fragment AUG : [aA][uU][gG] | [aA][uU][gG][uU][sS][tT] ;
+fragment SEP : [sS][eE][pP] | [sS][eE][pP][tT][eE][mM][bB][eE][rR] ;
+fragment OCT : [oO][cC][tT] | [oO][cC][tT][oO][bB][eE][rR] ;
+fragment NOV : [nN][oO][vV] | [nN][oO][vV][eE][mM][bB][eE][rR] ;
+fragment DEC : [dD][eE][cC] | [dD][eE][cC][eE][mM][bB][eE][rR] ;
+
+MONTH_NAME
+    : JAN | FEB | MAR | APR | MAY | JUN
+    | JUL | AUG | SEP | OCT | NOV | DEC
+    ;

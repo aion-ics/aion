@@ -5,25 +5,18 @@ import "work.ics" as work;
 // Constants
 
 // Tasks and events (automatically saved to "calendar.ics")
-$$$ new task "kiss my wife" daily at 23:00;
-new event "empty the dishwasher" at 18:30 for 10m;
-new event "Buy mum gift" on Friday at 15:50 for 1h;
+new task "kiss my wife" on 12.12 at 23:00;
+new event "empty the dishwasher" on 12.30 from 18:30 for 10m;
+new event "Buy mum gift" on 12.40 at 15:50 for 1h;
 
 // Pomodoro sessions (not automatically exported)
 pmd = pomodoro "LAB" at 14:30 repeat 4 times;
 pomodoro "LAB2" at 18:30 repeat 5 times every 30m with 10m pause;
 
 // Flexible event scheduling (manual export required)
-meeting = event "meeting" on Friday at 10:00 for 1h;
+meeting = event "meeting" on 12.04 at 10:00 for 1h;
 new event "Reading" daily at 21:00 for 2h 10m;
 
-// Define a structured event (not automatically exported)
-event find_gift {
-    name: "gift",
-    start: 10:30,
-    duration: 2h,
-    location: "Mall"
-}
 
 // Default behavior: All new tasks/events go into "calendar.ics"
 export default as "calendar.ics";
@@ -31,24 +24,11 @@ export default as "calendar.ics";
 // Start week calculation
 start_week_number = weeknumber(2025.02.03);
 
-// Different loop types - changed from "iterate" to "each"
-each week from start_week_number to 26 {
-    new event "Weekly Report" every Monday at 9:00 for 1h;
-}
 
 each day from 2025.03.01 to 2025.03.10 step 2 {
-    new event "Gym Session" at 07:00 for 1h;
+    new event "Gym Session" on 12.12 at 07:00 for 1h;
 }
 
-// Schedule "Date" on the correct Friday
-each month from today to today + 50 {
-    c = count(Friday) in month;
-    if (c == 4) {
-        new event "Date" on Friday at 19:00 for 3h;
-    } else if (c == 5) {
-        new event "Date" on Friday at 19:00 for 3h;
-    }
-}
 
 // Include an event in another calendar
 include find_gift in orar;

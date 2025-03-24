@@ -11,12 +11,15 @@ import { Value_assignment_stmtContext } from "./AionParser";
 import { Default_declarationContext } from "./AionParser";
 import { DeclarationContext } from "./AionParser";
 import { Event_declContext } from "./AionParser";
-import { Event_timingContext } from "./AionParser";
-import { Temporal_exprContext } from "./AionParser";
+import { Task_declContext } from "./AionParser";
+import { Repetition_in_declContext } from "./AionParser";
+import { Task_time_strictContext } from "./AionParser";
+import { Event_time_strictContext } from "./AionParser";
+import { Event_time_exprContext } from "./AionParser";
+import { Rep_periodContext } from "./AionParser";
+import { Pomodoro_declContext } from "./AionParser";
 import { Structured_event_stmtContext } from "./AionParser";
 import { Structured_event_fieldContext } from "./AionParser";
-import { Task_declContext } from "./AionParser";
-import { Pomodoro_declContext } from "./AionParser";
 import { Loop_stmtContext } from "./AionParser";
 import { Loop_startContext } from "./AionParser";
 import { Loop_endContext } from "./AionParser";
@@ -27,18 +30,22 @@ import { Merge_stmtContext } from "./AionParser";
 import { Identifier_listContext } from "./AionParser";
 import { Include_stmtContext } from "./AionParser";
 import { Export_stmtContext } from "./AionParser";
+import { Week_start_stmtContext } from "./AionParser";
 import { ConditionContext } from "./AionParser";
 import { Comparison_opContext } from "./AionParser";
 import { StrategyContext } from "./AionParser";
 import { Value_exprContext } from "./AionParser";
 import { Function_callContext } from "./AionParser";
 import { DateContext } from "./AionParser";
-import { Date_specifierContext } from "./AionParser";
-import { WeekdayContext } from "./AionParser";
 import { TimeContext } from "./AionParser";
 import { DurationContext } from "./AionParser";
 import { Time_unitContext } from "./AionParser";
 import { ValueContext } from "./AionParser";
+import { IdentifierContext } from "./AionParser";
+import { StringContext } from "./AionParser";
+import { NumberContext } from "./AionParser";
+import { WeekdayContext } from "./AionParser";
+import { Month_nameContext } from "./AionParser";
 
 
 /**
@@ -135,26 +142,81 @@ export interface AionListener extends ParseTreeListener {
 	exitEvent_decl?: (ctx: Event_declContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `AionParser.event_timing`.
+	 * Enter a parse tree produced by `AionParser.task_decl`.
 	 * @param ctx the parse tree
 	 */
-	enterEvent_timing?: (ctx: Event_timingContext) => void;
+	enterTask_decl?: (ctx: Task_declContext) => void;
 	/**
-	 * Exit a parse tree produced by `AionParser.event_timing`.
+	 * Exit a parse tree produced by `AionParser.task_decl`.
 	 * @param ctx the parse tree
 	 */
-	exitEvent_timing?: (ctx: Event_timingContext) => void;
+	exitTask_decl?: (ctx: Task_declContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `AionParser.temporal_expr`.
+	 * Enter a parse tree produced by `AionParser.repetition_in_decl`.
 	 * @param ctx the parse tree
 	 */
-	enterTemporal_expr?: (ctx: Temporal_exprContext) => void;
+	enterRepetition_in_decl?: (ctx: Repetition_in_declContext) => void;
 	/**
-	 * Exit a parse tree produced by `AionParser.temporal_expr`.
+	 * Exit a parse tree produced by `AionParser.repetition_in_decl`.
 	 * @param ctx the parse tree
 	 */
-	exitTemporal_expr?: (ctx: Temporal_exprContext) => void;
+	exitRepetition_in_decl?: (ctx: Repetition_in_declContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.task_time_strict`.
+	 * @param ctx the parse tree
+	 */
+	enterTask_time_strict?: (ctx: Task_time_strictContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.task_time_strict`.
+	 * @param ctx the parse tree
+	 */
+	exitTask_time_strict?: (ctx: Task_time_strictContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.event_time_strict`.
+	 * @param ctx the parse tree
+	 */
+	enterEvent_time_strict?: (ctx: Event_time_strictContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.event_time_strict`.
+	 * @param ctx the parse tree
+	 */
+	exitEvent_time_strict?: (ctx: Event_time_strictContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.event_time_expr`.
+	 * @param ctx the parse tree
+	 */
+	enterEvent_time_expr?: (ctx: Event_time_exprContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.event_time_expr`.
+	 * @param ctx the parse tree
+	 */
+	exitEvent_time_expr?: (ctx: Event_time_exprContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.rep_period`.
+	 * @param ctx the parse tree
+	 */
+	enterRep_period?: (ctx: Rep_periodContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.rep_period`.
+	 * @param ctx the parse tree
+	 */
+	exitRep_period?: (ctx: Rep_periodContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.pomodoro_decl`.
+	 * @param ctx the parse tree
+	 */
+	enterPomodoro_decl?: (ctx: Pomodoro_declContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.pomodoro_decl`.
+	 * @param ctx the parse tree
+	 */
+	exitPomodoro_decl?: (ctx: Pomodoro_declContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `AionParser.structured_event_stmt`.
@@ -177,28 +239,6 @@ export interface AionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitStructured_event_field?: (ctx: Structured_event_fieldContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `AionParser.task_decl`.
-	 * @param ctx the parse tree
-	 */
-	enterTask_decl?: (ctx: Task_declContext) => void;
-	/**
-	 * Exit a parse tree produced by `AionParser.task_decl`.
-	 * @param ctx the parse tree
-	 */
-	exitTask_decl?: (ctx: Task_declContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `AionParser.pomodoro_decl`.
-	 * @param ctx the parse tree
-	 */
-	enterPomodoro_decl?: (ctx: Pomodoro_declContext) => void;
-	/**
-	 * Exit a parse tree produced by `AionParser.pomodoro_decl`.
-	 * @param ctx the parse tree
-	 */
-	exitPomodoro_decl?: (ctx: Pomodoro_declContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `AionParser.loop_stmt`.
@@ -311,6 +351,17 @@ export interface AionListener extends ParseTreeListener {
 	exitExport_stmt?: (ctx: Export_stmtContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `AionParser.week_start_stmt`.
+	 * @param ctx the parse tree
+	 */
+	enterWeek_start_stmt?: (ctx: Week_start_stmtContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.week_start_stmt`.
+	 * @param ctx the parse tree
+	 */
+	exitWeek_start_stmt?: (ctx: Week_start_stmtContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `AionParser.condition`.
 	 * @param ctx the parse tree
 	 */
@@ -377,28 +428,6 @@ export interface AionListener extends ParseTreeListener {
 	exitDate?: (ctx: DateContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `AionParser.date_specifier`.
-	 * @param ctx the parse tree
-	 */
-	enterDate_specifier?: (ctx: Date_specifierContext) => void;
-	/**
-	 * Exit a parse tree produced by `AionParser.date_specifier`.
-	 * @param ctx the parse tree
-	 */
-	exitDate_specifier?: (ctx: Date_specifierContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `AionParser.weekday`.
-	 * @param ctx the parse tree
-	 */
-	enterWeekday?: (ctx: WeekdayContext) => void;
-	/**
-	 * Exit a parse tree produced by `AionParser.weekday`.
-	 * @param ctx the parse tree
-	 */
-	exitWeekday?: (ctx: WeekdayContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `AionParser.time`.
 	 * @param ctx the parse tree
 	 */
@@ -441,5 +470,60 @@ export interface AionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitValue?: (ctx: ValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.identifier`.
+	 * @param ctx the parse tree
+	 */
+	enterIdentifier?: (ctx: IdentifierContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.identifier`.
+	 * @param ctx the parse tree
+	 */
+	exitIdentifier?: (ctx: IdentifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.string`.
+	 * @param ctx the parse tree
+	 */
+	enterString?: (ctx: StringContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.string`.
+	 * @param ctx the parse tree
+	 */
+	exitString?: (ctx: StringContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.number`.
+	 * @param ctx the parse tree
+	 */
+	enterNumber?: (ctx: NumberContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.number`.
+	 * @param ctx the parse tree
+	 */
+	exitNumber?: (ctx: NumberContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.weekday`.
+	 * @param ctx the parse tree
+	 */
+	enterWeekday?: (ctx: WeekdayContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.weekday`.
+	 * @param ctx the parse tree
+	 */
+	exitWeekday?: (ctx: WeekdayContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `AionParser.month_name`.
+	 * @param ctx the parse tree
+	 */
+	enterMonth_name?: (ctx: Month_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.month_name`.
+	 * @param ctx the parse tree
+	 */
+	exitMonth_name?: (ctx: Month_nameContext) => void;
 }
 

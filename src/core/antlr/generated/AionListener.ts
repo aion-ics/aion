@@ -11,8 +11,8 @@ import { Value_assignment_stmtContext } from "./AionParser";
 import { Default_declarationContext } from "./AionParser";
 import { DeclarationContext } from "./AionParser";
 import { Event_declContext } from "./AionParser";
+import { Event_time_specContext } from "./AionParser";
 import { Recurrence_exprContext } from "./AionParser";
-import { Timing_exprContext } from "./AionParser";
 import { Structured_event_stmtContext } from "./AionParser";
 import { Structured_event_fieldContext } from "./AionParser";
 import { Task_declContext } from "./AionParser";
@@ -139,6 +139,17 @@ export interface AionListener extends ParseTreeListener {
 	exitEvent_decl?: (ctx: Event_declContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `AionParser.event_time_spec`.
+	 * @param ctx the parse tree
+	 */
+	enterEvent_time_spec?: (ctx: Event_time_specContext) => void;
+	/**
+	 * Exit a parse tree produced by `AionParser.event_time_spec`.
+	 * @param ctx the parse tree
+	 */
+	exitEvent_time_spec?: (ctx: Event_time_specContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `AionParser.recurrence_expr`.
 	 * @param ctx the parse tree
 	 */
@@ -148,17 +159,6 @@ export interface AionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRecurrence_expr?: (ctx: Recurrence_exprContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `AionParser.timing_expr`.
-	 * @param ctx the parse tree
-	 */
-	enterTiming_expr?: (ctx: Timing_exprContext) => void;
-	/**
-	 * Exit a parse tree produced by `AionParser.timing_expr`.
-	 * @param ctx the parse tree
-	 */
-	exitTiming_expr?: (ctx: Timing_exprContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `AionParser.structured_event_stmt`.

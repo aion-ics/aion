@@ -1,3 +1,7 @@
+/**
+ * This is the entry point of the CLI of the Aion. It is used as entry point if running `npm run cli` or if called from any executables.
+ */
+
 import chalk from 'chalk';
 
 // @ts-ignore

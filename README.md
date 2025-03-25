@@ -4,24 +4,28 @@
 
 # The Aion language
 
-
-
-Aion is DSL language for managing .ics files.  
-
-
 > [!CAUTION]
 > The language is under development, and doesn't yet works.
 
-Version 1.0.0
+
+Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aion-ics.github.io/. 
+
+## Resources
+
+- **Executables**: https://aion-ics.github.io/downloads.html
+- **Documentaion**: https://aion-ics.github.io/documentation.html 
 
 ## Using Aion
 
-The easiest way to get started with Aion is to dowload the executable files for your system. Otherwise, you can configure running of Aion from this repository, following the instructions:
+This repository contains all the necessary tools for and executing `Aion` source files in different ways.
 
-1) Clone the repository, using `git clone`
-2) Install Node.js environment.
-3) `cd aion`
-4) Run `npm start run ` with argument - the `.aion` source file, some of which you can take from `/examples` folder.
+- `npm run cli` - this npm command will start the execution of `cli.ts` file. This is the entry point of the compiler. In case you want to compile and exectute an `.aion` file, you pass it as argument. E.g: `npm run cli main.aion`
+
+- You can build the executables for your system. For that, you need two commands: `npm run build`, which will compile all the TypeScript files into JS in `/dist` directory, and then run the command `npm run make-%platform`, where `platform` is either `mac`, `win`, `linux`. OR you can build all the executables (why?) using command `npm run build-executables`. All the executables created will be available at `dist/exectuables` folder.
+
+- Finally, you can use a simplyfied `Aion` compiler right in your web-framework. Run `npm i aion-ics`, and then simply import this in ES or CommonJS in your web app. 
+
+> All the executables, but not necessary the most recent ones, are avaliable at https://aion-ics.github.io/ 
 
 ## Source code organization
 

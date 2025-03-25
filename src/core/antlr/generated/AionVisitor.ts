@@ -11,8 +11,8 @@ import { Value_assignment_stmtContext } from "./AionParser";
 import { Default_declarationContext } from "./AionParser";
 import { DeclarationContext } from "./AionParser";
 import { Event_declContext } from "./AionParser";
+import { Event_time_specContext } from "./AionParser";
 import { Recurrence_exprContext } from "./AionParser";
-import { Timing_exprContext } from "./AionParser";
 import { Structured_event_stmtContext } from "./AionParser";
 import { Structured_event_fieldContext } from "./AionParser";
 import { Task_declContext } from "./AionParser";
@@ -110,18 +110,18 @@ export interface AionVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitEvent_decl?: (ctx: Event_declContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `AionParser.event_time_spec`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEvent_time_spec?: (ctx: Event_time_specContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `AionParser.recurrence_expr`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitRecurrence_expr?: (ctx: Recurrence_exprContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `AionParser.timing_expr`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTiming_expr?: (ctx: Timing_exprContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `AionParser.structured_event_stmt`.

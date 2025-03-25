@@ -1,17 +1,15 @@
 import "orar-231" as orar;
 import "personal.ics" as personal;
 import "work.ics" as work;
-
 // Constants
 
 // Tasks and events (automatically saved to "calendar.ics")
 new task "kiss my wife" on 12.12 at 23:00;
-new event "empty the dishwasher" on 12.30 from 18:30 for 10m;
+new event "empty the dishwasher" on 12.30 at 18:30 for 10m;
 new event "Buy mum gift" on 12.40 at 15:50 for 1h;
 
 // Pomodoro sessions (not automatically exported)
-pmd = pomodoro "LAB" at 14:30 repeat 4 times;
-pomodoro "LAB2" at 18:30 repeat 5 times every 30m with 10m pause;
+pmd = pomodoro "LAB" on 13.30 at 14:30 repeat 4 times with 10m pause;
 
 // Flexible event scheduling (manual export required)
 meeting = event "meeting" on 12.04 at 10:00 for 1h;

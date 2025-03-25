@@ -52,25 +52,21 @@ declaration
 // ==================
 
 event_decl
-    : 'event' STRING recurrence_expr ('for' duration)?                    // Simple event declaration
-    | 'event' STRING timing_expr ('for' duration)?                        // Another form of timing
+    : 'event' STRING recurrence_expr event_time_spec
+    | 'event' STRING 'on' date event_time_spec
     ;
 
-// ----- Recurrence Types -----
+event_time_spec
+    : 'at' time 'for' duration
+    | 'from' time 'to' time
+    | 'for' duration 'find' 'between' time 'to' time
+    ;
+
 recurrence_expr
     : 'daily' ('at' time)?
     | 'weekly' 'on' weekday_list (time_range | time_at)?
     | 'monthly' 'on' NUMBER (time_range | time_at)?
     | 'yearly' 'on' date (time_range | time_at)?
-    ;
-
-// ----- Direct Timing -----
-timing_expr
-    : 'on' date (time_range | time_at)?
-    | 'every' weekday_list (time_range | time_at)?
-    | 'from' time 'to' time
-    | 'at' time
-    | 'find' 'between' time 'and' time
     ;
 
 // ----- Structured Event Block -----
@@ -190,6 +186,7 @@ value_expr
     | NUMBER
     | IDENTIFIER
     | function_call
+    | declaration
     ;
 
 function_call

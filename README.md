@@ -14,10 +14,10 @@ Aion is DSL language for managing ICalendar(.ics) files. The official page of Ai
 
 - **Executables**: https://aion-ics.github.io/downloads.html
 - **Documentaion**: https://aion-ics.github.io/documentation.html 
-
+- **Repository**: https://github.com/aion-ics/aion
 ## Using Aion
 
-This repository contains all the necessary tools for and executing `Aion` source files in different ways.
+This repository contains all the necessary tools for and executing `Aion` source files in different ways (clone and run `npm i` before using it).
 
 - `npm run cli` - this npm command will start the execution of `cli.ts` file. This is the entry point of the compiler. In case you want to compile and exectute an `.aion` file, you pass it as argument. E.g: `npm run cli main.aion`
 

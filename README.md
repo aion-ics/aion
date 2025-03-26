@@ -39,6 +39,8 @@ The Aion language repository is organized in following way:
 | `src/index/ts`        | npm package entry points with functions exports                                           |
 | `docs/examples/`        | some examples of `Aion` files                                      |
 | `docs/`            | contains `/examples` and grammar in BNF form                                             |
+| `exe/`            | contains `/executables` and win-installer build instructions                                            |
+
 
 ## Language grammar
 

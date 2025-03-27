@@ -18,6 +18,27 @@ SetupIconFile=.\assets\aionsmall.ico
 Source: "..\executables\win\aion.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "install_script.ps1"; DestDir: "{tmp}"; Flags: deleteafterinstall
 
+
+[Registry]
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsAddPath(ExpandConstant('{app}'))
+
+[Code]
+function NeedsAddPath(Param: string): boolean;
+var
+  OrigPath: string;
+begin
+  if not RegQueryStringValue(HKEY_LOCAL_MACHINE,
+    'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+    'Path', OrigPath)
+  then begin
+    Result := True;
+    exit;
+  end;
+  
+  // Look for the path with ';' added to prevent partial matches
+  Result := Pos(';' + Param + ';', ';' + OrigPath + ';') = 0;
+end;
+
 [Run]
 Filename: "powershell.exe"; \
 Parameters: "-ExecutionPolicy Bypass -File ""{tmp}\install_script.ps1"""; \

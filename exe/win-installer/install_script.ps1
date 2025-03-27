@@ -1,11 +1,21 @@
-# Add to system PATH permanently
-$path = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+# Add to user PATH permanently
+$userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 $installDir = "$env:ProgramFiles\Aion"
 
-if ($path -notlike "*$installDir*") {
+if ($userPath -notlike "*$installDir*") {
     [Environment]::SetEnvironmentVariable(
         "PATH",
-        "$path;$installDir",
+        "$userPath;$installDir",
+        "User"
+    )
+}
+
+# Optionally keep system PATH modification
+$systemPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+if ($systemPath -notlike "*$installDir*") {
+    [Environment]::SetEnvironmentVariable(
+        "PATH",
+        "$systemPath;$installDir",
         "Machine"
     )
 }

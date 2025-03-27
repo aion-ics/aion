@@ -67,6 +67,7 @@ recurrence_expr
     | 'weekly' 'on' weekday_list (time_range | time_at)?
     | 'monthly' 'on' NUMBER (time_range | time_at)?
     | 'yearly' 'on' date (time_range | time_at)?
+    | 'each' NUMBER loop_unit (time_range | time_at)?
     ;
 
 // ----- Structured Event Block -----
@@ -89,6 +90,7 @@ structured_event_field
 // ----- Task Declaration -----
 task_decl
     : 'task' STRING 'on' date task_time_spec
+    | 'task' STRING recurrence_expr task_time_spec
     ;
 
 task_time_spec
@@ -99,6 +101,10 @@ task_time_spec
 // ----- Pomodoro Declaration -----
 pomodoro_decl
     : 'pomodoro' STRING 'on' date 'at' time
+      'repeat' NUMBER 'times'
+      ('every' duration)?
+      ('with' duration 'pause')?
+    | 'pomodoro' STRING recurrence_expr 'at' time
       'repeat' NUMBER 'times'
       ('every' duration)?
       ('with' duration 'pause')?
@@ -210,8 +216,6 @@ date_specifier
 weekday_list
     : weekday (',' weekday)*
     ;
-
-
 
 weekday
     : 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday'

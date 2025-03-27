@@ -30,5 +30,6 @@ Parameters: "$path = [Environment]::GetEnvironmentVariable('PATH', 'Machine'); \
     [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')"
 
 [Icons]
-Name: "{group}\Aion CLI"; Filename: "{app}\aion.exe"
+Name: "{group}\Aion CLI"; Filename: "{app}\aion.exe"; IconFilename: "{app}\aion.exe"
 Name: "{group}\Uninstall Aion"; Filename: "{uninstallexe}"
+Name: "{commondesktop}\Aion CLI"; Filename: "{app}\aion.exe"; IconFilename: "{app}\aion.exe"

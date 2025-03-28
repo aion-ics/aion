@@ -4,6 +4,7 @@ import "work.ics" as work;
 // Constants
 
 // Tasks and events (automatically saved to "calendar.ics")
+
 new task "kiss my wife" on 12.12 at 23:00;
 new event "empty the dishwasher" on 12.30 at 18:30 for 10m;
 new event "Buy mum gift" on 12.40 at 15:50 for 1h;

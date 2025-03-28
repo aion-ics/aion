@@ -1,4 +1,6 @@
-![Logo](docs/img/huge_logo.png)
+<div align="center">
+<img src="docs/img/huge_logo.png" alt="Logo">
+</div>
 
 # The Aion language
 

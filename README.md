@@ -10,6 +10,9 @@
 
 Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aion-ics.github.io/. 
 
+This repository contains all the necessary tools for and executing `Aion` source files in different ways (clone and run `npm i` before using it).
+
+
 ## Resources
 
 - **Executables**: https://aion-ics.github.io/downloads.html
@@ -17,15 +20,49 @@ Aion is DSL language for managing ICalendar(.ics) files. The official page of Ai
 - **Repository**: https://github.com/aion-ics/aion
 ## Using Aion
 
-This repository contains all the necessary tools for and executing `Aion` source files in different ways (clone and run `npm i` before using it).
+**OPTION 1:** As npm library
 
-- `npm run cli` - this npm command will start the execution of `cli.ts` file. This is the entry point of the compiler. In case you want to compile and exectute an `.aion` file, you pass it as argument. E.g: `npm run cli main.aion`
+You can install the latest version of Aion for use in Node-js environments using the command:
 
-- You can build the executables for your system. For that, you need two commands: `npm run build`, which will compile all the TypeScript files into JS in `/dist` directory, and then run the command `npm run make-%platform`, where `platform` is either `mac`, `win`, `linux`. OR you can build all the executables (why?) using command `npm run build-executables`. All the executables created will be available at `dist/exectuables` folder.
+```
+npm install aion-ics
+```
+**OPTION 2:** Run CLI from this repository
 
-- Finally, you can use a simplyfied `Aion` compiler right in your web-framework. Run `npm i aion-ics`, and then simply import this in ES or CommonJS in your web app. 
+1) Clone the repository
 
-> All the executables, but not necessary the most recent ones, are avaliable at https://aion-ics.github.io/ 
+```
+git clone https://github.com/aion-ics/aion
+```
+
+2) Go to directory and install dependencies (make sure you have Node.js installed). Then, to compile and run an .aion file, you run
+
+```
+npm run cli aion_file.aion
+```
+
+**OPTION 3:** Create executables from this repository. 
+
+You can build Aion language directly from this repository, following these instructions:
+
+```
+npm run make-win
+(or)
+npm run make-platform
+(or)
+npm run make-platform
+```
+
+The target executable is located at `exe/executables/{platformname}`
+
+**OPTION 4:** Build the installer
+
+You can build the installer using Inno setup script. For more information, visit `exe/win-installer` folder with build [instructions](exe\win-installer\README.md)
+
+
+**OPTION 5:** Install Aion using `Aion-setup.exe`
+
+(coming soon) 
 
 ## Source code organization
 

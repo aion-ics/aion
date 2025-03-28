@@ -40,4 +40,3 @@ filter merged_calendar where category == "meeting" into meetings_only;
 export merged_calendar as "full_schedule.ics";
 export personal_only as "personal_filtered.ics";
 export meetings_only;
-export all;

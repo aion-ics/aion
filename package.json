@@ -1,6 +1,6 @@
 {
   "name": "aion-ics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Aion",
   "types": "types.types.d.ts",
   "main": "./dist/index.js",

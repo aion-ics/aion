@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="docs/img/huge_logo.png" alt="Logo">
-</p>
+![Logo](docs/img/huge_logo.png)
 
 # The Aion language
 
@@ -81,7 +79,7 @@ The Aion language repository is organized in following way:
 
 ## Language grammar
 
-The grammar of the language in Backus Naur Form (BNF) is avaliable in [docs folder](docs\grammar_BNF.md)
+The grammar of the language in Backus Naur Form (BNF) is avaliable in [docs folder](docs/grammar_BNF.md)
 
 ## Examples of Aion 
 

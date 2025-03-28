@@ -57,7 +57,7 @@ The target executable is located at `exe/executables/{platformname}`
 
 **OPTION 4:** Build the installer
 
-You can build the installer using Inno setup script. For more information, visit `exe/win-installer` folder with build [instructions](exe\win-installer\README.md)
+You can build the installer using Inno setup script. For more information, visit `exe/win-installer` folder with build [instructions](exe/win-installer/README.md)
 
 
 **OPTION 5:** Install Aion using `Aion-setup.exe`

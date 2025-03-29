@@ -8,7 +8,7 @@
 > The language is under development, and doesn't yet works.
 
 
-Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aion-ics.github.io/. 
+Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aionlang.github.io/. 
 
 This repository contains all the necessary tools for and executing `Aion` source files in different ways (clone and run `npm i` before using it).
 
@@ -16,8 +16,8 @@ This repository contains all the necessary tools for and executing `Aion` source
 ## Resources
 
 - **Executables**: https://aion-ics.github.io/downloads.html
-- **Documentaion**: https://aion-ics.github.io/documentation.html 
-- **Repository**: https://github.com/aion-ics/aion
+- **Documentaion**: https://aionlang.github.io/documentation.html 
+- **Repository**: https://github.com/aionlang/aion
 ## Using Aion
 
 **OPTION 1:** As npm library
@@ -32,7 +32,7 @@ npm install aion-ics
 1) Clone the repository
 
 ```
-git clone https://github.com/aion-ics/aion
+git clone https://github.com/aionlang/aion
 ```
 
 2) Go to directory and install dependencies (make sure you have Node.js installed). Then, to compile and run an .aion file, you run

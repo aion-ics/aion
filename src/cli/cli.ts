@@ -10,7 +10,7 @@ import * as fs from 'fs';
 import chalk from 'chalk';
 
 // @ts-ignore
-import packageJson from '../package.json';
+import packageJson from '../../package.json';
 
 const args = process.argv;
 

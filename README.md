@@ -47,9 +47,9 @@ You can build Aion language directly from this repository, following these instr
 
 ```
 npm run make-win
-(or)
+# or
 npm run make-platform
-(or)
+# or
 npm run make-platform
 ```
 

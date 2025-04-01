@@ -31,13 +31,13 @@ npm install aion-ics
 
 1) Clone the repository
 
-```
+```bash
 git clone https://github.com/aionlang/aion
 ```
 
 2) Go to directory and install dependencies (make sure you have Node.js installed). Then, to compile and run an .aion file, you run
 
-```
+```bash
 npm run cli aion_file.aion
 ```
 
@@ -45,7 +45,7 @@ npm run cli aion_file.aion
 
 You can build Aion language directly from this repository, following these instructions:
 
-```
+```bash
 npm run make-win
 # or
 npm run make-platform

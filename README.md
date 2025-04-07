@@ -24,24 +24,51 @@ This repository contains all the necessary tools for and executing `Aion` source
 
 You can install the latest version of Aion for use in Node-js environments using the command:
 
-```
+```bash
 npm install aion-ics
 ```
-**OPTION 2:** Run CLI from this repository
 
-1) Clone the repository
+Then, in your TS or JS file you can use it as a CJS or ESM module
 
+```typescript
+import * from "aion-ics"
+// or
+const Aion = require("aion-ics")
 ```
+
+
+All the instructions regarding npm-specific use of Aion can be found at [docs\use\NPM.md](docs\use\NPM.md)
+
+---
+
+> [!NOTE]  
+> Other option are specific for CLI and it's different applications. And requires local set-up of the langauge. Refer to [docs\use\LOCAL.md](docs\use\LOCAL.md) to get instructions.
+
+**OPTION 2:** Install Aion using `Aion-setup.exe`
+
+(coming soon) 
+
+
+**OPTION 3:** Run CLI from this repository
+
+1) Clone the repository, install the dependencies
+
+```bash
+mkdir aion
+cd aion
 git clone https://github.com/aionlang/aion
+npm i
 ```
 
-2) Go to directory and install dependencies (make sure you have Node.js installed). Then, to compile and run an .aion file, you run
+2) Then, to compile and run an `.aion` file, you run
 
 ```
 npm run cli aion_file.aion
 ```
 
-**OPTION 3:** Create executables from this repository. 
+The `.aion` file path should be relative to root folder or absolute. 
+
+**OPTION 4:** Create executables from this repository. 
 
 You can build Aion language directly from this repository, following these instructions:
 
@@ -55,14 +82,10 @@ npm run make-platform
 
 The target executable is located at `exe/executables/{platformname}`
 
-**OPTION 4:** Build the installer
+**OPTION 5:** Build the installer
 
 You can build the installer using Inno setup script. For more information, visit `exe/win-installer` folder with build [instructions](exe/win-installer/README.md)
 
-
-**OPTION 5:** Install Aion using `Aion-setup.exe`
-
-(coming soon) 
 
 ## Source code organization
 
@@ -77,6 +100,8 @@ The Aion language repository is organized in following way:
 | `docs/examples/`        | some examples of `Aion` files                                      |
 | `docs/`            | contains `/examples` and grammar in BNF form                                             |
 | `exe/`            | contains `/executables` and win-installer build instructions                                            |
+
+
 
 
 ## Language grammar

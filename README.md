@@ -37,12 +37,12 @@ const Aion = require("aion-ics")
 ```
 
 
-All the instructions regarding npm-specific use of Aion can be found at [docs\use\NPM.md](docs\use\NPM.md)
+All the instructions regarding npm-specific use of Aion can be found at [docs/use/NPM.md](docs/use/NPM.md)
 
 ---
 
 > [!NOTE]  
-> Other option are specific for CLI and it's different applications. And requires local set-up of the langauge. Refer to [docs\use\LOCAL.md](docs\use\LOCAL.md) to get instructions.
+> Other option are specific for CLI and its different applications. It requires local set-up of the langauge. Refer to [docs/use/LOCAL.md](docs/use/LOCAL.md) to get instructions.
 
 **OPTION 2:** Install Aion using `Aion-setup.exe`
 
@@ -53,7 +53,7 @@ All the instructions regarding npm-specific use of Aion can be found at [docs\us
 
 1) Clone the repository, install the dependencies
 
-```bash
+```bashbash
 mkdir aion
 cd aion
 git clone https://github.com/aionlang/aion
@@ -62,7 +62,7 @@ npm i
 
 2) Then, to compile and run an `.aion` file, you run
 
-```
+```bash
 npm run cli aion_file.aion
 ```
 
@@ -72,11 +72,11 @@ The `.aion` file path should be relative to root folder or absolute.
 
 You can build Aion language directly from this repository, following these instructions:
 
-```
+```bash
 npm run make-win
-(or)
+# or
 npm run make-platform
-(or)
+# or
 npm run make-platform
 ```
 

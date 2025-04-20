@@ -11,7 +11,7 @@ SolidCompression=yes
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 PrivilegesRequired=admin
-
+LicenseFile=..\..\LICENCE
 SetupIconFile=.\assets\aionsmall.ico
 
 [Files]

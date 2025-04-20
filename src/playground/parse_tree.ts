@@ -1,12 +1,13 @@
-import { AionParser } from "./core/antlr/generated/AionParser";
-import { AionLexer } from "./core/antlr/generated/AionLexer";
+import { AionParser } from "../core/antlr/generated/AionParser";
+import { AionLexer } from "../core/antlr/generated/AionLexer";
 import antlr4, { ANTLRInputStream, CommonTokenStream, ParserRuleContext } from 'antlr4ts'
 import { ParseTree } from "antlr4ts/tree/ParseTree";
+
 
 import * as fs from 'fs';
 import * as path from 'path';
 
-const filePath = path.join(__dirname, '..', 'docs/examples', 'main.aion');
+const filePath = path.join(__dirname, '..', '../docs/examples', 'main.aion');
 const content = fs.readFileSync(filePath, 'utf8');
 
 
@@ -41,7 +42,6 @@ function printParseTree(tree: ParseTree, parser: AionParser, indent: string = ""
 
 
 let input = 'import "orar-231" as orar;';
-
 
 let inputStream = new ANTLRInputStream(content);
 let lexer = new AionLexer(inputStream);

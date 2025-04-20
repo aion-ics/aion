@@ -11,19 +11,20 @@
   "scripts": {
     "build": "tsup",
     "start": "node dist/index/index.js",
-    "playground": "tsx src/playground.ts",
+    "playground": "tsx src/playground/playground.ts",
+    "play": "tsx",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pkg": "pkg .",
     "check-exports": "attw --pack .",
     "cli": "npm run build && node dist/cli/cli.js",
-    "make-win": "pkg . --targets node18-win-x64 --output exe/executables/win/aion.exe && timeout /t 4 && adnpm run set-metata",
+    "make-win": "pkg . --targets node18-win-x64 --output exe/executables/win/aion.exe && timeout /t 4 && npm run set-metadata",
     "make-linux": "pkg . --targets node18-linux-x64 --output exe/executables/linux/aion",
     "make-mac": "pkg . --targets node18-macos-x64 --output exe/executables/mac/aion-mac",
     "set-metadata": "resedit --in exe/executables/win/aion.exe --out exe/executables/win/aion.exe --icon 1,docs/img/aionsmall.ico --original-filename aion.exe --file-description Aion",
     "build-executables": "npm run build && npm run make-win && npm run make-linux && npm run make-mac",
     "antlr4ts": "antlr4ts -visitor -o ./src/core/antlr/generated src/core/antlr/Aion.g4",
     "build-win-installer": "npm run build && npm run make-win && iscc exe/win-installer/setup.iss"
-},
+  },
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -55,7 +56,10 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "ical.js": "^2.1.0",
+    "ts-ics": "^2.0.1",
+    "ts-node": "^10.9.2"
   },
   "repository": {
     "type": "git",

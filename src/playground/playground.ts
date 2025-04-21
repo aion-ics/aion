@@ -85,6 +85,7 @@
 
 import { generateIcsCalendar, IcsCalendar, IcsEvent, IcsDateObject } from 'ts-ics';
 import {errorWithCodePositionReference} from "../core/exceptions/errorWithCodePositionReference";
+import { parse } from '../core/parser/parser';
 
 // Define a date object for the event
 const createIcsDateObject = (date: Date): IcsDateObject => ({
@@ -123,4 +124,6 @@ const event: IcsEvent = {
 // import { getProdId } from '../core/intepreter/helpers/getProdId';
 //
 
-console.log(errorWithCodePositionReference(1, 5, "let a = 5", "unexpected a", "input.aion"));
+// console.log(errorWithCodePositionReference(1, 5, "let a = 5", "unexpected a", "input.aion"));
+
+parse(`new event "kill myself" daily from 13:30 to 15:30`);

@@ -15,6 +15,7 @@
  * @param message message to be displayed
  * @param fileName  <code>.aion</code> filename where the error is met
  */
+
 export function errorWithCodePositionReference(
     lineNumber: number,
     columnNumber: number,
@@ -28,7 +29,7 @@ export function errorWithCodePositionReference(
     const pointer = " ".repeat(columnNumber - 1) + "^";
 
     return [
-        `${fileName}:${lineNumber}:${columnNumber}`,
+        `\n${fileName}:${lineNumber}:${columnNumber}`,
         `  ${line}`,
         `  ${pointer}`,
         `\x1b[31mError:\x1b[0m ${message}`

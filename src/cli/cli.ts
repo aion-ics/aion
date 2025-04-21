@@ -38,11 +38,14 @@ if (args.length == 2) {
     }
 }
 
+
+
 function handleDefaultArgumentCLI(arg: string) {
     if (arg.endsWith(".aion")) {
         // handle the compilation
         const file = fs.readFileSync(arg, 'utf-8');
         console.log(file);
+        
     }
 
 }

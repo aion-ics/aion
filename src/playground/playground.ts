@@ -84,6 +84,7 @@
 // console.log(vcalendar.toString()); // Write to file if needed
 
 import { generateIcsCalendar, IcsCalendar, IcsEvent, IcsDateObject } from 'ts-ics';
+import {errorWithCodePositionReference} from "../core/exceptions/errorWithCodePositionReference";
 
 // Define a date object for the event
 const createIcsDateObject = (date: Date): IcsDateObject => ({
@@ -103,21 +104,23 @@ const event: IcsEvent = {
   status: 'CONFIRMED'
 };
 
-// Define the calendar
-const calendar: IcsCalendar = {
-  version: '2.0', // Required iCalendar version
-  prodId: getProdId(),
-  events: [event], // Array of events
-  method: 'PUBLISH', // Optional: calendar method
-  name: 'Team Calendar', // Optional: calendar name
-};
+// // Define the calendar
+// const calendar: IcsCalendar = {
+//   version: '2.0', // Required iCalendar version
+//   prodId: getProdId(),
+//   events: [event], // Array of events
+//   method: 'PUBLISH', // Optional: calendar method
+//   name: 'Team Calendar', // Optional: calendar name
+// };
+//
+// calendar.events.push(event);
+//
+// // Generate the ICS string
+// const icsContent = generateIcsCalendar(calendar);
+// console.log(icsContent);
+//
+// import { getAionVersion } from '../core/intepreter/helpers/getVersion';
+// import { getProdId } from '../core/intepreter/helpers/getProdId';
+//
 
-calendar.events.push(event);
-
-// Generate the ICS string
-const icsContent = generateIcsCalendar(calendar);
-console.log(icsContent);
-
-import { getAionVersion } from '../core/intepreter/helpers/getVersion';
-import { getProdId } from '../core/intepreter/helpers/getProdId';
-
+console.log(errorWithCodePositionReference(1, 5, "let a = 5", "unexpected a", "input.aion"));

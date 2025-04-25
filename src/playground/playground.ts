@@ -3,13 +3,11 @@
 // import antlr4, { ANTLRInputStream, CommonTokenStream, ParserRuleContext } from 'antlr4ts'
 // import { ParseTree } from "antlr4ts/tree/ParseTree";
 
-
 // import * as fs from 'fs';
 // import * as path from 'path';
 
 // const filePath = path.join(__dirname, '..', 'docs/examples', 'main.aion');
 // const content = fs.readFileSync(filePath, 'utf8');
-
 
 // function printParseTree(tree: ParseTree, parser: AionParser, indent: string = "", level: number = 0): string {
 //     let output = "";
@@ -18,7 +16,7 @@
 //     if (tree instanceof ParserRuleContext) {
 //         const ruleName = parser.ruleNames[tree.ruleIndex];
 //         output += `${indent}${level === 0 ? "" : "└─"}<${ruleName}>\n`;
-//     } 
+//     }
 //     // Terminal node (Token)
 //     else {
 //         const token = tree['symbol']; // Access the token object behind the terminal node
@@ -40,9 +38,7 @@
 //     return output;
 // }
 
-
 // let input = 'import "orar-231" as orar;';
-
 
 // let inputStream = new ANTLRInputStream(content);
 // let lexer = new AionLexer(inputStream);
@@ -54,9 +50,7 @@
 // // Print the parse tree
 // console.log(printParseTree(tree, parser));
 
-
 // import { generateIcsCalendar, type IcsCalendar } from "ts-ics";
-
 
 // const ICAL = require('ical.js');
 
@@ -83,26 +77,31 @@
 
 // console.log(vcalendar.toString()); // Write to file if needed
 
-import { generateIcsCalendar, IcsCalendar, IcsEvent, IcsDateObject } from 'ts-ics';
-import {errorWithCodePositionReference} from "../core/exceptions/errorWithCodePositionReference";
-import { parse } from '../core/parser/parser';
+import {
+  generateIcsCalendar,
+  IcsCalendar,
+  IcsEvent,
+  IcsDateObject,
+} from "ts-ics";
+import { errorWithCodePositionReference } from "../core/exceptions/errorWithCodePositionReference";
+import { parse } from "../core/parser/parser";
 
 // Define a date object for the event
 const createIcsDateObject = (date: Date): IcsDateObject => ({
   date,
-  type: 'DATE-TIME', // Can be 'DATE' or 'DATE-TIME'
+  type: "DATE-TIME", // Can be 'DATE' or 'DATE-TIME'
 });
 
 // Define an event
 const event: IcsEvent = {
-  summary: 'Team Meeting',
-  uid: 'event-12345@example.com', // Unique identifier for the event
+  summary: "Team Meeting",
+  uid: "event-12345@example.com", // Unique identifier for the event
   stamp: createIcsDateObject(new Date()), // Timestamp of creation
-  start: createIcsDateObject(new Date('2025-04-10T10:00:00Z')), // Start time (UTC)
-  end: createIcsDateObject(new Date('2025-04-10T11:00:00Z')), // End time (UTC)
-  description: 'A team sync-up meeting.',
-  location: 'Office Room 101',
-  status: 'CONFIRMED'
+  start: createIcsDateObject(new Date("2025-04-10T10:00:00Z")), // Start time (UTC)
+  end: createIcsDateObject(new Date("2025-04-10T11:00:00Z")), // End time (UTC)
+  description: "A team sync-up meeting.",
+  location: "Office Room 101",
+  status: "CONFIRMED",
 };
 
 // // Define the calendar
@@ -126,4 +125,29 @@ const event: IcsEvent = {
 
 // console.log(errorWithCodePositionReference(1, 5, "let a = 5", "unexpected a", "input.aion"));
 
-parse(`new event "kill myself" daily from 13:30 to 15:30`);
+// parse(`new event "kill myself" daily from 13:30 to 15:30;`);
+
+import { CharStreams, CommonTokenStream } from "antlr4ts";
+import { AionLexer } from "../core/antlr/generated/AionLexer";
+import { AionParser } from "../core/antlr/generated/AionParser";
+import { Interpreter } from "../core/intepreter/Interpreter";
+
+// const code = `new event "Final Review" on 28.04.2025 at 14:00 for 1h;`;
+const code = `
+event DailyCheck {
+  name: "Daily Standup",
+  start: 10:00,
+  duration: 15m,
+  location: "Room 101",
+  category: "Team"
+}
+`;
+
+const inputStream = CharStreams.fromString(code);
+const lexer = new AionLexer(inputStream);
+const tokenStream = new CommonTokenStream(lexer);
+const parser = new AionParser(tokenStream);
+
+const tree = parser.program();
+const interpreter = new Interpreter();
+interpreter.visit(tree);

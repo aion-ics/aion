@@ -13,6 +13,8 @@ npm init
 npm install aion-ics
 ```
 
+https://img.shields.io/npm/v/aion-ics
+
 ### Use
 
 > The code written using `npm` works just like for `command line`. For current specification of the language visit https://aionlang.github.io/

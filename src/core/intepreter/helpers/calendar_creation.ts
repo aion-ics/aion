@@ -19,7 +19,6 @@ const event: IcsEvent = {
     location: 'Conference Room A',
     url: 'https://example.com/meeting',
     categories: ['Meeting', 'Work'],
-    status: 'CONFIRMED',
     organizer: { name: 'John Doe', email: 'john@example.com' },
 };
 

@@ -126,4 +126,4 @@ const event: IcsEvent = {
 
 // console.log(errorWithCodePositionReference(1, 5, "let a = 5", "unexpected a", "input.aion"));
 
-parse(`new event "kill myself" daily from 13:30 to 15:30`);
+parse(`new event "kill myself" daily from 13:30 to 15:30;`);

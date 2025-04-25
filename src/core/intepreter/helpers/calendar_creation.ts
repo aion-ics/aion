@@ -1,5 +1,17 @@
-import {generateIcsCalendar, generateIcsEvent, IcsCalendar, IcsEvent} from 'ts-ics';
+import {generateIcsCalendar, generateIcsEvent, IcsCalendar, IcsEvent, IcsComponent, IcsTodo, generateIcsTodo} from '@timurcravtov/ts-ics';
 import {getProdId} from "./getProdId";
+
+const c: IcsComponent = "STANDARD";
+
+const todo: IcsTodo = {
+    due: {
+        date: new Date(2025, 10, 10)
+    },
+    stamp: {
+        date: new Date(2025, 10, 10)
+    },
+    uid: "1231231",
+}
 
 const event: IcsEvent = {
 
@@ -7,9 +19,7 @@ const event: IcsEvent = {
         date: new Date(2025, 1, 2, 14, 30)
     },
 
-    end: {
-        date: new Date(2025, 1,2, 14, 50)
-    },
+    end: null,
     uid: "1231231",
     stamp: {
         date: new Date(2025, 1, 2, 14, 30)
@@ -27,13 +37,15 @@ const events: IcsEvent[] = [
     event,
 ];
 
-let icsContent = generateIcsEvent(event);
-let calendar: IcsCalendar = {
-    prodId: getProdId(),
-    events: [event],
-    version: "2.0"
-}
+let icsContent = generateIcsTodo(todo);
+console.log(icsContent)
 
-const icsCalendar = generateIcsCalendar(calendar);
+// let calendar: IcsCalendar = {
+//     prodId: getProdId(),
+//     events: [event],
+//     version: "2.0"
+// }
 
-console.log(icsCalendar);
+// const icsCalendar = generateIcsCalendar(calendar);
+
+// console.log(icsCalendar);

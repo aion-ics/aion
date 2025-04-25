@@ -140,6 +140,13 @@ event DailyCheck {
   duration: 15m,
   location: "Room 101",
   category: "Team"
+};
+event DailyCheck {
+  name: "Daily Standup 2",
+  start: 10:00,
+  duration: 15m,
+  location: "Room 101",
+  category: "Team"
 }
 `;
 

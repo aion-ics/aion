@@ -9,7 +9,8 @@ export class Interpreter
   extends AbstractParseTreeVisitor<void>
   implements AionVisitor<void>
 {
-  private events: IcsEvent[] = [];
+  private calendars: Map<string, IcsEvent[]> = new Map();
+  private currentCalendar: string = "main";
 
   protected defaultResult(): void {}
 
@@ -18,19 +19,53 @@ export class Interpreter
       this.visit(stmt);
     }
 
+    const events = this.calendars.get(this.currentCalendar) || [];
+
     const calendar: IcsCalendar = {
       prodId: getProdId(),
       version: "2.0",
-      events: this.events,
+      events,
     };
 
     const icsString = generateIcsCalendar(calendar);
     console.log(icsString);
   }
 
+  visitStatement(ctx: AionParser.StatementContext): void {
+    if (ctx.structured_event_stmt()) {
+      this.visitStructured_event_stmt(ctx.structured_event_stmt());
+    } else if (ctx.default_declaration()) {
+      this.visitDefault_declaration(ctx.default_declaration());
+    } else if (ctx.loop_stmt()) {
+      this.visitLoop_stmt(ctx.loop_stmt());
+    } else if (ctx.conditional_stmt()) {
+      this.visitConditional_stmt(ctx.conditional_stmt());
+    }
+    // TODO: more statements as needed
+  }
+
+  visitDefault_declaration(ctx: AionParser.Default_declarationContext): void {
+    if (ctx.event_decl()) {
+      this.visitEvent_decl(ctx.event_decl());
+    } else if (ctx.task_decl()) {
+      this.visitTask_decl(ctx.task_decl());
+    } else if (ctx.pomodoro_decl()) {
+      this.visitPomodoro_decl(ctx.pomodoro_decl());
+    }
+  }
+
+  visitDeclaration(ctx: AionParser.DeclarationContext): void {
+    if (ctx.event_decl()) {
+      this.visitEvent_decl(ctx.event_decl());
+    } else if (ctx.task_decl()) {
+      this.visitTask_decl(ctx.task_decl());
+    } else if (ctx.pomodoro_decl()) {
+      this.visitPomodoro_decl(ctx.pomodoro_decl());
+    }
+  }
+
   visitEvent_decl(ctx: AionParser.Event_declContext): void {
     const name = ctx.STRING().text.replace(/"/g, "");
-
     let start: Date;
     let end: Date;
 
@@ -39,49 +74,101 @@ export class Interpreter
 
     if (timeSpec && dateCtx) {
       const times = timeSpec.time();
-
       if (times.length >= 2) {
         start = this.toDateTime(dateCtx, times[0]);
         end = this.toDateTime(dateCtx, times[1]);
       } else {
         start = this.toDateTime(dateCtx, times[0]);
-        end = new Date(start.getTime() + 60 * 60 * 1000); // Default +1h
+        end = new Date(start.getTime() + 60 * 60 * 1000);
       }
     } else {
       start = new Date();
-      end = new Date();
+      end = new Date(start.getTime() + 60 * 60 * 1000);
     }
 
     const event = createIcsEvent(name, start, end);
-    this.events.push(event);
+    const list = this.calendars.get(this.currentCalendar) || [];
+    list.push(event);
+    this.calendars.set(this.currentCalendar, list);
   }
 
-  visitDefault_declaration(ctx: AionParser.Default_declarationContext): void {
-    if (ctx.event_decl()) {
-      this.visitEvent_decl(ctx.event_decl());
-    }
+  visitTask_decl(ctx: AionParser.Task_declContext): void {
+    const name = ctx.STRING().text.replace(/"/g, "");
+    const dateCtx = ctx.date();
+    const timeCtx = ctx.task_time_spec().time()[0];
+    const [h, m] = timeCtx.text.split(":").map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
+      .split(".")
+      .map(Number);
 
-    // Add here more
+    const start = new Date(y, mo - 1, d, h, m);
+    const end = new Date(start.getTime() + 30 * 60 * 1000); // default 30m duration
+
+    const event = createIcsEvent(name, start, end);
+    const list = this.calendars.get(this.currentCalendar) || [];
+    list.push(event);
+    this.calendars.set(this.currentCalendar, list);
   }
 
-  visitDeclaration(ctx: AionParser.DeclarationContext): void {
-    if (ctx.event_decl()) {
-      this.visitEvent_decl(ctx.event_decl());
-    }
-    // Later add task_decl() and pomodoro_decl()
-  }
+  visitPomodoro_decl(ctx: AionParser.Pomodoro_declContext): void {
+    const name = ctx.STRING().text.replace(/"/g, "");
+    const dateCtx = ctx.date();
+    const timeCtx = ctx.time();
 
-  visitStatement(ctx: AionParser.StatementContext): void {
-    if (ctx.import_stmt()) {
-      // later handle imports
-    } else if (ctx.assignment_stmt()) {
-      // later handle assignments
-    } else if (ctx.structured_event_stmt()) {
-      this.visitStructured_event_stmt(ctx.structured_event_stmt());
-    } else if (ctx.default_declaration()) {
-      this.visitDefault_declaration(ctx.default_declaration());
+    const numberTokens = ctx.children?.filter(
+      (c) => c.text && /^\d+$/.test(c.text)
+    );
+    const repeatCount =
+      numberTokens && numberTokens.length > 0
+        ? parseInt(numberTokens[0].text)
+        : 1;
+
+    const [h, m] = timeCtx.text.split(":").map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
+      .split(".")
+      .map(Number);
+    const base = new Date(y, mo - 1, d, h, m);
+
+    let workDuration = 25;
+    let breakDuration = 5;
+
+    if (ctx.duration().length >= 1) {
+      const raw = ctx.duration()[0].text;
+      const matches = raw.match(/(\\d+)([hm])/g);
+      if (matches) {
+        for (const m of matches) {
+          const num = parseInt(m);
+          const unit = m[m.length - 1];
+          if (unit === "h") workDuration += num * 60;
+          else if (unit === "m") workDuration += num;
+        }
+      }
     }
-    // Add more as needed
+
+    if (ctx.duration().length >= 2) {
+      const raw = ctx.duration()[1].text;
+      const matches = raw.match(/(\\d+)([hm])/g);
+      if (matches) {
+        for (const m of matches) {
+          const num = parseInt(m);
+          const unit = m[m.length - 1];
+          if (unit === "h") breakDuration += num * 60;
+          else if (unit === "m") breakDuration += num;
+        }
+      }
+    }
+
+    let current = new Date(base);
+    for (let i = 0; i < repeatCount; i++) {
+      const start = new Date(current);
+      const end = new Date(current.getTime() + workDuration * 60 * 1000);
+      current = new Date(end.getTime() + breakDuration * 60 * 1000);
+
+      const event = createIcsEvent(`${name} #${i + 1}`, start, end);
+      const list = this.calendars.get(this.currentCalendar) || [];
+      list.push(event);
+      this.calendars.set(this.currentCalendar, list);
+    }
   }
 
   visitStructured_event_stmt(
@@ -90,7 +177,7 @@ export class Interpreter
     const fields = ctx.structured_event_field();
     let name = "Untitled Event";
     let startTime: Date = new Date();
-    let durationMinutes = 60; // Default 1 hour
+    let durationMinutes = 60;
     let location = "Unknown";
     let category = "General";
 
@@ -103,54 +190,55 @@ export class Interpreter
 
     for (const field of fields) {
       if (field.STRING()) {
-        const label = field.getChild(0).text; // e.g., 'name' or 'location' or 'category'
+        const label = field.getChild(0).text;
         const value = field.STRING().text.replace(/"/g, "");
 
-        if (label === "name") {
-          name = value;
-        } else if (label === "location") {
-          location = value;
-        } else if (label === "category") {
-          category = value;
-        }
+        if (label === "name") name = value;
+        else if (label === "location") location = value;
+        else if (label === "category") category = value;
       } else if (field.time()) {
-        const label = field.getChild(0).text; // should be 'start'
+        const label = field.getChild(0).text;
         if (label === "start") {
-          const [hours, minutes] = field.time().text.split(":").map(Number);
+          const [h, m] = field.time().text.split(":").map(Number);
           startTime = new Date(
             defaultDate.getFullYear(),
             defaultDate.getMonth(),
             defaultDate.getDate(),
-            hours,
-            minutes
+            h,
+            m
           );
         }
       } else if (field.duration()) {
-        const label = field.getChild(0).text; // should be 'duration'
+        const label = field.getChild(0).text;
         if (label === "duration") {
-          // Parse something like '30m' or '2h'
-          const durationParts =
-            field.duration().text.match(/(\d+)([hm])/g) || [];
-          for (const part of durationParts) {
-            const value = parseInt(part);
-            const unit = part[part.length - 1];
-            if (unit === "h") {
-              durationMinutes += value * 60;
-            } else if (unit === "m") {
-              durationMinutes += value;
-            }
+          const matches = field.duration().text.match(/(\d+)([hm])/g) || [];
+          durationMinutes = 0;
+          for (const match of matches) {
+            const num = parseInt(match);
+            const unit = match[match.length - 1];
+            if (unit === "h") durationMinutes += num * 60;
+            else if (unit === "m") durationMinutes += num;
           }
         }
       }
     }
 
     const endTime = new Date(startTime.getTime() + durationMinutes * 60 * 1000);
-
     const event = createIcsEvent(name, startTime, endTime);
     event.location = location;
     event.categories = [category];
 
-    this.events.push(event);
+    const list = this.calendars.get(this.currentCalendar) || [];
+    list.push(event);
+    this.calendars.set(this.currentCalendar, list);
+  }
+
+  visitLoop_stmt(ctx: AionParser.Loop_stmtContext): void {
+    // Placeholder: will need date math and loop execution
+  }
+
+  visitConditional_stmt(ctx: AionParser.Conditional_stmtContext): void {
+    // Placeholder: will need expression evaluation engine
   }
 
   private toDateTime(

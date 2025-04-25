@@ -132,14 +132,18 @@ import { AionLexer } from "../core/antlr/generated/AionLexer";
 import { AionParser } from "../core/antlr/generated/AionParser";
 import { Interpreter } from "../core/intepreter/Interpreter";
 
-// const code = `new event "Final Review" on 28.04.2025 at 14:00 for 1h;`;
+// Multiline code
 const code = `
-event DailyCheck {
-  name: "Daily Standup",
-  start: 10:00,
-  duration: 15m,
-  location: "Room 101",
-  category: "Team"
+new event "Morning Sync" on 28.04.2025 at 09:00 for 1h;
+new task "Submit Assignment" on 30.04.2025 at 14:00;
+new pomodoro "Study Session" on 28.04.2025 at 10:00 repeat 3 times every 25m with 5m pause;
+
+event TeamMeeting {
+  name: "Team Weekly Sync",
+  start: 11:00,
+  duration: 45m,
+  location: "Conference Room",
+  category: "Work"
 }
 `;
 

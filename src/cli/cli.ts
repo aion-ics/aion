@@ -9,6 +9,7 @@ import * as fs from 'fs';
 
 import chalk from 'chalk';
 import { getAionVersion } from '../core/intepreter/helpers/getVersion';
+import { parse } from '../core/parser/parser';
 
 const args = process.argv;
 const version = getAionVersion()
@@ -44,6 +45,7 @@ function handleDefaultArgumentCLI(arg: string) {
     if (arg.endsWith(".aion")) {
         // handle the compilation
         const file = fs.readFileSync(arg, 'utf-8');
+        parse(file, arg)
         console.log(file);
         
     }

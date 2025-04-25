@@ -1,5 +1,7 @@
 # Using Aion as npm package
 
+<img src="https://img.shields.io/npm/v/aion-ics">
+
 ### Installation:
 
 1) Make sure you are in a `Node.js` project. If you are not, run
@@ -13,7 +15,6 @@ npm init
 npm install aion-ics
 ```
 
-https://img.shields.io/npm/v/aion-ics
 
 ### Use
 

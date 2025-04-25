@@ -151,14 +151,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitProgram(this);
-		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -236,14 +228,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitStatement(this);
-		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -351,14 +335,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_import_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterImport_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitImport_stmt(this);
-		}
 	}
 
 	public final Import_stmtContext import_stmt() throws RecognitionException {
@@ -400,14 +376,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignment_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterAssignment_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitAssignment_stmt(this);
-		}
 	}
 
 	public final Assignment_stmtContext assignment_stmt() throws RecognitionException {
@@ -447,14 +415,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value_assignment_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterValue_assignment_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitValue_assignment_stmt(this);
-		}
 	}
 
 	public final Value_assignment_stmtContext value_assignment_stmt() throws RecognitionException {
@@ -499,14 +459,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_default_declaration; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterDefault_declaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitDefault_declaration(this);
-		}
 	}
 
 	public final Default_declarationContext default_declaration() throws RecognitionException {
@@ -571,14 +523,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaration; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterDeclaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitDeclaration(this);
-		}
 	}
 
 	public final DeclarationContext declaration() throws RecognitionException {
@@ -640,14 +584,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_event_decl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterEvent_decl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitEvent_decl(this);
-		}
 	}
 
 	public final Event_declContext event_decl() throws RecognitionException {
@@ -713,14 +649,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_event_time_spec; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterEvent_time_spec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitEvent_time_spec(this);
-		}
 	}
 
 	public final Event_time_specContext event_time_spec() throws RecognitionException {
@@ -815,14 +743,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_recurrence_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterRecurrence_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitRecurrence_expr(this);
-		}
 	}
 
 	public final Recurrence_exprContext recurrence_expr() throws RecognitionException {
@@ -987,14 +907,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_structured_event_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterStructured_event_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitStructured_event_stmt(this);
-		}
 	}
 
 	public final Structured_event_stmtContext structured_event_stmt() throws RecognitionException {
@@ -1052,14 +964,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_structured_event_field; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterStructured_event_field(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitStructured_event_field(this);
-		}
 	}
 
 	public final Structured_event_fieldContext structured_event_field() throws RecognitionException {
@@ -1206,14 +1110,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_task_decl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTask_decl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTask_decl(this);
-		}
 	}
 
 	public final Task_declContext task_decl() throws RecognitionException {
@@ -1279,14 +1175,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_task_time_spec; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTask_time_spec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTask_time_spec(this);
-		}
 	}
 
 	public final Task_time_specContext task_time_spec() throws RecognitionException {
@@ -1371,14 +1259,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pomodoro_decl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterPomodoro_decl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitPomodoro_decl(this);
-		}
 	}
 
 	public final Pomodoro_declContext pomodoro_decl() throws RecognitionException {
@@ -1520,14 +1400,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_loop_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterLoop_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitLoop_stmt(this);
-		}
 	}
 
 	public final Loop_stmtContext loop_stmt() throws RecognitionException {
@@ -1602,14 +1474,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_loop_start; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterLoop_start(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitLoop_start(this);
-		}
 	}
 
 	public final Loop_startContext loop_start() throws RecognitionException {
@@ -1669,14 +1533,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_loop_end; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterLoop_end(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitLoop_end(this);
-		}
 	}
 
 	public final Loop_endContext loop_end() throws RecognitionException {
@@ -1730,14 +1586,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_loop_unit; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterLoop_unit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitLoop_unit(this);
-		}
 	}
 
 	public final Loop_unitContext loop_unit() throws RecognitionException {
@@ -1788,14 +1636,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_conditional_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterConditional_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitConditional_stmt(this);
-		}
 	}
 
 	public final Conditional_stmtContext conditional_stmt() throws RecognitionException {
@@ -1928,14 +1768,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_filter_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterFilter_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitFilter_stmt(this);
-		}
 	}
 
 	public final Filter_stmtContext filter_stmt() throws RecognitionException {
@@ -1981,14 +1813,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_merge_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterMerge_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitMerge_stmt(this);
-		}
 	}
 
 	public final Merge_stmtContext merge_stmt() throws RecognitionException {
@@ -2030,14 +1854,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_identifier_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterIdentifier_list(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitIdentifier_list(this);
-		}
 	}
 
 	public final Identifier_listContext identifier_list() throws RecognitionException {
@@ -2088,14 +1904,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_include_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterInclude_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitInclude_stmt(this);
-		}
 	}
 
 	public final Include_stmtContext include_stmt() throws RecognitionException {
@@ -2135,14 +1943,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_export_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterExport_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitExport_stmt(this);
-		}
 	}
 
 	public final Export_stmtContext export_stmt() throws RecognitionException {
@@ -2233,14 +2033,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_condition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterCondition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitCondition(this);
-		}
 	}
 
 	public final ConditionContext condition() throws RecognitionException {
@@ -2314,14 +2106,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_comparison_op; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterComparison_op(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitComparison_op(this);
-		}
 	}
 
 	public final Comparison_opContext comparison_op() throws RecognitionException {
@@ -2360,14 +2144,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_strategy; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterStrategy(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitStrategy(this);
-		}
 	}
 
 	public final StrategyContext strategy() throws RecognitionException {
@@ -2424,14 +2200,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterValue_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitValue_expr(this);
-		}
 	}
 
 	public final Value_exprContext value_expr() throws RecognitionException {
@@ -2522,14 +2290,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_function_call; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterFunction_call(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitFunction_call(this);
-		}
 	}
 
 	public final Function_callContext function_call() throws RecognitionException {
@@ -2594,14 +2354,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_date; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterDate(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitDate(this);
-		}
 	}
 
 	public final DateContext date() throws RecognitionException {
@@ -2654,14 +2406,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_date_specifier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterDate_specifier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitDate_specifier(this);
-		}
 	}
 
 	public final Date_specifierContext date_specifier() throws RecognitionException {
@@ -2725,14 +2469,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_weekday_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterWeekday_list(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitWeekday_list(this);
-		}
 	}
 
 	public final Weekday_listContext weekday_list() throws RecognitionException {
@@ -2779,14 +2515,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_weekday; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterWeekday(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitWeekday(this);
-		}
 	}
 
 	public final WeekdayContext weekday() throws RecognitionException {
@@ -2829,14 +2557,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_time; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTime(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTime(this);
-		}
 	}
 
 	public final TimeContext time() throws RecognitionException {
@@ -2873,14 +2593,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_time_at; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTime_at(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTime_at(this);
-		}
 	}
 
 	public final Time_atContext time_at() throws RecognitionException {
@@ -2918,14 +2630,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_time_range; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTime_range(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTime_range(this);
-		}
 	}
 
 	public final Time_rangeContext time_range() throws RecognitionException {
@@ -2971,14 +2675,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_duration; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterDuration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitDuration(this);
-		}
 	}
 
 	public final DurationContext duration() throws RecognitionException {
@@ -3027,14 +2723,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_time_unit; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterTime_unit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitTime_unit(this);
-		}
 	}
 
 	public final Time_unitContext time_unit() throws RecognitionException {
@@ -3076,14 +2764,6 @@ public class AionParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).enterValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AionListener ) ((AionListener)listener).exitValue(this);
-		}
 	}
 
 	public final ValueContext value() throws RecognitionException {

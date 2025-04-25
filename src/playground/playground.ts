@@ -134,17 +134,30 @@ import { Interpreter } from "../core/intepreter/Interpreter";
 
 // Multiline code
 const code = `
-new event "Morning Sync" on 28.04.2025 at 09:00 for 1h;
-new task "Submit Assignment" on 30.04.2025 at 14:00;
-new pomodoro "Study Session" on 28.04.2025 at 10:00 repeat 3 times every 25m with 5m pause;
+import "testFile" as test;
 
-event TeamMeeting {
-  name: "Team Weekly Sync",
-  start: 11:00,
-  duration: 45m,
-  location: "Conference Room",
-  category: "Work"
+new event "Daily Standup" on 26.04.2025 at 09:00 for 1h;
+
+each day from 26.04.2025 to 28.04.2025 {
+    new event "Follow-up Meeting" on 26.04.2025 at 14:00 for 1h;
+    new task "Complete Documentation" on 26.04.2025 at 10:00 for 2h;
+    new pomodoro "Write Blog Post" on 26.04.2025 at 11:00 for 25m repeat 4 times with 5m pause;
 }
+
+if (x == 5) {
+    new event "Special Event" on 27.04.2025 at 12:00 for 2h;
+} else if (y != 3) {
+    new event "Backup Event" on 28.04.2025 at 15:00 for 1h;
+} else {
+    new event "Fallback" on 28.04.2025 at 16:00 for 1h;
+}
+
+merge eventList into "AllEvents";
+filter "eventList" where category == "Work" into "FilteredEvents";
+
+include "FilteredEvents" in "AllEvents";
+
+export "AllEvents" as "FinalEvents";
 `;
 
 const inputStream = CharStreams.fromString(code);

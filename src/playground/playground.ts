@@ -82,7 +82,7 @@ import {
   IcsCalendar,
   IcsEvent,
   IcsDateObject,
-} from "ts-ics";
+} from "@timurcravtov/ts-ics";
 import { errorWithCodePositionReference } from "../core/exceptions/errorWithCodePositionReference";
 import { parse } from "../core/parser/parser";
 
@@ -132,22 +132,32 @@ import { AionLexer } from "../core/antlr/generated/AionLexer";
 import { AionParser } from "../core/antlr/generated/AionParser";
 import { Interpreter } from "../core/intepreter/Interpreter";
 
-// const code = `new event "Final Review" on 28.04.2025 at 14:00 for 1h;`;
+// Multiline code
 const code = `
-event DailyCheck {
-  name: "Daily Standup",
-  start: 10:00,
-  duration: 15m,
-  location: "Room 101",
-  category: "Team"
-};
-event DailyCheck {
-  name: "Daily Standup 2",
-  start: 10:00,
-  duration: 15m,
-  location: "Room 101",
-  category: "Team"
+import "testFile" as test;
+
+new event "Daily Standup" on 26.04.2025 at 09:00 for 1h;
+
+each day from 26.04.2025 to 28.04.2025 {
+    new event "Follow-up Meeting" on 26.04.2025 at 14:00 for 1h;
+    new task "Complete Documentation" on 26.04.2025 at 10:00 for 2h;
+    new pomodoro "Write Blog Post" on 26.04.2025 at 11:00 for 25m repeat 4 times with 5m pause;
 }
+
+if (x == 5) {
+    new event "Special Event" on 27.04.2025 at 12:00 for 2h;
+} else if (y != 3) {
+    new event "Backup Event" on 28.04.2025 at 15:00 for 1h;
+} else {
+    new event "Fallback" on 28.04.2025 at 16:00 for 1h;
+}
+
+merge eventList into "AllEvents";
+filter "eventList" where category == "Work" into "FilteredEvents";
+
+include "FilteredEvents" in "AllEvents";
+
+export "AllEvents" as "FinalEvents";
 `;
 
 const inputStream = CharStreams.fromString(code);

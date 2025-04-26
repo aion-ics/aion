@@ -3,11 +3,7 @@
 </div>
 
 # The Aion language
-<img src="https://img.shields.io/npm/v/aion-ics">
-
-<img src="https://img.shields.io/npm/dy/aion-ics?label=npm%20downloads">
-
-<img src="https://img.shields.io/github/last-commit/aionlang/aion">
+<img src="https://img.shields.io/npm/v/aion-ics"> <img src="https://img.shields.io/npm/dy/aion-ics?label=npm%20downloads"> <img src="https://img.shields.io/github/last-commit/aionlang/aion">
 
 <a href="https://aionlang.github.io/documentation.html"><img src='https://img.shields.io/badge/docs-blue.svg'/></a> <a href="https://marketplace.visualstudio.com/items?itemName=aion-dsl-support.aion"><img src="https://img.shields.io/visual-studio-marketplace/v/aion-dsl-support.aion?label=vs%20code%20extension"></a>
 

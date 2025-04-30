@@ -1,6 +1,6 @@
 export interface IOSystem {
     importFile(path: string): string;
-    saveFile(fileContents: string): boolean;
+    saveFile(fileName: string, fileContents: string): boolean;
 }
 
 

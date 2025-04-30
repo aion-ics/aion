@@ -5,7 +5,7 @@ export class IOFileSystem implements IOSystem {
         return "";
     }
 
-    saveFile(fileContents: string): boolean {
+    saveFile(fileName:string, fileContents:string): boolean {
         return false;
     }
 

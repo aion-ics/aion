@@ -1,12 +1,24 @@
 import {IOSystem} from "./ioSystem";
 
-export class IoDictionarySystem implements IOSystem {
+/**
+ * Uses a dictionary for storing the data
+ */
+export class IODictionarySystem implements IOSystem {
+
+    private existingCalendarData: Map<string, string>;
+    private addedCalendarData: Map<string, string>;
+
+    constructor(private existingCalendars: Map<string, string> ) {
+        this.existingCalendarData = existingCalendars;
+    }
 
     importFile(path: string): string {
-        return "";
+        return this.existingCalendarData.get(path);
     }
 
-    saveFile(fileContents: string): boolean {
-        return false;
+    saveFile(fileName: string, fileContents: string): boolean {
+        this.addedCalendarData.set(fileName, fileContents);
+        return true; // return something meaningful;
     }
 }
+

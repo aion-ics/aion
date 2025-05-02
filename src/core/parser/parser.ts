@@ -25,7 +25,7 @@ export function parse(aionSourceCode: string, fileName: string = "input.aion"): 
     parser.program();
 
     if (!lexerErrorListener.hasErrors && !parserErrorListener.hasErrors) {
-        console.log("Parsing successful. Proceeding to semantic analysis or other processing...");
+        // consol»e.log("Parsing successful. Proceeding to semantic analysis or other processing...");
     } else {
     
         // console.log("Parsing failed due to syntax errors.");

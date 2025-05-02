@@ -1,7 +1,7 @@
 import { AbstractParseTreeVisitor } from "antlr4ts/tree/AbstractParseTreeVisitor";
 import { AionVisitor } from "../../core/antlr/generated/AionVisitor";
 import * as AionParser from "../../core/antlr/generated/AionParser";
-import { IcsEvent, IcsCalendar, generateIcsCalendar } from "ts-ics";
+import { IcsEvent, IcsCalendar, generateIcsCalendar } from "@timurcravtov/ts-ics";
 import { getProdId } from "./helpers/getProdId";
 import { createIcsEvent } from "./helpers/createIcsEvent";
 

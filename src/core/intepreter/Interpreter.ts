@@ -4,6 +4,7 @@ import * as AionParser from "../../core/antlr/generated/AionParser";
 import { IcsEvent, IcsCalendar, generateIcsCalendar } from "@timurcravtov/ts-ics";
 import { getProdId } from "./helpers/getProdId";
 import { createIcsEvent } from "./helpers/createIcsEvent";
+import { IOSystem } from "./helpers/io_system/ioSystem";
 
 export class Interpreter
   extends AbstractParseTreeVisitor<void>
@@ -13,6 +14,10 @@ export class Interpreter
   private variables: Map<string, any> = new Map();
   private currentCalendar: string = "main";
 
+  constructor(ioSystem: IOSystem) {
+    super();
+  }
+  
   protected defaultResult(): void {}
 
   visitProgram(ctx: AionParser.ProgramContext): void {

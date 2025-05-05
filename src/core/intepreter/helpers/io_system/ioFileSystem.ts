@@ -1,12 +1,23 @@
-import {IOSystem} from "./ioSystem";
+import { IOSystem } from "./ioSystem";
+import * as fs from "fs";
 
 export class IOFileSystem implements IOSystem {
     importFile(path: string): string {
-        return "";
+        try {
+            return fs.readFileSync(path, "utf-8");
+        } catch (error) {
+            console.error(`Error reading file from path ${path}:`, error);
+            return "";
+        }
     }
 
-    saveFile(fileName:string, fileContents:string): boolean {
-        return false;
+    saveFile(fileName: string, fileContents: string): boolean {
+        try {
+            fs.writeFileSync(fileName, fileContents, "utf-8");
+            return true;
+        } catch (error) {
+            console.error(`Error writing to file ${fileName}:`, error);
+            return false;
+        }
     }
-
 }

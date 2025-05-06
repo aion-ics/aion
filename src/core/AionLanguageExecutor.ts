@@ -1,7 +1,10 @@
 import { Interpreter } from "./intepreter/Interpreter";
-import { parse } from "./parser/parser";
+import { AionParserWrapper } from "./parser/parser";
 import { AionErrorListener } from "./parser/AionErrorListener";
 import { IOSystem } from "./intepreter/helpers/io_system/ioSystem";
+import { CharStreams, CommonTokenStream } from "antlr4ts";
+import { AionLexer } from "./antlr/generated/AionLexer";
+import { AionParser } from "./antlr/generated/AionParser";
 
 /**
  * T
@@ -14,6 +17,7 @@ export class AionLanguageExecutor {
     private ioSystem: IOSystem;
     private interpreter: Interpreter;
 
+
     public constructor(ioSystem: IOSystem) {
         this.ioSystem = ioSystem;
         this.interpreter = new Interpreter(ioSystem);
@@ -21,6 +25,12 @@ export class AionLanguageExecutor {
 
 
     public start(aionFilePath: string) {
+    
+        
+        const code = this.ioSystem.importFile(aionFilePath);
+        const parserWrapper = new AionParserWrapper();
+        parserWrapper.parse(code, aionFilePath);
+    
 
     }
 }

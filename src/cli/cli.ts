@@ -45,7 +45,7 @@ if (args.length == 2) {
 
 function handleDefaultArgumentCLI(arg: string) {
     if (arg.endsWith(".aion")) {
-        let aionLanguageExecutor: AionLanguageExecutor = new AionLanguageExecutor(new IOFileSystem);
+        let aionLanguageExecutor: AionLanguageExecutor = new AionLanguageExecutor(new IOFileSystem());
         aionLanguageExecutor.start(arg)
     }
 }

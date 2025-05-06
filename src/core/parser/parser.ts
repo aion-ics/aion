@@ -6,29 +6,35 @@ import { LexerATNSimulator } from "antlr4ts/atn/LexerATNSimulator";
 import { errorWithCodePositionReference } from "../exceptions/errorWithCodePositionReference";
 import { AionErrorListener } from "./AionErrorListener";
 
+export class AionParserWrapper {
 
-export function parse(aionSourceCode: string, fileName: string = "input.aion"): void {
-    const inputStream = new ANTLRInputStream(aionSourceCode);
-    const lexer = new AionLexer(inputStream);
-
-    const lexerErrorListener = new AionErrorListener<number>(aionSourceCode, fileName);
-    lexer.removeErrorListeners();
-    lexer.addErrorListener(lexerErrorListener);
-
-    const tokenStream = new CommonTokenStream(lexer);
-    const parser = new AionParser(tokenStream);
-
-    const parserErrorListener = new AionErrorListener<any>(aionSourceCode, fileName);
-    parser.removeErrorListeners();
-    parser.addErrorListener(parserErrorListener);
-
-    parser.program();
-
-    if (!lexerErrorListener.hasErrors && !parserErrorListener.hasErrors) {
-        // consol»e.log("Parsing successful. Proceeding to semantic analysis or other processing...");
-    } else {
+    constructor() {
+        
+    }
+    parse(aionSourceCode: string, fileName: string = "input.aion"): void {
+        const inputStream = new ANTLRInputStream(aionSourceCode);
+        const lexer = new AionLexer(inputStream);
     
-        // console.log("Parsing failed due to syntax errors.");
+        const lexerErrorListener = new AionErrorListener<number>(aionSourceCode, fileName);
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(lexerErrorListener);
+    
+        const tokenStream = new CommonTokenStream(lexer);
+        const parser = new AionParser(tokenStream);
+    
+        const parserErrorListener = new AionErrorListener<any>(aionSourceCode, fileName);
+        parser.removeErrorListeners();
+        parser.addErrorListener(parserErrorListener);
+    
+        parser.program();
+    
+        if (!lexerErrorListener.hasErrors && !parserErrorListener.hasErrors) {
+            // consol»e.log("Parsing successful. Proceeding to semantic analysis or other processing...");
+        } else {
+        
+            // console.log("Parsing failed due to syntax errors.");
+        }
     }
 }
+
 

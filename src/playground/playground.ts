@@ -84,7 +84,6 @@ import {
   IcsDateObject,
 } from "@timurcravtov/ts-ics";
 import { errorWithCodePositionReference } from "../core/exceptions/errorWithCodePositionReference";
-import { parse } from "../core/parser/parser";
 
 // Define a date object for the event
 const createIcsDateObject = (date: Date): IcsDateObject => ({
@@ -166,5 +165,4 @@ const tokenStream = new CommonTokenStream(lexer);
 const parser = new AionParser(tokenStream);
 
 const tree = parser.program();
-const interpreter = new Interpreter();
-interpreter.visit(tree);
+

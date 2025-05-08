@@ -5,19 +5,28 @@ import { IcsEvent, IcsCalendar, generateIcsCalendar } from "@timurcravtov/ts-ics
 import { getProdId } from "./helpers/getProdId";
 import { createIcsEvent } from "./helpers/createIcsEvent";
 import { IOSystem } from "./helpers/io_system/ioSystem";
+import { TimeValidation, TimeValidationNormal } from "../helpers/time_validation";
+import { IODictionarySystem } from "./helpers/io_system/ioDictionarySystem";
 
 export class Interpreter
   extends AbstractParseTreeVisitor<void>
   implements AionVisitor<void>
 {
+
+  private ioSystem: IOSystem;
+  private timeValidator: TimeValidation;
   private calendars: Map<string, IcsEvent[]> = new Map();
   private variables: Map<string, any> = new Map();
   private currentCalendar: string = "main";
 
-  constructor(ioSystem: IOSystem) {
+  public constructor(params: {ioSystem: IOSystem, timeValidator: TimeValidation}) {
+    const { ioSystem = new IODictionarySystem(new Map()) , timeValidator = new TimeValidationNormal() } = params;
+
     super();
+    this.ioSystem = ioSystem;
+    this.timeValidator = timeValidator
   }
-  
+
   protected defaultResult(): void {}
 
   visitProgram(ctx: AionParser.ProgramContext): void {

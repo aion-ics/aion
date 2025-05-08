@@ -5,6 +5,7 @@ import { IOSystem } from "./intepreter/helpers/io_system/ioSystem";
 import { CharStreams, CommonTokenStream } from "antlr4ts";
 import { AionLexer } from "./antlr/generated/AionLexer";
 import { AionParser } from "./antlr/generated/AionParser";
+import { TimeValidationNormal } from "./helpers/time_validation";
 
 /**
  * T
@@ -20,9 +21,8 @@ export class AionLanguageExecutor {
 
     public constructor(ioSystem: IOSystem) {
         this.ioSystem = ioSystem;
-        this.interpreter = new Interpreter(ioSystem);
+        this.interpreter = new Interpreter({ioSystem: this.ioSystem, timeValidator: new TimeValidationNormal()});
     }
-
 
     public start(aionFilePath: string) {
     

@@ -9,7 +9,6 @@ import * as fs from 'fs';
 
 import chalk from 'chalk';
 import { getAionVersion } from '../core/intepreter/helpers/getVersion';
-import { parse } from '../core/parser/parser';
 import { AionLanguageExecutor } from '../core/AionLanguageExecutor';
 import { IOFileSystem } from '../core/intepreter/helpers/io_system/ioFileSystem';
 

@@ -24,13 +24,26 @@ export class AionLanguageExecutor {
         this.interpreter = new Interpreter({ioSystem: this.ioSystem, timeValidator: new TimeValidationNormal()});
     }
 
-    public start(aionFilePath: string) {
-    
+    public start(aionFilePath: string): Array<AionRuntimeLoggingMessage> {
         
         const code = this.ioSystem.importFile(aionFilePath);
         const parserWrapper = new AionParserWrapper();
         parserWrapper.parse(code, aionFilePath);
-    
+        
+        return Array.of();
+    }
+}
 
+export class AionRuntimeLoggingMessage {
+    public datetime: Date;
+    public message: string;
+
+    public constructor(message: string) {
+        this.datetime = new Date();
+        this.message = message;
+    }
+    
+    public toString(): string {
+        return `${this.datetime.toISOString()} - ${this.message}`;
     }
 }

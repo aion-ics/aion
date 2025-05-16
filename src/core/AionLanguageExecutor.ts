@@ -28,8 +28,10 @@ export class AionLanguageExecutor {
         
         const code = this.ioSystem.importFile(aionFilePath);
         const parserWrapper = new AionParserWrapper();
-        parserWrapper.parse(code, aionFilePath);
-        
+        let tree = parserWrapper.parse(code, aionFilePath);
+
+        this.interpreter.visitProgram(tree);
+
         return Array.of();
     }
 }

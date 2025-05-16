@@ -1,7 +1,7 @@
 import { AbstractParseTreeVisitor } from "antlr4ts/tree/AbstractParseTreeVisitor";
 import { AionVisitor } from "../../core/antlr/generated/AionVisitor";
 import * as AionParser from "../../core/antlr/generated/AionParser";
-import { IcsEvent, IcsCalendar, generateIcsCalendar } from "@timurcravtov/ts-ics";
+import { IcsEvent, IcsCalendar, generateIcsCalendar, convertIcsCalendar } from "@timurcravtov/ts-ics";
 import { getProdId } from "./helpers/getProdId";
 import { createIcsEvent } from "./helpers/createIcsEvent";
 import { IOSystem } from "./helpers/io_system/ioSystem";
@@ -12,19 +12,18 @@ export class Interpreter
   extends AbstractParseTreeVisitor<void>
   implements AionVisitor<void>
 {
-
   private ioSystem: IOSystem;
   private timeValidator: TimeValidation;
   private calendars: Map<string, IcsEvent[]> = new Map();
   private variables: Map<string, any> = new Map();
   private currentCalendar: string = "main";
 
-  public constructor(params: {ioSystem: IOSystem, timeValidator: TimeValidation}) {
-    const { ioSystem = new IODictionarySystem(new Map()) , timeValidator = new TimeValidationNormal() } = params;
+  public constructor(params: { ioSystem: IOSystem; timeValidator: TimeValidation }) {
+    const { ioSystem = new IODictionarySystem(new Map()), timeValidator = new TimeValidationNormal() } = params;
 
     super();
     this.ioSystem = ioSystem;
-    this.timeValidator = timeValidator
+    this.timeValidator = timeValidator;
   }
 
   protected defaultResult(): void {}
@@ -80,25 +79,22 @@ export class Interpreter
     const name = ctx.IDENTIFIER().text;
     const declaration = ctx.declaration();
     if (declaration) {
-      this.variables.set(name, declaration);
+      const event = this.visitDeclaration(declaration);
+      this.variables.set(name, event);
       console.log(`(Assignment) Stored declaration in variable: ${name}`);
     }
   }
 
-  visitValue_assignment_stmt(
-    ctx: AionParser.Value_assignment_stmtContext
-  ): void {
+  visitValue_assignment_stmt(ctx: AionParser.Value_assignment_stmtContext): void {
     const name = ctx.IDENTIFIER().text;
     const value = ctx.value_expr().text;
     this.variables.set(name, value);
-    console.log(
-      `(Value Assignment) Stored value in variable: ${name} = ${value}`
-    );
+    console.log(`(Value Assignment) Stored value in variable: ${name} = ${value}`);
   }
 
   visitMerge_stmt(ctx: AionParser.Merge_stmtContext): void {
     const identifiers = ctx.identifier_list().IDENTIFIER();
-    const target = identifiers[identifiers.length - 1].text; // use last IDENTIFIER
+    const target = identifiers[identifiers.length - 1].text;
     const list: IcsEvent[] = [];
 
     for (let id of identifiers) {
@@ -127,7 +123,29 @@ export class Interpreter
 
   visitDefault_declaration(ctx: AionParser.Default_declarationContext): void {
     if (ctx.event_decl()) {
-      this.visitEvent_decl(ctx.event_decl());
+      const event = this.visitEvent_decl(ctx.event_decl());
+      // Append to calendar.ics
+      let events: IcsEvent[] = [];
+      try {
+        const icsContent = this.ioSystem.importFile("calendar.ics");
+        if (icsContent) {
+          const calendar = convertIcsCalendar(undefined, icsContent);
+          events = calendar.events || [];
+        }
+      } catch (e) {
+        // console.log(`(Event Declaration) No existing calendar.ics found, creating new one`);
+      }
+
+      events.push(event);
+
+      const updatedCalendar: IcsCalendar = {
+        prodId: getProdId(),
+        version: "2.0",
+        events,
+      };
+      const icsString = generateIcsCalendar(updatedCalendar);
+      this.ioSystem.saveFile("calendar.ics", icsString);
+      console.log(`(Event Declaration) Appended event "${event.summary}" to calendar.ics`);
     } else if (ctx.task_decl()) {
       this.visitTask_decl(ctx.task_decl());
     } else if (ctx.pomodoro_decl()) {
@@ -135,9 +153,9 @@ export class Interpreter
     }
   }
 
-  visitDeclaration(ctx: AionParser.DeclarationContext): void {
+  visitDeclaration(ctx: AionParser.DeclarationContext): IcsEvent | void {
     if (ctx.event_decl()) {
-      this.visitEvent_decl(ctx.event_decl());
+      return this.visitEvent_decl(ctx.event_decl());
     } else if (ctx.task_decl()) {
       this.visitTask_decl(ctx.task_decl());
     } else if (ctx.pomodoro_decl()) {
@@ -145,7 +163,7 @@ export class Interpreter
     }
   }
 
-  visitEvent_decl(ctx: AionParser.Event_declContext): void {
+  visitEvent_decl(ctx: AionParser.Event_declContext): IcsEvent {
     const name = ctx.STRING().text.replace(/"/g, "");
     let start: Date;
     let end: Date;
@@ -167,10 +185,7 @@ export class Interpreter
       end = new Date(start.getTime() + 60 * 60 * 1000);
     }
 
-    const event = createIcsEvent(name, start, end);
-    const list = this.calendars.get(this.currentCalendar) || [];
-    list.push(event);
-    this.calendars.set(this.currentCalendar, list);
+    return createIcsEvent(name, start, end);
   }
 
   visitTask_decl(ctx: AionParser.Task_declContext): void {
@@ -178,14 +193,13 @@ export class Interpreter
     const dateCtx = ctx.date();
     const timeCtx = ctx.task_time_spec().time()[0];
     const [h, m] = timeCtx.text.split(":").map(Number);
-    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
-      .split(".")
-      .map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
 
     const start = new Date(y, mo - 1, d, h, m);
-    const end = new Date(start.getTime() + 30 * 60 * 1000); // default 30m duration
+    const end = new Date(start.getTime() + 30 * 60 * 1000);
 
     const event = createIcsEvent(name, start, end);
+    
     const list = this.calendars.get(this.currentCalendar) || [];
     list.push(event);
     this.calendars.set(this.currentCalendar, list);
@@ -196,18 +210,11 @@ export class Interpreter
     const dateCtx = ctx.date();
     const timeCtx = ctx.time();
 
-    const numberTokens = ctx.children?.filter(
-      (c) => c.text && /^\d+$/.test(c.text)
-    );
-    const repeatCount =
-      numberTokens && numberTokens.length > 0
-        ? parseInt(numberTokens[0].text)
-        : 1;
+    const numberTokens = ctx.children?.filter((c) => c.text && /^\d+$/.test(c.text));
+    const repeatCount = numberTokens && numberTokens.length > 0 ? parseInt(numberTokens[0].text) : 1;
 
     const [h, m] = timeCtx.text.split(":").map(Number);
-    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
-      .split(".")
-      .map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
     const base = new Date(y, mo - 1, d, h, m);
 
     let workDuration = 25;
@@ -252,9 +259,7 @@ export class Interpreter
     }
   }
 
-  visitStructured_event_stmt(
-    ctx: AionParser.Structured_event_stmtContext
-  ): void {
+  visitStructured_event_stmt(ctx: AionParser.Structured_event_stmtContext): void {
     const fields = ctx.structured_event_field();
     let name = "Untitled Event";
     let startTime: Date = new Date();
@@ -263,11 +268,7 @@ export class Interpreter
     let category = "General";
 
     const today = new Date();
-    const defaultDate = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
+    const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
     for (const field of fields) {
       if (field.STRING()) {
@@ -363,10 +364,7 @@ export class Interpreter
     throw new Error("Invalid loop start");
   }
 
-  private resolveLoopEnd(
-    ctx: AionParser.Loop_endContext,
-    startDate: Date
-  ): Date {
+  private resolveLoopEnd(ctx: AionParser.Loop_endContext, startDate: Date): Date {
     if (ctx.date()) {
       return this.parseDate(ctx.date().text);
     }
@@ -396,36 +394,29 @@ export class Interpreter
   visitConditional_stmt(ctx: AionParser.Conditional_stmtContext): void {
     let conditionMet = false;
 
-    // Step 1: Evaluate the first condition (if condition)
     if (this.evaluateCondition(ctx.condition(0))) {
-      conditionMet = true; // The first condition is true
-      this.visitBlock(ctx.statement(0)); // Visit the "if" block
+      conditionMet = true;
+      this.visitBlock(ctx.statement(0));
     } else {
-      // Step 2: Check for "else if" conditions if the "if" condition is not met
       for (let i = 1; i < ctx.condition().length; i++) {
         if (this.evaluateCondition(ctx.condition(i))) {
           conditionMet = true;
-          this.visitBlock(ctx.statement(i)); // Visit the "else if" block
+          this.visitBlock(ctx.statement(i));
           break;
         }
       }
 
-      // Step 3: Check for "else" block if no conditions matched
       if (!conditionMet && ctx.statement(ctx.condition().length)) {
-        this.visitBlock(ctx.statement(ctx.condition().length)); // Execute the "else" block
+        this.visitBlock(ctx.statement(ctx.condition().length));
       }
     }
   }
 
-  private evaluateCondition(
-    conditionCtx: AionParser.ConditionContext
-  ): boolean {
+  private evaluateCondition(conditionCtx: AionParser.ConditionContext): boolean {
     if (conditionCtx.IDENTIFIER()) {
       const variable = conditionCtx.IDENTIFIER().text;
       const value = this.variables.get(variable);
-      const comparisonValue = this.evaluateComparisonValue(
-        conditionCtx.value()
-      );
+      const comparisonValue = this.evaluateComparisonValue(conditionCtx.value());
 
       switch (conditionCtx.comparison_op().text) {
         case "==":
@@ -444,39 +435,30 @@ export class Interpreter
           return false;
       }
     }
-    return false; // If condition is not handled, return false.
+    return false;
   }
 
   private evaluateComparisonValue(valueCtx: AionParser.ValueContext): any {
     if (valueCtx.NUMBER()) {
       return parseInt(valueCtx.NUMBER().text);
     } else if (valueCtx.STRING()) {
-      return valueCtx.STRING().text.replace(/"/g, ""); // Remove quotes
+      return valueCtx.STRING().text.replace(/"/g, "");
     }
-    return null; // For other types of values, we should handle appropriately
+    return null;
   }
 
-  private visitBlock(
-    statements: AionParser.StatementContext | AionParser.StatementContext[]
-  ): void {
-    // If we only have a single statement, convert it into an array
+  private visitBlock(statements: AionParser.StatementContext | AionParser.StatementContext[]): void {
     if (!Array.isArray(statements)) {
-      statements = [statements]; // Wrap the single statement in an array
+      statements = [statements];
     }
 
-    // Now, iterate through the statements array and visit each one
     for (const stmt of statements) {
-      this.visit(stmt); // Visit each statement inside the block
+      this.visit(stmt);
     }
   }
 
-  private toDateTime(
-    dateCtx: AionParser.DateContext,
-    timeCtx: AionParser.TimeContext
-  ): Date {
-    const [d, m, y = new Date().getFullYear()] = dateCtx.text
-      .split(".")
-      .map(Number);
+  private toDateTime(dateCtx: AionParser.DateContext, timeCtx: AionParser.TimeContext): Date {
+    const [d, m, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
     const [h, min] = timeCtx.text.split(":").map(Number);
     return new Date(y, m - 1, d, h, min);
   }

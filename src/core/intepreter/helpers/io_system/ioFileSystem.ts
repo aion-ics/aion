@@ -6,8 +6,7 @@ export class IOFileSystem implements IOSystem {
         try {
             return fs.readFileSync(path, "utf-8");
         } catch (error) {
-            console.error(`Error reading file from path ${path}:`, error);
-            return "";
+            throw new Error(`Error reading file ${path}: ${error}`);
         }
     }
 
@@ -16,8 +15,8 @@ export class IOFileSystem implements IOSystem {
             fs.writeFileSync(fileName, fileContents, "utf-8");
             return true;
         } catch (error) {
-            console.error(`Error writing to file ${fileName}:`, error);
-            return false;
+            throw new Error(`Error writing file ${fileName}: ${error}`);
+            return false; 
         }
     }
 }

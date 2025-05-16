@@ -1,17 +1,19 @@
 import { ANTLRInputStream, CommonTokenStream } from "antlr4ts";
 import { AionLexer } from "../antlr/generated/AionLexer";
-import { AionParser } from "../antlr/generated/AionParser";
+import { AionParser, ProgramContext } from "../antlr/generated/AionParser";
 import { ANTLRErrorListener, Recognizer, RecognitionException } from "antlr4ts";
 import { LexerATNSimulator } from "antlr4ts/atn/LexerATNSimulator";
 import { errorWithCodePositionReference } from "../exceptions/errorWithCodePositionReference";
 import { AionErrorListener } from "./AionErrorListener";
+import { Program } from "typescript";
 
 export class AionParserWrapper {
 
     constructor() {
         
     }
-    parse(aionSourceCode: string, fileName: string = "input.aion"): void {
+    
+    parse(aionSourceCode: string, fileName: string = "input.aion"): ProgramContext {
         const inputStream = new ANTLRInputStream(aionSourceCode);
         const lexer = new AionLexer(inputStream);
     
@@ -26,13 +28,14 @@ export class AionParserWrapper {
         parser.removeErrorListeners();
         parser.addErrorListener(parserErrorListener);
     
-        parser.program();
+        let tree = parser.program();
     
         if (!lexerErrorListener.hasErrors && !parserErrorListener.hasErrors) {
-            // consol»e.log("Parsing successful. Proceeding to semantic analysis or other processing...");
+            console.log("Parsing successful. Proceeding to semantic analysis or other processing...");
+            return tree;
         } else {
-        
-            // console.log("Parsing failed due to syntax errors.");
+    
+            console.log("Parsing failed due to syntax errors.");
         }
     }
 }

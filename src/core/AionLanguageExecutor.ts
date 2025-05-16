@@ -13,7 +13,10 @@ import { TimeValidationNormal } from "./helpers/time_validation";
 export class AionLanguageExecutor {
 
     /**
-     * The IO system used to handle input and output operations. @see IOSystem, @see IOFileSystem, @see IODictionarySystem
+     * The IO system used to handle input and output operations.
+     * @see IOSystem
+     * @see IOFileSystem
+     * @see IODictionarySystem
      */
     private ioSystem: IOSystem;
     private interpreter: Interpreter;

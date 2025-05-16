@@ -42,7 +42,7 @@ export class Interpreter
     };
 
     const icsString = generateIcsCalendar(calendar);
-    console.log(icsString);
+    // console.log(icsString);
   }
 
   visitStatement(ctx: AionParser.StatementContext): void {

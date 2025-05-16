@@ -1,6 +1,6 @@
 {
   "name": "aion-ics",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Aion DSL language for managing ICalendar data",
   "types": "types.types.d.ts",
   "main": "./dist/index/index.js",

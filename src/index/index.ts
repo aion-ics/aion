@@ -13,8 +13,8 @@ import { IODictionarySystem } from "../core/intepreter/helpers/io_system/ioDicti
  * @param existingCalendars - A map of existing calendars (.ics) to be used with filename as a key (without the .ics extension) and the calendar code as a value.
  * @returns updated and created calendars in form of the map. 
  */
-export function executeAionCode(code: string, filename: string = "input.aion", existingCalendars: Map<String, String>): Map<String, String> {
-    const ioSystem = new IODictionarySystem(null);
+export function executeAionCode(code: string, filename: string = "input.aion", existingCalendars: Map<string, string>): Map<string, string> {
+    const ioSystem = new IODictionarySystem(existingCalendars);
     const aionLanguageExecutor = new AionLanguageExecutor(ioSystem);
     aionLanguageExecutor.start(code);
     

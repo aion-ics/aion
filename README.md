@@ -15,12 +15,12 @@
 
 Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aionlang.github.io/. 
 
-This repository contains all the necessary tools for and executing `Aion` source files in different ways (clone and run `npm i` before using it).
+This repository contains all the necessary tools for and executing `Aion` source files in different ways.
 
 
 ## Resources
 
-- **Executables**: https://aion-ics.github.io/downloads.html
+- **Executables**: https://aionlang.github.io/downloads.html
 - **Documentaion**: https://aionlang.github.io/documentation.html 
 - **Repository**: https://github.com/aionlang/aion
 ## Using Aion
@@ -36,9 +36,10 @@ npm install aion-ics
 Then, in your TS or JS file you can use it as a CJS or ESM module
 
 ```typescript
-import * from "aion-ics"
+import { runAionCode } from "aion-ics"
 // or
-const Aion = require("aion-ics")
+const aion = require("aion-ics")
+aion.runAionCode(/* ...*/)
 ```
 
 
@@ -115,4 +116,4 @@ The grammar of the language in Backus Naur Form (BNF) is avaliable in [docs fold
 
 ## Examples of Aion 
 
-Further examples, and the full documentation is avaliable at Aion [website](https://aion-ics.github.io/). 
+Further examples, and the full documentation is avaliable at Aion [website](https://aionlang.github.io/). 

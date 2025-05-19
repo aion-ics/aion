@@ -16,8 +16,8 @@ import { IODictionarySystem } from "../core/intepreter/helpers/io_system/ioDicti
 export function executeAionCode(code: string, filename: string = "input.aion", existingCalendars: Map<string, string>): Map<string, string> {
     const ioSystem = new IODictionarySystem(existingCalendars);
     const aionLanguageExecutor = new AionLanguageExecutor(ioSystem);
-    aionLanguageExecutor.start(code);
-    
+    aionLanguageExecutor.start(filename);
+
     return null;
 }
 

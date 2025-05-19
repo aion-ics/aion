@@ -1,4 +1,4 @@
-import { ANTLRInputStream, CommonTokenStream } from "antlr4ts";
+import {ANTLRInputStream, CharStreams, CommonTokenStream} from "antlr4ts";
 import { AionLexer } from "../antlr/generated/AionLexer";
 import { AionParser, ProgramContext } from "../antlr/generated/AionParser";
 import { ANTLRErrorListener, Recognizer, RecognitionException } from "antlr4ts";
@@ -14,7 +14,7 @@ export class AionParserWrapper {
     }
     
     parse(aionSourceCode: string, fileName: string = "input.aion"): ProgramContext {
-        const inputStream = new ANTLRInputStream(aionSourceCode);
+        const inputStream = CharStreams.fromString(aionSourceCode);
         const lexer = new AionLexer(inputStream);
     
         const lexerErrorListener = new AionErrorListener<number>(aionSourceCode, fileName);

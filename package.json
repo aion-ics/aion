@@ -1,10 +1,11 @@
 {
   "name": "aion-ics",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "Aion DSL language for managing ICalendar data",
   "types": "types.types.d.ts",
   "main": "./dist/index/index.js",
   "module": "./dist/index/index.mjs",
+
   "bin": {
     "aion": "./dist/cli/cli.js"
   },
@@ -26,12 +27,8 @@
     "build-win-installer": "npm run build && npm run make-win && iscc exe/win-installer/setup.iss"
   },
   "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "default": "./dist/index.cjs"
-    }
+    "import": "./dist/index/index.mjs",
+    "require": "./dist/index/index.js"
   },
   "pkg": {
     "scripts": "dist/**/*.js",

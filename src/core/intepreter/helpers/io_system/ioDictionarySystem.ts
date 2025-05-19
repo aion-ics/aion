@@ -6,9 +6,8 @@ import {IOSystem} from "./ioSystem";
 export class IODictionarySystem implements IOSystem {
 
     private existingCalendarData: Map<string, string>;
-    private addedCalendarData: Map<string, string>;
 
-    constructor(private existingCalendars: Map<string, string> ) {
+    constructor(existingCalendars: Map<string, string> ) {
         this.existingCalendarData = existingCalendars;
     }
 
@@ -17,7 +16,7 @@ export class IODictionarySystem implements IOSystem {
     }
 
     saveFile(fileName: string, fileContents: string): boolean {
-        this.addedCalendarData.set(fileName, fileContents);
+        this.existingCalendarData.set(fileName, fileContents);
         return true; // return something meaningful;
     }
 }

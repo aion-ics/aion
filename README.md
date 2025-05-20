@@ -8,11 +8,6 @@
 <a href="https://aionlang.github.io/documentation.html"><img src='https://img.shields.io/badge/docs-blue.svg'/></a> <a href="https://marketplace.visualstudio.com/items?itemName=aion-dsl-support.aion"><img src="https://img.shields.io/visual-studio-marketplace/v/aion-dsl-support.aion?label=vs%20code%20extension"></a>
 
 
-
-> [!CAUTION]
-> The language is under development, and doesn't yet works.
-
-
 Aion is DSL language for managing ICalendar(.ics) files. The official page of Aion language can be found at https://aionlang.github.io/. 
 
 This repository contains all the necessary tools for and executing `Aion` source files in different ways.

@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "@timurcravtov/ts-ics": "^2.1.0",
+    "@timurcravtov/ts-ics": "^2.1.4",
     "ts-node": "^10.9.2"
   },
   "repository": {

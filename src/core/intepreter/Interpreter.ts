@@ -3,7 +3,7 @@ import { AionVisitor } from "../../core/antlr/generated/AionVisitor";
 import * as AionParser from "../../core/antlr/generated/AionParser";
 import { IcsEvent, IcsCalendar, generateIcsCalendar, convertIcsCalendar } from "@timurcravtov/ts-ics";
 import { getProdId } from "./helpers/getProdId";
-import { createIcsEvent } from "./helpers/createIcsEvent";
+import { createIcsEvent } from "./helpers/createIcsStructures";
 import { IOSystem } from "./helpers/io_system/ioSystem";
 import { TimeValidation, TimeValidationNormal } from "../helpers/time_validation";
 import { IODictionarySystem } from "./helpers/io_system/ioDictionarySystem";

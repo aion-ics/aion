@@ -7,6 +7,8 @@ import { createIcsEvent } from "./helpers/createIcsStructures";
 import { IOSystem } from "./helpers/io_system/ioSystem";
 import { TimeValidation, TimeValidationNormal } from "../helpers/time_validation";
 import { IODictionarySystem } from "./helpers/io_system/ioDictionarySystem";
+import {AionRuntimeLoggingMessage} from "../helpers/AionRuntimeLoggingMessage";
+
 
 export class Interpreter
   extends AbstractParseTreeVisitor<void>
@@ -145,7 +147,10 @@ export class Interpreter
       };
       const icsString = generateIcsCalendar(updatedCalendar);
       this.ioSystem.saveFile("calendar.ics", icsString);
-      console.log(`(Event Declaration) Appended event "${event.summary}" to calendar.ics`);
+      let event_created =
+          new AionRuntimeLoggingMessage(`Appended event "${event.summary}" to calendar.ics`, "Event Declaration");
+      console.log(event_created.toString());
+
     } else if (ctx.task_decl()) {
       this.visitTask_decl(ctx.task_decl());
     } else if (ctx.pomodoro_decl()) {
@@ -184,7 +189,6 @@ export class Interpreter
       start = new Date();
       end = new Date(start.getTime() + 60 * 60 * 1000);
     }
-
     return createIcsEvent(name, start, end);
   }
 

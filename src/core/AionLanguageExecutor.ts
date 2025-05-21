@@ -6,6 +6,8 @@ import { CharStreams, CommonTokenStream } from "antlr4ts";
 import { AionLexer } from "./antlr/generated/AionLexer";
 import { AionParser } from "./antlr/generated/AionParser";
 import { TimeValidationNormal } from "./helpers/time_validation";
+import chalk from "chalk";
+import {AionRuntimeLoggingMessage} from "./helpers/AionRuntimeLoggingMessage";
 
 /**
  * T
@@ -32,23 +34,12 @@ export class AionLanguageExecutor {
         const code = this.ioSystem.importFile(aionFilePath);
         const parserWrapper = new AionParserWrapper();
         let tree = parserWrapper.parse(code, aionFilePath);
-
+        if (parserWrapper.hasErrors()) {
+            console.log(parserWrapper.getErrors()[0]);
+            return;
+        }
         this.interpreter.visitProgram(tree);
 
         return Array.of();
-    }
-}
-
-export class AionRuntimeLoggingMessage {
-    public datetime: Date;
-    public message: string;
-
-    public constructor(message: string) {
-        this.datetime = new Date();
-        this.message = message;
-    }
-    
-    public toString(): string {
-        return `${this.datetime.toISOString()} - ${this.message}`;
     }
 }

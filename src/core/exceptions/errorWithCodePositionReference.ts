@@ -24,10 +24,11 @@ export function errorWithCodePositionReference(
     fileName: string = "input.aion"
 ): string {
     const lines = sourceCode.split(/\r?\n/);
-    const line = lines[lineNumber - 1] ?? "";
+    // console.log(lineNumber);
+    const line = lines[lineNumber - 2] ?? "";
 
     const pointer = " ".repeat(columnNumber - 1) + "^";
-
+    // console.log(lines, line, pointer);
     return [
         `\n${fileName}:${lineNumber}:${columnNumber}`,
         `  ${line}`,

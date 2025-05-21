@@ -3,11 +3,16 @@ import { errorWithCodePositionReference } from "../exceptions/errorWithCodePosit
 
 export class AionErrorListener<T> implements ANTLRErrorListener<T> {
     private _hasErrors = false;
+    private errors: string[] = [];
 
     constructor(private sourceCode: string, private fileName: string = "input.aion") {}
 
     public get hasErrors(): boolean {
         return this._hasErrors;
+    }
+
+    public getErrors(): string[] {
+        return this.errors;
     }
 
     syntaxError(
@@ -26,6 +31,6 @@ export class AionErrorListener<T> implements ANTLRErrorListener<T> {
             msg,
             this.fileName
         );
-        console.error(errorMessage);
+        this.errors.push(errorMessage);
     }
 }

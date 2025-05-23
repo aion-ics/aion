@@ -1,14 +1,22 @@
 import { AbstractParseTreeVisitor } from "antlr4ts/tree/AbstractParseTreeVisitor";
 import { AionVisitor } from "../../core/antlr/generated/AionVisitor";
 import * as AionParser from "../../core/antlr/generated/AionParser";
-import { IcsEvent, IcsCalendar, generateIcsCalendar, convertIcsCalendar } from "@timurcravtov/ts-ics";
+import {
+  IcsEvent,
+  IcsCalendar,
+  generateIcsCalendar,
+  convertIcsCalendar,
+} from "@timurcravtov/ts-ics";
 import { getProdId } from "./helpers/getProdId";
 import { createIcsEvent } from "./helpers/createIcsStructures";
 import { IOSystem } from "./helpers/io_system/ioSystem";
-import { TimeValidation, TimeValidationNormal } from "../helpers/time_validation";
+import {
+  TimeValidation,
+  TimeValidationNormal,
+} from "../helpers/time_validation";
 import { IODictionarySystem } from "./helpers/io_system/ioDictionarySystem";
-import {AionRuntimeLoggingMessage} from "../helpers/AionRuntimeLoggingMessage";
-
+import { AionRuntimeLoggingMessage } from "../helpers/AionRuntimeLoggingMessage";
+import { time } from "console";
 
 export class Interpreter
   extends AbstractParseTreeVisitor<void>
@@ -20,8 +28,14 @@ export class Interpreter
   private variables: Map<string, any> = new Map();
   private currentCalendar: string = "main";
 
-  public constructor(params: { ioSystem: IOSystem; timeValidator: TimeValidation }) {
-    const { ioSystem = new IODictionarySystem(new Map()), timeValidator = new TimeValidationNormal() } = params;
+  public constructor(params: {
+    ioSystem: IOSystem;
+    timeValidator: TimeValidation;
+  }) {
+    const {
+      ioSystem = new IODictionarySystem(new Map()),
+      timeValidator = new TimeValidationNormal(),
+    } = params;
 
     super();
     this.ioSystem = ioSystem;
@@ -87,11 +101,15 @@ export class Interpreter
     }
   }
 
-  visitValue_assignment_stmt(ctx: AionParser.Value_assignment_stmtContext): void {
+  visitValue_assignment_stmt(
+    ctx: AionParser.Value_assignment_stmtContext
+  ): void {
     const name = ctx.IDENTIFIER().text;
     const value = ctx.value_expr().text;
     this.variables.set(name, value);
-    console.log(`(Value Assignment) Stored value in variable: ${name} = ${value}`);
+    console.log(
+      `(Value Assignment) Stored value in variable: ${name} = ${value}`
+    );
   }
 
   visitMerge_stmt(ctx: AionParser.Merge_stmtContext): void {
@@ -147,10 +165,11 @@ export class Interpreter
       };
       const icsString = generateIcsCalendar(updatedCalendar);
       this.ioSystem.saveFile("calendar.ics", icsString);
-      let event_created =
-          new AionRuntimeLoggingMessage(`Appended event "${event.summary}" to calendar.ics`, "Event Declaration");
+      let event_created = new AionRuntimeLoggingMessage(
+        `Appended event "${event.summary}" to calendar.ics`,
+        "Event Declaration"
+      );
       console.log(event_created.toString());
-
     } else if (ctx.task_decl()) {
       this.visitTask_decl(ctx.task_decl());
     } else if (ctx.pomodoro_decl()) {
@@ -179,6 +198,7 @@ export class Interpreter
     if (timeSpec && dateCtx) {
       const times = timeSpec.time();
       if (times.length >= 2) {
+        console.log("here");
         start = this.toDateTime(dateCtx, times[0]);
         end = this.toDateTime(dateCtx, times[1]);
       } else {
@@ -197,13 +217,15 @@ export class Interpreter
     const dateCtx = ctx.date();
     const timeCtx = ctx.task_time_spec().time()[0];
     const [h, m] = timeCtx.text.split(":").map(Number);
-    const [d, mo, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
+      .split(".")
+      .map(Number);
 
     const start = new Date(y, mo - 1, d, h, m);
     const end = new Date(start.getTime() + 30 * 60 * 1000);
 
     const event = createIcsEvent(name, start, end);
-    
+
     const list = this.calendars.get(this.currentCalendar) || [];
     list.push(event);
     this.calendars.set(this.currentCalendar, list);
@@ -214,11 +236,18 @@ export class Interpreter
     const dateCtx = ctx.date();
     const timeCtx = ctx.time();
 
-    const numberTokens = ctx.children?.filter((c) => c.text && /^\d+$/.test(c.text));
-    const repeatCount = numberTokens && numberTokens.length > 0 ? parseInt(numberTokens[0].text) : 1;
+    const numberTokens = ctx.children?.filter(
+      (c) => c.text && /^\d+$/.test(c.text)
+    );
+    const repeatCount =
+      numberTokens && numberTokens.length > 0
+        ? parseInt(numberTokens[0].text)
+        : 1;
 
     const [h, m] = timeCtx.text.split(":").map(Number);
-    const [d, mo, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
+    const [d, mo, y = new Date().getFullYear()] = dateCtx.text
+      .split(".")
+      .map(Number);
     const base = new Date(y, mo - 1, d, h, m);
 
     let workDuration = 25;
@@ -263,7 +292,9 @@ export class Interpreter
     }
   }
 
-  visitStructured_event_stmt(ctx: AionParser.Structured_event_stmtContext): void {
+  visitStructured_event_stmt(
+    ctx: AionParser.Structured_event_stmtContext
+  ): void {
     const fields = ctx.structured_event_field();
     let name = "Untitled Event";
     let startTime: Date = new Date();
@@ -272,7 +303,11 @@ export class Interpreter
     let category = "General";
 
     const today = new Date();
-    const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const defaultDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
 
     for (const field of fields) {
       if (field.STRING()) {
@@ -368,7 +403,10 @@ export class Interpreter
     throw new Error("Invalid loop start");
   }
 
-  private resolveLoopEnd(ctx: AionParser.Loop_endContext, startDate: Date): Date {
+  private resolveLoopEnd(
+    ctx: AionParser.Loop_endContext,
+    startDate: Date
+  ): Date {
     if (ctx.date()) {
       return this.parseDate(ctx.date().text);
     }
@@ -416,11 +454,15 @@ export class Interpreter
     }
   }
 
-  private evaluateCondition(conditionCtx: AionParser.ConditionContext): boolean {
+  private evaluateCondition(
+    conditionCtx: AionParser.ConditionContext
+  ): boolean {
     if (conditionCtx.IDENTIFIER()) {
       const variable = conditionCtx.IDENTIFIER().text;
       const value = this.variables.get(variable);
-      const comparisonValue = this.evaluateComparisonValue(conditionCtx.value());
+      const comparisonValue = this.evaluateComparisonValue(
+        conditionCtx.value()
+      );
 
       switch (conditionCtx.comparison_op().text) {
         case "==":
@@ -451,7 +493,9 @@ export class Interpreter
     return null;
   }
 
-  private visitBlock(statements: AionParser.StatementContext | AionParser.StatementContext[]): void {
+  private visitBlock(
+    statements: AionParser.StatementContext | AionParser.StatementContext[]
+  ): void {
     if (!Array.isArray(statements)) {
       statements = [statements];
     }
@@ -461,9 +505,47 @@ export class Interpreter
     }
   }
 
-  private toDateTime(dateCtx: AionParser.DateContext, timeCtx: AionParser.TimeContext): Date {
-    const [d, m, y = new Date().getFullYear()] = dateCtx.text.split(".").map(Number);
-    const [h, min] = timeCtx.text.split(":").map(Number);
-    return new Date(y, m - 1, d, h, min);
+  private toDateTime(
+    dateCtx: AionParser.DateContext,
+    timeCtx: AionParser.TimeContext
+  ): Date {
+    try {
+      // Delegate date parsing to timeValidator
+      const dateText = dateCtx.text.trim();
+      const parsedDate = this.timeValidator.validateDate(dateText);
+      if (!parsedDate) {
+        throw new Error(
+          `Invalid date format: ${dateText}, expected dd.mm.yyyy`
+        );
+      }
+
+      // Delegate time parsing to timeValidator
+      const timeText = timeCtx.text.trim();
+      const time = this.timeValidator.validateTime(timeText);
+      if (!time) {
+        throw new Error(
+          `Invalid time format: ${timeText}, expected HH:mm or HH:mm AM/PM`
+        );
+      }
+
+      // Combine date and time
+      const result = new Date(
+        parsedDate.getFullYear(),
+        parsedDate.getMonth(),
+        parsedDate.getDate(),
+        time.hours,
+        time.minutes
+      );
+
+      // Validate the resulting date
+      if (isNaN(result.getTime())) {
+        throw new Error(`Invalid date/time: ${dateText} ${timeText}`);
+      }
+
+      return result;
+    } catch (error) {
+      console.error(`Error parsing date/time: ${error.message}`);
+      return new Date(); // Fallback to current date/time (May 23, 2025, 10:13 AM EEST)
+    }
   }
 }

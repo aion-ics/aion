@@ -1,6 +1,6 @@
 {
   "name": "aion-ics",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Aion DSL language for managing ICalendar data",
   "types": "types.types.d.ts",
   "main": "./dist/index/index.js",
@@ -52,6 +52,19 @@
     "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
+  "keywords": [
+    "aion",
+    "aionlang",
+    "ics",
+    "icalendar",
+    "calendar",
+    "dsl",
+    "typescript",
+    "nodejs",
+    "cli",
+    "parser",
+    "compiler"
+  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "@timurcravtov/ts-ics": "^2.1.4",
